@@ -12,7 +12,8 @@ def plot_sample(x, y, ax):
         The sample's first environmental variable.
     y : ndarray of doubles,
         The sample's second environmental variable.
-    ax :
+    ax : Axes,
+        Axes of the figure where the scatter plot should be drawn.
     """
     ax.scatter(x, y, s=2, c='k', label='observation')
 
@@ -42,7 +43,7 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
     if sample:
         plot_sample(sample[0], sample[1], ax)
     ax.scatter(x, y, s=15, c='b',
-               label='design condition')
+               label='extreme condition')
     try:
         alpha = .3
         concave_hull, edge_points = alpha_shape(
