@@ -1,6 +1,6 @@
 # A Benchmarking Exercise on Estimating Extreme Environmental Conditions for Engineering Design
 ## Datasets
-The 6 datasets are loacted in the folder 'datasets'.
+The 6 datasets are loacted in the folder [datasets](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/datasets).
 ## Preparing your results
 To prepare your results, please provide the coordinates of the environmental contour using the same format that the datasets have.
 That means please separate all values with semicolons. The first line represents the header.
