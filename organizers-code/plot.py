@@ -51,7 +51,7 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
         patch_design_region = PolygonPatch(
             concave_hull, fc='#999999', linestyle='None', fill=True,
             zorder=-2, label='design region')
-        ec_label = str(return_period) + ' year environmental contour'
+        ec_label = str(return_period) + ' year env. contour'
         patch_environmental_contour = PolygonPatch(
             concave_hull, ec='b', fill=False, zorder=-1,
             label=ec_label)
@@ -61,7 +61,7 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
         print('Encountered a ZeroDivisionError when using alpha_shape.'
               'Consequently no contour is plotted.')
 
-    plt.legend(loc='lower right')
+    plt.legend(loc='upper right')
     plt.xlabel(x_label)
     plt.ylabel(y_label)
 

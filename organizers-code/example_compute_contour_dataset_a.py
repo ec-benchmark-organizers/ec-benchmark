@@ -28,9 +28,9 @@ my_fit = Fit((sample_hs, sample_tz),
 
 iform_contour = IFormContour(my_fit.mul_var_dist, 50, 1, 100)
 
-plot_contour(iform_contour.coordinates[0][0],
-             iform_contour.coordinates[0][1],
+plot_contour(iform_contour.coordinates[0][1],
+             iform_contour.coordinates[0][0],
              50,
+             'zero-crossing period (s)',
              'significant wave height (m)',
-             'spectral peak period (s)',
-             [sample_hs, sample_tz])
+             [sample_tz, sample_hs])
