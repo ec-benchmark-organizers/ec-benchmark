@@ -5,7 +5,7 @@ import csv
 
 sample_hs = list()
 sample_tz = list()
-with open('../datasets/A.txt', newline='') as csv_file:
+with open('../datasets/D.txt', newline='') as csv_file:
     reader = csv.reader(csv_file, delimiter=';')
     idx = 0
     for row in reader:
@@ -20,15 +20,15 @@ with open('../datasets/A.txt', newline='') as csv_file:
 dist_description_hs = {'name': 'Weibull_3p',
                       'dependency': (None, None, None),
                       'width_of_intervals': 0.5}
-dist_description_tz = {'name': 'Lognormal',
+dist_description_tz = {'name': 'Weibull_2p',
                       'dependency': (0,  None, 0), #Shape, Location, Scale
-                      'functions': ('power3', None, 'exp3') #Shape, Location, Scale
+                      'functions': ('power3', None, 'power3') #Shape, Location, Scale
                       }
 
 # Fit the model to the data.
 my_fit = Fit((sample_hs, sample_tz), (dist_description_hs, dist_description_tz))
 
-# Compute an IFORM-contour with a return period of 20 years.
+# Compute an IFORM-contour with a return period of 50 years.
 return_period = 20
 iform_contour = IFormContour(my_fit.mul_var_dist, return_period, 1, 100)
 
@@ -36,6 +36,6 @@ iform_contour = IFormContour(my_fit.mul_var_dist, return_period, 1, 100)
 plot_contour(iform_contour.coordinates[0][1],
              iform_contour.coordinates[0][0],
              return_period,
-             'zero-up-crossing period (s)',
+             'wind speed (m/s)',
              'significant wave height (m)',
              [sample_tz, sample_hs])
