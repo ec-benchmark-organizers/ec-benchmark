@@ -1,4 +1,4 @@
-time (YYYY-MM-DD-HH); significant wave height (m); zero-upcrossing period (s)
+time (YYYY-MM-DD-HH); significant wave height (m); zero-up-crossing period (s)
 1996-02-08-11; 1.0157; 4.5975
 1996-02-08-12; 1.0325; 4.8732
 1996-02-08-13; 1.1208; 4.9601

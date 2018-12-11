@@ -1,0 +1,2 @@
+viroconcom==1.1.8
+matplotlib==2.2.0
