@@ -37,17 +37,21 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
     sample : list of lists of floats,
         Sample of environmental states.
     """
+    # For generating a closed contour: add the first coordinate at the end.
     xplot = x.tolist()
     xplot.append(x[0])
     yplot = y.tolist()
     yplot.append(y[0])
 
+    # Plot the contour and, if provided, also the sample.
     fig = plt.figure(figsize=(5,5), dpi=150)
     ax = fig.add_subplot(111)
     if sample:
         plot_sample(sample[0], sample[1], ax)
     ec_label = str(return_period) + ' year contour'
     ax.plot(xplot, yplot, c='b', label=ec_label)
+
+    # Format the figure.
     plt.legend(loc='upper left', frameon=False)
     plt.xlabel(x_label)
     plt.ylabel(y_label)

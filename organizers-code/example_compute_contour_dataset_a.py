@@ -25,9 +25,13 @@ dist_description_tz = {'name': 'Lognormal',
                       'functions': ('power3', None, 'exp3') #Shape, Location, Scale
                       }
 
-my_fit = Fit((sample_hs, sample_tz),
-             (dist_description_hs, dist_description_tz))
+# Fit the model to the data.
+my_fit = Fit((sample_hs, sample_tz), (dist_description_hs, dist_description_tz))
+
+# Compute an IFORM-contour with a return period of 50 years.
 iform_contour = IFormContour(my_fit.mul_var_dist, 50, 1, 100)
+
+# Plot the contour.
 plot_contour(iform_contour.coordinates[0][1],
              iform_contour.coordinates[0][0],
              50,
