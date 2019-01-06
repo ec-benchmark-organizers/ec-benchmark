@@ -3,7 +3,8 @@ import matplotlib as mpl
 
 
 def points_outside(contour_x, contour_y, x, y):
-    '''Determines the observations outside the region enclosed by the contour.
+    """
+    Determines the observations outside the region enclosed by the contour.
 
     Parameters
     ----------
@@ -24,7 +25,7 @@ def points_outside(contour_x, contour_y, x, y):
     outside_y : nparray
         The observations that are outside of the contour of variable 2.
 
-    '''
+    """
     contour_path = mpl.path.Path(np.column_stack((contour_x, contour_y)))
     is_inside_contour = contour_path.contains_points(np.column_stack((x, y)))
     indices_is_outside = np.argwhere(is_inside_contour == False)

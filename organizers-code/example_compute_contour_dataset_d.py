@@ -1,22 +1,13 @@
 import numpy as np
-import csv
 
 from viroconcom.fitting import Fit
 from viroconcom.contours import IFormContour
 from plot import plot_contour
 from contour_statistics import points_outside
+from read_write import read_dataset, determine_file_name, write_contour, read_contour
 
-
-sample_hs = list()
-sample_v = list()
-with open('../datasets/D.txt', newline='') as csv_file:
-    reader = csv.reader(csv_file, delimiter=';')
-    idx = 0
-    for row in reader:
-        if idx > 0: # Ignore the header
-            sample_v.append(float(row[1]))
-            sample_hs.append(float(row[2]))
-        idx = idx + 1
+# Read dataset D.
+sample_v, sample_hs = read_dataset('../datasets/D.txt')
 
 # Define the structure of the probabilistic model that will be fitted to the
 # dataset. We will use the model that is recommended in DNV-RP-C205 (2010) on
@@ -36,10 +27,20 @@ my_fit = Fit((sample_hs, sample_v), (dist_description_hs, dist_description_v))
 return_period = 50
 iform_contour = IFormContour(my_fit.mul_var_dist, return_period, 1, 100)
 
+# Save the contour as a csv file in the required format.
+file_name = determine_file_name('John', 'Doe', 'D', return_period)
+write_contour(iform_contour.coordinates[0][0],
+              iform_contour.coordinates[0][1],
+              file_name,
+              label_x='significant wave height [m]',
+              label_y='wind speed [m/s]')
+# Read the contour from a csv file in the required format.
+(contour_hs, contour_v) = read_contour(file_name)
+
 # Find datapoints that exceed the contour.
 hs_outside, v_outside, hs_inside, v_inside = \
-    points_outside(iform_contour.coordinates[0][0],
-                   iform_contour.coordinates[0][1],
+    points_outside(contour_hs,
+                   contour_v,
                    np.asarray(sample_hs),
                    np.asarray(sample_v))
 print('Number of points outside the contour: ' +  str(len(hs_outside)))
@@ -52,8 +53,8 @@ sample_struct = [np.asarray(sample_v),
                  v_outside,
                  hs_outside,
                  [False, True, False, True]]
-plot_contour(iform_contour.coordinates[0][1],
-             iform_contour.coordinates[0][0],
+plot_contour(contour_v,
+             contour_hs,
              return_period,
              'wind speed (m/s)',
              'significant wave height (m)',
