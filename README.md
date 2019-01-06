@@ -9,12 +9,12 @@ In addition, we encourage you to plot your environmental contours using the plot
 ## Entering the benchmark & submitting your results
 To enter the benchmark, please submit the following files to '**not-yet-set@email.domain**':
 * Exercise 1 (environmental modeling and contour construction):
-  * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1_Example.pdf) is a filed example)
+  * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1_Example.pdf) is a filled example)
   * 12 CSV files, each containing the coordinates of one contour (example: **not yet**)
   * 12 figures, each showing one contour (example: **not yet**)
   * Please compress these 25 files into a ZIP file and name it 'lastname_firstname_exercise1.zip' (example: **not yet**).
 * Exercise 2 (uncertainty characterization):
-  * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2_Example.pdf) is a filed example)
+  * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2_Example.pdf) is a filled example)
   * 9 CSV files that together describe 3 contours. Each contour is described with 3 CSV files: one csv file should contain the most-likely contour, one csv file the bottom confidence interval and one csv file the upper confidence interval.
   * 3 figures, each showing one contour (example: **not yet**)
   * Please compress these 13 files into a ZIP file and name it 'lastname_firstname_exercise2.zip' (example: **not yet**).
