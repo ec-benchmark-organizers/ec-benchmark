@@ -3,15 +3,15 @@ This is the official respository for the excercise annouced at OMAE 2019 (**link
 ## Datasets
 The 6 datasets are located in the folder [datasets](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/datasets).
 ## Preparing your results
-To prepare your results, please provide the coordinates of the environmental contour using the same format that the datasets have.
-That means please separate all values with semicolons. The first line should contain the header. As an example, have a look at [this file](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/results/raw-data/dummy_dataset_a_participant_1.csv).
-In addition, we encourage you to plot your environmental contours using the plotting method provided in the file [organizers-code/plot.py](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/plot.py). If you are are not afluent in Python feel free to plot your contours with a different method.
+* To prepare your results, please provide the coordinates of the environmental contour using the same format that the datasets have. That means please separate all values with semicolons. The first line should contain the header. As an example, have a look at [this file](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/doe_john_dataset_a_20.txt). You can use the method ['determine_file_name'](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/read_write.py#L38) to determine the required file name and the method ['write_contour'](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/read_write.py#L64) to create the CSV file in the rquired format.
+* In addition, we encourage you to plot your environmental contours using the plotting method provided in the file [organizers-code/plot.py](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/plot.py). If you are are not afluent in Python feel free to plot your contours with a different method.
 ## Entering the benchmark & submitting your results
 To enter the benchmark, please submit the following files to '**not-yet-set@email.domain**':
 * Exercise 1 (environmental modeling and contour construction):
   * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1_Example.pdf) is a filled example)
-  * 12 CSV files, each containing the coordinates of one contour (example: **not yet**)
-  * 12 figures, each showing one contour (example: **not yet**)
+  * 12 CSV files, each containing the coordinates of one contour (example: [doe_john_dataset_a_20.txt
+](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/doe_john_dataset_a_20.txt))
+  * 12 figures, each showing one contour (example: [doe_john_dataset_a_20.png](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/doe_john_dataset_a_20.png))
   * Please compress these 25 files into a ZIP file and name it 'lastname_firstname_exercise1.zip' (example: **not yet**).
 * Exercise 2 (uncertainty characterization):
   * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2_Example.pdf) is a filled example)
