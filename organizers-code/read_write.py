@@ -81,7 +81,7 @@ def write_contour(x, y, path, label_x='significant wave height [m]', label_y='ze
         defaults to 'zero-up-crossing period [s]'.
 
     """
-    with open(path, mode='w') as contour_file:
+    with open(path, mode='w', newline='') as contour_file:
         contour_writer = csv.writer(contour_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         contour_writer.writerow([label_x, label_y])
         for xi,yi in zip(x,y):

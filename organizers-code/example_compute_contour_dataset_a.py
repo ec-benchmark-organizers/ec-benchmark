@@ -52,7 +52,7 @@ sample_struct = [np.asarray(sample_tz),
                  hs_inside,
                  tz_outside,
                  hs_outside,
-                 [True, True, False, True]]
+                 [False, False, False, False]]
 plot_contour(contour_tz,
              contour_hs,
              return_period,

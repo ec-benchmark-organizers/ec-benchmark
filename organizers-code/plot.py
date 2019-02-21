@@ -54,7 +54,9 @@ def plot_sample(x, y, ax, x_inside=None, y_inside=None ,x_outside=None,
         index_max_y = np.argmax(y)
         x_extremes[3] = x[index_max_y]
         y_extremes[3] = y[index_max_y]
-    ax.scatter(x_extremes, y_extremes,  s=40, c='g', marker='*', label='observed extreme')
+    if any(d == True for d in do_plot_extreme):
+        ax.scatter(x_extremes, y_extremes,  s=40, c='g', marker='*',
+                   label='observed extreme')
 
 
 def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
@@ -76,7 +78,30 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
     y_label : str
         Label for the y-axis.
     sample : list of lists of floats
-        Sample of environmental states.
+        Sample of environmental states and optional additional information:
+        Element 0:
+            x : ndarray of doubles
+                The sample's first environmental variable.
+        Element 1:
+            y : ndarray of doubles
+                The sample's second environmental variable.
+        Element 2 (optional):
+                x_inside : ndarray of doubles
+                Values in the first dimension of the points inside the contour.
+        Element 3 (optional):
+            y_inside : ndarray of doubles
+            Values in the second dimension of the points inside the contour.
+        Element 4 (optional): x-Points inside the contour.
+            x_outside : ndarray of doubles
+            Values in the first dimension of the points outside the contour.
+        Element 5 (optional): y-Points inside the contour.
+            y_outside : ndarray of doubles
+                Values in the second dimension of the points outside the contour.
+        Element 6 (optional):
+            do_plot_extreme : ndarray of booleans
+                Specifies which extremes should be plotted.
+                The order is [min(x), max(x), min(y), max(y)].
+
     """
     # For generating a closed contour: add the first coordinate at the end.
     xplot = x.tolist()
