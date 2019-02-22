@@ -16,15 +16,24 @@ def read_dataset(path='../datasets/A.txt'):
         Observations of the environmental variable 1.
     y : ndarray of doubles
         Observations of the environmental variable 2.
+    x_label : str
+        Label of the environmantal variable 1.
+    y_label : str
+        Label of the environmental variable 2.
 
     """
 
     x = list()
     y = list()
+    x_label = None
+    y_label = None
     with open(path, newline='') as csv_file:
         reader = csv.reader(csv_file, delimiter=';')
         idx = 0
         for row in reader:
+            if idx == 0:
+                x_label = row[1][1:] # Ignore first char (is a white space).
+                y_label = row[2][1:] # Ignore first char (is a white space).
             if idx > 0: # Ignore the header
                 x.append(float(row[1]))
                 y.append(float(row[2]))
@@ -32,7 +41,7 @@ def read_dataset(path='../datasets/A.txt'):
 
     x = np.asarray(x)
     y = np.asarray(y)
-    return (x, y)
+    return (x, y, x_label, y_label)
 
 
 def determine_file_name(first_name, last_name, dataset, return_period):

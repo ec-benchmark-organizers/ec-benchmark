@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 
 
 def plot_sample(x, y, ax, x_inside=None, y_inside=None ,x_outside=None,
-                y_outside=None, do_plot_extreme=[True, True, True, True]):
+                y_outside=None, return_period=None,
+                do_plot_extreme=[True, True, True, True]):
     """
     Plots the sample of metocean data.
 
@@ -23,15 +24,24 @@ def plot_sample(x, y, ax, x_inside=None, y_inside=None ,x_outside=None,
         Values in the first dimension of the points outside the contour.
     y_outside : ndarray of doubles
         Values in the second dimension of the points outside the contour.
-    do_plot_extreme : ndarray of booleans
+    return_period : int, optional
+        Return period in years. Is used in legend for describing the inside and
+        outside datapoints.
+    do_plot_extreme : ndarray of booleans, optional
         Specifies which extremes should be plotted.
         The order is [min(x), max(x), min(y), max(y)].
     """
     if x_inside is not None and y_inside is not None:
+        if return_period:
+            inside_label = 'inside ' + str(return_period) + '-yr contour'
+            outside_label = 'outside ' + str(return_period) + '-yr contour'
+        else:
+            inside_label = 'inside contour'
+            outside_label = 'outside contour'
         ax.scatter(x_inside, y_inside, s=11, alpha=0.5, c='k', marker='o',
-                   label='inside contour')
+                   label=inside_label)
         ax.scatter(x_outside, y_outside, s=9, alpha=0.5, c='r', marker='D',
-                   label='outside contour')
+                   label=outside_label)
     else:
         ax.scatter(x, y, s=40, alpha=0.5, c='k', marker='.', label='observation')
     x_extremes = np.empty((4,1,))
@@ -59,7 +69,8 @@ def plot_sample(x, y, ax, x_inside=None, y_inside=None ,x_outside=None,
                    label='observed extreme')
 
 
-def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
+def plot_contour(x, y, return_period, ax, x_label='', y_label='',
+                 line_style='b-', sample=None):
     """
     Plots the environmental contour.
 
@@ -73,11 +84,15 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
         The contour's coordiantes in the y-direction.
     return_period : float
         The environmental contour's return period in years.
-    x_label : str
+    ax : Axes
+        Axes of the figure where the contour should be plotted.
+    x_label : str, optional
         Label for the x-axis.
-    y_label : str
+    y_label : str, optional
         Label for the y-axis.
-    sample : list of lists of floats
+    line_style : str, optional
+        Matplotlib line style.
+    sample : list of lists of floats, optional
         Sample of environmental states and optional additional information:
         Element 0:
             x : ndarray of doubles
@@ -85,23 +100,26 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
         Element 1:
             y : ndarray of doubles
                 The sample's second environmental variable.
-        Element 2 (optional):
+        Element 2, optional:
                 x_inside : ndarray of doubles
                 Values in the first dimension of the points inside the contour.
-        Element 3 (optional):
+        Element 3, optional:
             y_inside : ndarray of doubles
             Values in the second dimension of the points inside the contour.
-        Element 4 (optional): x-Points inside the contour.
+        Element 4, optional:
             x_outside : ndarray of doubles
             Values in the first dimension of the points outside the contour.
-        Element 5 (optional): y-Points inside the contour.
+        Element 5, optional:
             y_outside : ndarray of doubles
                 Values in the second dimension of the points outside the contour.
-        Element 6 (optional):
+        Element 6, optional:
+            return_period_20 : int, optional
+                Return period in years. Is used in legend for describing the inside and
+                outside datapoints.
+        Element 7, optional:
             do_plot_extreme : ndarray of booleans
                 Specifies which extremes should be plotted.
                 The order is [min(x), max(x), min(y), max(y)].
-
     """
     # For generating a closed contour: add the first coordinate at the end.
     xplot = x.tolist()
@@ -110,8 +128,6 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
     yplot.append(y[0])
 
     # Plot the contour and, if provided, also the sample.
-    fig = plt.figure(figsize=(5,5), dpi=150)
-    ax = fig.add_subplot(111)
     if sample:
         if len(sample) > 2:
             plot_sample(x=sample[0],
@@ -121,23 +137,28 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
                         y_inside=sample[3],
                         x_outside=sample[4],
                         y_outside=sample[5],
-                        do_plot_extreme=sample[6])
+                        return_period=sample[6],
+                        do_plot_extreme=sample[7])
         else:
             plot_sample(x=sample[0], y=sample[1], ax=ax)
-    ec_label = str(return_period) + ' year contour'
-    ax.plot(xplot, yplot, c='b', label=ec_label)
+    ec_label = str(return_period) + '-yr contour'
+    ax.plot(xplot, yplot, line_style, label=ec_label)
 
     # Format the figure.
-    if x_label == 'zero-up-crossing period (s)':
-        plt.legend(loc='upper right', frameon=False)
-    else:
-        plt.legend(loc='upper left', frameon=False)
+    plt.legend(loc='upper left', frameon=False)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
+    y_lim_factor = 1.2
     if sample:
-        upper_ylim = max(max(y), max(sample[1])) * 1.2
+        # If there is not enough space for the legend in the upper left corner:
+        # make space for it.
+        max_index = np.where(sample[1] == max(sample[1]))
+        if sample[0][max_index] < 0.5 * max(max(x), max(sample[0])):
+            y_lim_factor = 1.35
+
+        upper_ylim = max(max(y), max(sample[1])) * y_lim_factor
     else:
-        upper_ylim = max(y) * 1.2
+        upper_ylim = max(y) * y_lim_factor
     plt.ylim((0, upper_ylim))
 
     # Remove axis on the right and on the top (Matlab 'box off').
@@ -145,5 +166,3 @@ def plot_contour(x, y, return_period, x_label='X1', y_label='X2', sample=None):
     ax.spines['top'].set_visible(False)
     ax.yaxis.set_ticks_position('left')
     ax.xaxis.set_ticks_position('bottom')
-
-    plt.show()
