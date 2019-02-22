@@ -26,8 +26,12 @@ dist_description_tz = {'name': 'Lognormal_SigmaMu',
 # Fit the model to the data.
 my_fit = Fit((sample_hs, sample_tz), (
     dist_description_hs, dist_description_tz))
-print('First variable: '  + my_fit.mul_var_dist.distributions[0])
-print('Second variable: ' + my_fit.mul_var_dist.distributions[1])
+dist0 = my_fit.mul_var_dist.distributions[0]
+print('First variable: ' + dist0.name + ' with '
+      + ' scale: ' + str(dist0.scale) + ', '
+      + ' shape: ' + str(dist0.shape) + ', '
+      + ' location: ' + str(dist0.loc))
+print('Second variable: ' + str(my_fit.mul_var_dist.distributions[1]))
 
 # Compute a IFORM-contours with a return periods of 1 and 20 years.
 return_period_1 = 1
