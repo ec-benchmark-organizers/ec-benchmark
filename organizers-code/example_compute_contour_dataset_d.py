@@ -22,6 +22,16 @@ dist_description_v = {'name': 'Weibull_2p',
 
 # Fit the model to the data.
 my_fit = Fit((sample_hs, sample_v), (dist_description_hs, dist_description_v))
+dist0 = my_fit.mul_var_dist.distributions[0]
+print('First variable: ' + dist0.name + ' with '
+      + ' scale: ' + str(dist0.scale) + ', '
+      + ' shape: ' + str(dist0.shape) + ', '
+      + ' location: ' + str(dist0.loc))
+dist1 = my_fit.mul_var_dist.distributions[1]
+print('Second variable: ' + dist1.name + ' with '
+      + ' scale: ' + str(dist1.scale) + ', '
+      + ' shape: ' + str(dist1.shape) + ', '
+      + ' location: ' + str(dist1.loc))
 
 # Compute an IFORM-contour with a return period of 50 years.
 return_period = 50
