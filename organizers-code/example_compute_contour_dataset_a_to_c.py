@@ -8,7 +8,7 @@ from contour_statistics import points_outside
 from read_write import read_dataset, determine_file_name, write_contour, read_contour
 
 # Read dataset A, B  or C.
-DATASET_CHAR = 'A'
+DATASET_CHAR = 'C'
 file_path = '../datasets/' + DATASET_CHAR + '.txt'
 sample_hs, sample_tz, label_hs, label_tz= read_dataset(file_path)
 
@@ -20,7 +20,7 @@ dist_description_hs = {'name': 'Weibull_3p',
                       'width_of_intervals': 0.5}
 dist_description_tz = {'name': 'Lognormal_SigmaMu',
                       'dependency': (0,  None, 0), #Shape, Location, Scale
-                      'functions': ('power3', None, 'exp3') #Shape, Location, Scale
+                      'functions': ('exp3', None, 'power3') #Shape, Location, Scale
                       }
 
 # Fit the model to the data.
