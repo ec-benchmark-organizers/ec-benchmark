@@ -8,7 +8,7 @@ from contour_statistics import points_outside
 from read_write import read_dataset, determine_file_name, write_contour, read_contour
 
 # Read dataset A, B  or C.
-DATASET_CHAR = 'C'
+DATASET_CHAR = 'A'
 file_path = '../datasets/' + DATASET_CHAR + '.txt'
 sample_hs, sample_tz, label_hs, label_tz= read_dataset(file_path)
 
