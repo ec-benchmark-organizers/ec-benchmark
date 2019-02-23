@@ -153,7 +153,7 @@ def plot_contour(x, y, return_period, ax, x_label='', y_label='',
         # If there is not enough space for the legend in the upper left corner:
         # make space for it.
         max_index = np.where(sample[1] == max(sample[1]))
-        if sample[0][max_index] < 0.5 * max(max(x), max(sample[0])):
+        if sample[0][max_index] < 0.6 * max(max(x), max(sample[0])):
             y_lim_factor = 1.35
 
         upper_ylim = max(max(y), max(sample[1])) * y_lim_factor

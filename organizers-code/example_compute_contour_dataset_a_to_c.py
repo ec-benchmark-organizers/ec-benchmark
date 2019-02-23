@@ -92,4 +92,5 @@ plot_contour(x=contour_tz_20,
              y_label=label_hs,
              line_style='b-',
              sample=sample_struct)
+plt.title('Dataset ' + DATASET_CHAR)
 plt.show()
