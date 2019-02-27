@@ -40,22 +40,23 @@ return_period_20 = 20
 iform_contour_20 = IFormContour(my_fit.mul_var_dist, return_period_20, 1, 100)
 
 # Save the contours as csv files in the required format.
+folder_name = 'contour_coordinates/'
 file_name_1 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_1)
 write_contour(iform_contour_1.coordinates[0][0],
               iform_contour_1.coordinates[0][1],
-              file_name_1,
+              folder_name + file_name_1,
               label_x=label_hs,
               label_y=label_tz)
 file_name_20 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_20)
 write_contour(iform_contour_20.coordinates[0][0],
               iform_contour_20.coordinates[0][1],
-              file_name_20,
+              folder_name + file_name_20,
               label_x=label_hs,
               label_y=label_tz)
 
 # Read the contours from the csv files.
-(contour_hs_1, contour_tz_1) = read_contour(file_name_1)
-(contour_hs_20, contour_tz_20) = read_contour(file_name_20)
+(contour_hs_1, contour_tz_1) = read_contour(folder_name + file_name_1)
+(contour_hs_20, contour_tz_20) = read_contour(folder_name + file_name_20)
 
 # Find datapoints that exceed the 20-yr contour.
 hs_outside, tz_outside, hs_inside, tz_inside = \

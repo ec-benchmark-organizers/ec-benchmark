@@ -43,22 +43,23 @@ return_period_50 = 50
 iform_contour_50 = IFormContour(my_fit.mul_var_dist, return_period_50, 1, 100)
 
 # Save the contours as csv files in the required format.
+folder_name = 'contour_coordinates/'
 file_name_1 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_1)
 write_contour(iform_contour_1.coordinates[0][0],
               iform_contour_1.coordinates[0][1],
-              file_name_1,
+              folder_name + file_name_1,
               label_x=label_hs,
               label_y=label_v)
 file_name_50 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_50)
 write_contour(iform_contour_50.coordinates[0][0],
               iform_contour_50.coordinates[0][1],
-              file_name_50,
+              folder_name + file_name_50,
               label_x=label_hs,
               label_y=label_v)
 
 # Read the contour coordinates from the created csv files.
-(contour_hs_1, contour_v_1) = read_contour(file_name_1)
-(contour_hs_50, contour_v_50) = read_contour(file_name_50)
+(contour_hs_1, contour_v_1) = read_contour(folder_name + file_name_1)
+(contour_hs_50, contour_v_50) = read_contour(folder_name + file_name_50)
 
 # Find datapoints that exceed the contour.
 hs_outside, v_outside, hs_inside, v_inside = \
