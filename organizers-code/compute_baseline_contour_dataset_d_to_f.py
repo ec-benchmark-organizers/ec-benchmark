@@ -36,13 +36,13 @@ print('Second variable: ' + dist1.name + ' with '
       + ' shape: ' + str(dist1.shape) + ', '
       + ' location: ' + str(dist1.loc))
 
-# Compute an IFORM-contours with return periods of 1 and 50 years.
+# Compute IFORM-contours with return periods of 1 and 50 years.
 return_period_1 = 1
 iform_contour_1 = IFormContour(my_fit.mul_var_dist, return_period_1, 1, 100)
 return_period_50 = 50
 iform_contour_50 = IFormContour(my_fit.mul_var_dist, return_period_50, 1, 100)
 
-# Save the contours as a csv files in the required format.
+# Save the contours as csv files in the required format.
 file_name_1 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_1)
 write_contour(iform_contour_1.coordinates[0][0],
               iform_contour_1.coordinates[0][1],
@@ -55,6 +55,7 @@ write_contour(iform_contour_50.coordinates[0][0],
               file_name_50,
               label_x=label_hs,
               label_y=label_v)
+
 # Read the contour coordinates from the created csv files.
 (contour_hs_1, contour_v_1) = read_contour(file_name_1)
 (contour_hs_50, contour_v_50) = read_contour(file_name_50)
@@ -69,6 +70,7 @@ print('Number of points outside the contour: ' +  str(len(hs_outside)))
 
 fig = plt.figure(figsize=(5, 5), dpi=150)
 ax = fig.add_subplot(111)
+
 # Plot the 1-year contour.
 plot_contour(x=contour_v_1,
              y=contour_hs_1,
@@ -77,6 +79,7 @@ plot_contour(x=contour_v_1,
              x_label=label_v,
              y_label=label_hs,
              line_style='b--')
+
 # Plot the 50-year contour and the sample.
 sample_struct = [np.asarray(sample_v),
                  np.asarray(sample_hs),
@@ -95,4 +98,5 @@ plot_contour(x=contour_v_50,
              line_style='b-',
              sample=sample_struct)
 plt.title('Dataset ' + DATASET_CHAR)
+
 plt.show()
