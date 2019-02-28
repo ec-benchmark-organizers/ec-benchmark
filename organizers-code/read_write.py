@@ -44,9 +44,9 @@ def read_dataset(path='../datasets/A.txt'):
     return (x, y, x_label, y_label)
 
 
-def determine_file_name(first_name, last_name, dataset, return_period):
+def determine_file_name_e1(first_name, last_name, dataset, return_period):
     """
-    Returns the file name as required by the benchmark's rules.
+    Returns the file name for Excercise 1 as required by the benchmark's rules.
 
     Parameters
     ----------
@@ -67,6 +67,37 @@ def determine_file_name(first_name, last_name, dataset, return_period):
     """
     file_name = last_name + '_' + first_name + '_dataset_' + dataset + \
                  '_' + str(return_period) + '.txt'
+    return file_name.lower()
+
+
+def determine_file_name_e2(first_name, last_name, bootstrap_years, type):
+    """
+    Returns the file name for Exercise 2 as required by the benchmark's rules.
+
+    Parameters
+    ----------
+    first_name : str
+        Corresponding author's first name.
+    last_name: str
+        Corresponding author's last name.
+    bootstrap_years : int
+        Number of years of the bootstrap sample.
+    type : str
+        Must be an element of {'median', 'bottom', 'upper'}
+
+    Returns
+    -------
+    file_name : str
+        File name as required by the benchmark's rules.
+    """
+    allowable_types = ['median', 'bottom', 'upper']
+    if (type in allowable_types):
+        file_name = last_name + '_' + first_name + '_years_' \
+                    + str(bootstrap_years) + '_' + type + '.txt'
+    else:
+        raise ValueError('The parameter type must be one of the following '
+                         'strings: ' + str(allowable_types) + '. However, it was: '
+                         + str(type))
     return file_name.lower()
 
 

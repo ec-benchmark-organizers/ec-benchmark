@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 from viroconcom.fitting import Fit
 from viroconcom.contours import IFormContour
-from plot import plot_contour
+from plot import plot_contour, PlottedSample
 from contour_statistics import points_outside
-from read_write import read_dataset, determine_file_name, write_contour, read_contour
+from read_write import read_dataset, determine_file_name_e1, write_contour, read_contour
 
 # Read dataset A, B  or C.
 DATASET_CHAR = 'A'
@@ -41,13 +41,13 @@ iform_contour_20 = IFormContour(my_fit.mul_var_dist, return_period_20, 1, 100)
 
 # Save the contours as csv files in the required format.
 folder_name = 'contour_coordinates/'
-file_name_1 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_1)
+file_name_1 = determine_file_name_e1('John', 'Doe', DATASET_CHAR, return_period_1)
 write_contour(iform_contour_1.coordinates[0][0],
               iform_contour_1.coordinates[0][1],
               folder_name + file_name_1,
               label_x=label_hs,
               label_y=label_tz)
-file_name_20 = determine_file_name('John', 'Doe', DATASET_CHAR, return_period_20)
+file_name_20 = determine_file_name_e1('John', 'Doe', DATASET_CHAR, return_period_20)
 write_contour(iform_contour_20.coordinates[0][0],
               iform_contour_20.coordinates[0][1],
               folder_name + file_name_20,
@@ -72,29 +72,29 @@ ax = fig.add_subplot(111)
 # Plot the 1-year contour.
 plot_contour(x=contour_tz_1,
              y=contour_hs_1,
-             return_period=return_period_1,
              ax=ax,
+             return_period=return_period_1,
              x_label=label_tz,
              y_label=label_hs,
              line_style='b--')
 
 # Plot the 20-year contour and the sample.
-sample_struct = [np.asarray(sample_tz),
-                 np.asarray(sample_hs),
-                 tz_inside,
-                 hs_inside,
-                 tz_outside,
-                 hs_outside,
-                 return_period_20,
-                 [False, False, False, False]]
+plotted_sample = PlottedSample(x=np.asarray(sample_tz),
+                               y=np.asarray(sample_hs),
+                               ax=ax,
+                               x_inside=tz_inside,
+                               y_inside=hs_inside,
+                               x_outside=tz_outside,
+                               y_outside=hs_outside,
+                               return_period=return_period_20)
 plot_contour(x=contour_tz_20,
              y=contour_hs_20,
-             return_period=return_period_20,
              ax=ax,
+             return_period=return_period_20,
              x_label=label_tz,
              y_label=label_hs,
              line_style='b-',
-             sample=sample_struct)
+             plotted_sample=plotted_sample)
 plt.title('Dataset ' + DATASET_CHAR)
 
 plt.show()
