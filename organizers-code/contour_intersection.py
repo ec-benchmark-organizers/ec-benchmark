@@ -51,8 +51,8 @@ def contour_intersection(contour_x, contour_y, line_x, line_y, do_plot_in_case_o
     if type(intersection) is MultiPoint:
         if len(intersection.geoms) > 0:
             print(str(len(intersection.geoms)) + ' intersections were found.'
-                  + ' Using the intersection that has is the farthest'
-                  + ' apart from the origin.')
+                  + ' Using the intersection that is the farthest'
+                  + ' away from the origin.')
         origin = Point(line_x[0], line_y[0])
         for i, p in enumerate(intersection.geoms):
             if i == 0:

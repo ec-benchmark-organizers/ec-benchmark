@@ -6,25 +6,31 @@ from viroconcom.contours import IFormContour
 from plot import plot_contour, PlottedSample
 from read_write import read_dataset, determine_file_name_e2, write_contour, read_contour
 from contour_intersection import contour_intersection
+from contour_statistics import thetastar_to_theta
 
 # Define the number of years of data that one bootstrap sample should contain.
 # In the exercise 1, 5 and 25 years are used.
 NR_OF_YEARS_TO_DRAW = 1
 
-NR_OF_BOOTSTRAP_SAMPLES = 1000
-BOTTOM_PERCENTILE = 2.5
-UPPER_PERCENTILE = 97.5
 DO_COMPUTE_CONFIDENCE_INTERVAL = True
-PLOT_ANGLE_LINES = False
-NR_OF_POINTS_ON_CONTOUR = 100
+NR_OF_BOOTSTRAP_SAMPLES = 1000 # Must be 1000 in Exercise 2.
+BOTTOM_PERCENTILE = 2.5 # Must be 2.5 in Exercise 2.
+UPPER_PERCENTILE = 97.5 # Must be 97.5 in Excercise 2.
+ANGLE_STEP_FOR_CI = 2 # Must be 2 in in Excercise 2.
+
+DO_PLOT_ANGLE_LINES = False # Must be False in Excercise 2. For visualization.
+NR_OF_POINTS_ON_CONTOUR = 200 # For IFORM contours it can be set explicitly.
 
 # Read dataset D.
 file_path = '../datasets/D.txt'
 dataset_d_v, dataset_d_hs, label_v, label_hs = read_dataset(file_path)
 
 # Define the origin (will be used to compute confidence intervals).
-v0 = np.median(dataset_d_v)
-hs0 = np.median(dataset_d_hs)
+v0 = np.mean(dataset_d_v)
+hs0 = np.mean(dataset_d_hs)
+#print('Origin:')
+#print(v0)
+#print(hs0)
 
 nr_of_datapoints_to_draw = int(NR_OF_YEARS_TO_DRAW * 365.25 * 24)
 np.random.seed(9001)
@@ -58,21 +64,13 @@ for i in range(NR_OF_BOOTSTRAP_SAMPLES):
                                    NR_OF_POINTS_ON_CONTOUR)
 
     if DO_COMPUTE_CONFIDENCE_INTERVAL:
-        # Define angles based on normalization. Give the first quadrant of the
-        # normalized angle. Based on it the full 360° will be calculated.
-        theta_stars = np.linspace(0.0, 90.0, 37) / 180 * np.pi
+        # Define angles based on normalization.
+        theta_stars = np.arange(0, 360, ANGLE_STEP_FOR_CI) / 180 * np.pi
         t1 = max(dataset_d_v) - min(dataset_d_v)
         t2 = max(dataset_d_hs) - min(dataset_d_hs)
-        q1 = np.arctan(np.tan(theta_stars) * t2 / t1)
-        q2 = np.pi - q1
-        q2 = np.sort(q2)
-        q2 = q2[1:]
-        q3 = np.pi + q1
-        q3 = q3[1:]
-        q4 = 2 * np.pi - q1
-        q4 = np.sort(q4)
-        q4 = q4[1:-2]
-        thetas = np.concatenate([q1, q2, q3, q4], axis=0)
+        #print('t1: ' + str(t1))
+        #print('t2: ' + str(t2))
+        thetas = thetastar_to_theta(theta_stars, t1, t2)
         #print('Thetas: ' + str(thetas / np.pi * 180))
         #print('Theta_stars: ' + str(theta_stars/np.pi * 180))
         nr_of_datapoints_on_angled_line = 10
@@ -123,7 +121,7 @@ for i, contour in enumerate(contours):
                      line_style='b-',
                      alpha=0.4,
                      ax=ax)
-    if DO_COMPUTE_CONFIDENCE_INTERVAL and PLOT_ANGLE_LINES:
+    if DO_COMPUTE_CONFIDENCE_INTERVAL and DO_PLOT_ANGLE_LINES:
         for j, (line_v, line_hs) in enumerate(zip(theta_line_v, theta_line_hs)):
             if i == 0:
                 plt.plot(line_v, line_hs, 'r-')

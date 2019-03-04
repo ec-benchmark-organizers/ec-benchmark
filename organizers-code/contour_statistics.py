@@ -36,3 +36,28 @@ def points_outside(contour_x, contour_y, x, y):
     y_inside =  y[indices_is_inside]
 
     return (x_outside, y_outside, x_inside, y_inside)
+
+def thetastar_to_theta(thetastar, xspread, yspread):
+    """
+
+    Parameters
+    ----------
+    thetastar : ndarray of floats
+        Angle in the normalized coordinate system.
+    xspread : float
+        Spread of x (xmax - ymin).
+    yspread : float
+        Spread of y (ymax - amin).
+
+    Returns
+    -------
+    theta : float,
+        The angle theta in the original coordinate system. The angle is
+        defined counter clockwise, 0 at (x=1, y=0) and is converted to be
+        inside the interval [0 360).
+    """
+    theta = np.arctan2(np.sin(thetastar) * yspread, np.cos(thetastar) * xspread)
+    for i, t in enumerate(theta):
+        if t < 0:
+            theta[i] = t + 2 * np.pi
+    return theta
