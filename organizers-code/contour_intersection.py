@@ -7,19 +7,30 @@ def contour_intersection(contour_x, contour_y, line_x, line_y, do_plot_in_case_o
     """
     Computes the intersection point between two lines.
 
+    The first line should be the environmental contour and the second line a
+    straight line. If there are more multiple intersections the point that has
+    the longest distance to the origin is returned (assuming the origin is at
+    the first point of the straight line).
+
     Parameters
     ----------
-    contour_x : ndarray of floats
+    contour_x : ndarray of floats,
+        Coordinates in the first dimension of the contour.
     contour_y : ndarray of floats
+        Coordinates in the second dimension of the contour.
     line_x : ndarray of floats
+        Coordinates in the first dimension of the straight line.
     line_y : ndarray of floats
+        Coordaintes in the second dimension of the straight line.
     do_plot_in_case_of_failure : Boolean,
         if True a plot of the two lines for which no intersection could be
         found is shown.
     Returns
     -------
     x : float
+        Intersection coordinate in the first dimension.
     y : float
+        Intersection coordinate in the second dimension.
     """
 
     point_list_l1 = list()
@@ -38,6 +49,10 @@ def contour_intersection(contour_x, contour_y, line_x, line_y, do_plot_in_case_o
     if type(intersection) is Point:
         return intersection.x, intersection.y
     if type(intersection) is MultiPoint:
+        if len(intersection.geoms) > 0:
+            print(str(len(intersection.geoms)) + ' intersections were found.'
+                  + ' Using the intersection that has is the farthest'
+                  + ' apart from the origin.')
         origin = Point(line_x[0], line_y[0])
         for i, p in enumerate(intersection.geoms):
             if i == 0:

@@ -5,7 +5,7 @@ from viroconcom.fitting import Fit
 from viroconcom.contours import IFormContour
 from plot import plot_contour, PlottedSample
 from read_write import read_dataset, determine_file_name_e2, write_contour, read_contour
-from shapely_intersection import shapely_intersection
+from contour_intersection import contour_intersection
 
 # Define the number of years of data that one bootstrap sample should contain.
 # In the exercise 1, 5 and 25 years are used.
@@ -89,7 +89,7 @@ for i in range(NR_OF_BOOTSTRAP_SAMPLES):
             theta_line_hs.append(np.multiply(np.sin(theta), line_length) + hs0)
             c_v = np.append(iform_contour_i.coordinates[0][1], iform_contour_i.coordinates[0][1][0])
             c_hs = np.append(iform_contour_i.coordinates[0][0], iform_contour_i.coordinates[0][0][0])
-            theta_v_j, theta_hs_j = shapely_intersection(
+            theta_v_j, theta_hs_j = contour_intersection(
                 theta_line_v[j], theta_line_hs[j], c_v, c_hs, True)
 
             iform_contour_i.theta_v.append(theta_v_j)
