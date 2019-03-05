@@ -10,7 +10,7 @@ from contour_statistics import thetastar_to_theta
 
 # Define the number of years of data that one bootstrap sample should contain.
 # In the exercise 1, 5 and 25 years are used.
-NR_OF_YEARS_TO_DRAW = 1
+NR_OF_YEARS_TO_DRAW = 5
 
 DO_COMPUTE_CONFIDENCE_INTERVAL = True
 NR_OF_BOOTSTRAP_SAMPLES = 1000 # Must be 1000 in Exercise 2.
