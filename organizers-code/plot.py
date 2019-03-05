@@ -57,7 +57,7 @@ def plot_sample(plotted_sample):
                    label='observed extreme')
 
 
-def plot_contour(x, y, ax, return_period=None, x_label=None, y_label=None,
+def plot_contour(x, y, ax, contour_label=None, x_label=None, y_label=None,
                  line_style='b-', alpha=1, plotted_sample=None):
     """
     Plots the environmental contour.
@@ -72,8 +72,8 @@ def plot_contour(x, y, ax, return_period=None, x_label=None, y_label=None,
         The contour's coordiantes in the y-direction.
     ax : Axes
         Axes of the figure where the contour should be plotted.
-    return_period : float, optional
-        The environmental contour's return period in years.
+    contour_label : str, optional
+        The environmental contour's label that will be used in the legend.
     x_label : str, optional
         Label for the x-axis.
     y_label : str, optional
@@ -94,14 +94,13 @@ def plot_contour(x, y, ax, return_period=None, x_label=None, y_label=None,
     # Plot the contour and, if provided, also the sample.
     if plotted_sample:
         plot_sample(plotted_sample)
-    if return_period:
-        ec_label = str(return_period) + '-yr contour'
-        ax.plot(xplot, yplot, line_style, alpha=alpha, label=ec_label)
+    if contour_label:
+        ax.plot(xplot, yplot, line_style, alpha=alpha, label=contour_label)
     else:
         ax.plot(xplot, yplot, line_style, alpha=alpha)
 
     # Format the figure.
-    if return_period:
+    if contour_label:
         plt.legend(loc='upper left', frameon=False)
     if x_label:
         plt.xlabel(x_label)
@@ -132,21 +131,21 @@ class PlottedSample():
 
     Attributes
     ----------
-    x : ndarray of doubles
+    x : ndarray of floats
         The sample's first environmental variable.
-    y : ndarray of doubles
+    y : ndarray of floats
         The sample's second environmental variable.
     ax : Axes
         Axes of the figure where the scatter plot should be drawn.
     label : str
         Label that will be used in the legend for the sample.
-    x_inside : ndarray of doubles
+    x_inside : ndarray of floats
         Values in the first dimension of the points inside the contour.
-    y_inside : ndarray of doubles
+    y_inside : ndarray of floats
         Values in the second dimension of the points inside the contour.
-    x_outside : ndarray of doubles
+    x_outside : ndarray of floats
         Values in the first dimension of the points outside the contour.
-    y_outside : ndarray of doubles
+    y_outside : ndarray of floats
         Values in the second dimension of the points outside the contour.
     return_period : int, optional
         Return period in years. Is used in legend for describing the inside and
@@ -163,21 +162,21 @@ class PlottedSample():
 
         Parameters
         ----------
-        x : ndarray of doubles
+        x : ndarray of floats
             The sample's first environmental variable.
-        y : ndarray of doubles
+        y : ndarray of floats
             The sample's second environmental variable.
         ax : Axes
             Axes of the figure where the scatter plot should be drawn.
         label : str
             Label that will be used in the legend for the sample.
-        x_inside : ndarray of doubles
+        x_inside : ndarray of floats
             Values in the first dimension of the points inside the contour.
-        y_inside : ndarray of doubles
+        y_inside : ndarray of floats
             Values in the second dimension of the points inside the contour.
-        x_outside : ndarray of doubles
+        x_outside : ndarray of floats
             Values in the first dimension of the points outside the contour.
-        y_outside : ndarray of doubles
+        y_outside : ndarray of floats
             Values in the second dimension of the points outside the contour.
         return_period : int, optional
             Return period in years. Is used in legend for describing the inside and
@@ -196,3 +195,57 @@ class PlottedSample():
         self.y_outside = y_outside
         self.return_period = return_period
         self.do_plot_extreme = do_plot_extreme
+
+
+def plot_confidence_interval(x_median, y_median, x_bottom, y_bottom, x_upper,
+                             y_upper, ax, x_label=None, y_label=None,
+                             contour_labels=[None, None, None], plotted_sample=None):
+    """
+    Plots the confidence interval (median, bottom, upper) in a standardized
+    appearance.
+
+    Parameters
+    ----------
+    x_median : ndarray of doubles
+        The 50-percentile contour's coordinates in the x-direction.
+    y_median : ndarray of doubles
+        The 50-percentile contour's coordinates in the y-direction.
+    x_bottom : ndarray of doubles
+        The bottom percentile contour's coordinates in the x-direction.
+    y_bottom : ndarray of doubles
+        The bottom percentile contour's coordinates in the y-direction.
+    x_upper : ndarray of doubles
+        The upper percentile contour's coordinates in the x-direction.
+    y_upper : ndarray of doubles
+        The upper percentile contour's coordinates in the y-direction.
+    ax : Axes
+        Axes of the figure where the contour should be plotted.
+    x_label : str, optional
+        Label for the x-axis.
+    y_label : str, optional
+        Label for the y-axis.
+    contour_labels : list of str, optional
+        Label for th environmental contours that will be used in the legend.
+    plotted_sample : PlottedSample, optional
+        If provided, this sample is drawn together with the contours.
+    """
+    plot_contour(x=x_median,
+                 y=y_median,
+                 ax=ax,
+                 x_label=x_label,
+                 y_label=y_label,
+                 line_style='b-',
+                 contour_label=contour_labels[0],
+                 plotted_sample=plotted_sample)
+    plot_contour(x=x_bottom,
+                 y=y_bottom,
+                 contour_label=contour_labels[1],
+                 line_style='r--',
+                 ax=ax)
+    plot_contour(x=x_upper,
+                 y=y_upper,
+                 contour_label=contour_labels[2],
+                 line_style='r--',
+                 ax=ax)
+    plt.xlim((0, 32))
+    plt.ylim((0, 12))

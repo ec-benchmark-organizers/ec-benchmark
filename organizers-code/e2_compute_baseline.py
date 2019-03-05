@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 
 from viroconcom.fitting import Fit
 from viroconcom.contours import IFormContour
-from plot import plot_contour, PlottedSample
+from plot import plot_contour, PlottedSample, plot_confidence_interval
 from read_write import read_dataset, determine_file_name_e2, write_contour, read_contour
 from contour_intersection import contour_intersection
 from contour_statistics import thetastar_to_theta
 
 # Define the number of years of data that one bootstrap sample should contain.
 # In the exercise 1, 5 and 25 years are used.
-NR_OF_YEARS_TO_DRAW = 5
+NR_OF_YEARS_TO_DRAW = 1
 
 DO_COMPUTE_CONFIDENCE_INTERVAL = True
 NR_OF_BOOTSTRAP_SAMPLES = 1000 # Must be 1000 in Exercise 2.
@@ -106,10 +106,11 @@ for i, contour in enumerate(contours):
                                        y=np.asarray(dataset_d_hs),
                                        ax=ax,
                                        label='dataset D')
+        contour_label = str(return_period) + '-yr contour'
         plot_contour(x=contour.coordinates[0][1],
                      y=contour.coordinates[0][0],
                      ax=ax,
-                     return_period=return_period,
+                     contour_label=contour_label,
                      x_label=label_v,
                      y_label=label_hs,
                      line_style='b-',
@@ -165,7 +166,6 @@ if DO_COMPUTE_CONFIDENCE_INTERVAL:
                   folder_name + file_name_median,
                   label_x=label_v,
                   label_y=label_hs)
-    folder_name = 'contour_coordinates/'
     file_name_bottom = determine_file_name_e2(
         'John', 'Doe', NR_OF_YEARS_TO_DRAW, 'bottom')
     write_contour(sorted_v[bottom_percentile_index, :],
@@ -173,7 +173,6 @@ if DO_COMPUTE_CONFIDENCE_INTERVAL:
                   folder_name + file_name_bottom,
                   label_x=label_v,
                   label_y=label_hs)
-    folder_name = 'contour_coordinates/'
     file_name_upper = determine_file_name_e2(
         'John', 'Doe', NR_OF_YEARS_TO_DRAW, 'upper')
     write_contour(sorted_v[upper_percentile_index, :],
@@ -194,22 +193,17 @@ if DO_COMPUTE_CONFIDENCE_INTERVAL:
                                    y=np.asarray(dataset_d_hs),
                                    ax=ax,
                                    label='dataset D')
-    plot_contour(x=contour_v_median,
-                 y=contour_hs_median,
-                 ax=ax,
-                 return_period=return_period,
-                 x_label=label_v,
-                 y_label=label_hs,
-                 line_style='k--',
-                 plotted_sample=plotted_sample)
-    plot_contour(x=contour_v_bottom,
-                 y=contour_hs_bottom,
-                 line_style='r-',
-                 ax=ax)
-    plot_contour(x=contour_v_upper,
-                 y=contour_hs_upper,
-                 line_style='g-',
-                 ax=ax)
-    plt.xlim((0, 32))
-    plt.ylim((0, 12))
+    contour_labels = ['50th percentile contour', '2.5th percentile contour',
+                      '97.5th percentile contour']
+    plot_confidence_interval(
+        x_median=contour_v_median, y_median=contour_hs_median,
+        x_bottom=contour_v_bottom, y_bottom=contour_hs_bottom,
+        x_upper=contour_v_upper, y_upper=contour_hs_upper, ax=ax,
+        x_label=label_v,
+        y_label=label_hs, contour_labels=contour_labels,
+        plotted_sample=plotted_sample)
+    if NR_OF_YEARS_TO_DRAW == 1:
+        plt.title('Samples cover ' + str(NR_OF_YEARS_TO_DRAW) + ' year')
+    else:
+        plt.title('Samples cover ' + str(NR_OF_YEARS_TO_DRAW) + ' years')
     plt.show()
