@@ -60,8 +60,7 @@ def plot_sample(plotted_sample):
 
 def plot_dependence_functions(
         fit, fig, unconditonal_variable_label=None,
-        conditoinal_variable_label=None, style_discrete_values='r.',
-        style_dependence_function='b-'):
+        style_discrete_values='r.', style_dependence_function='b-'):
     """
 
     Parameters
@@ -69,7 +68,6 @@ def plot_dependence_functions(
     fit : Fit
     fig : Figure
     unconditonal_variable_label : str
-    conditoinal_variable_label : str
     style_discrete_values : str
         Style of the discrete values for the parameters that were derived from
         individual distribution fitting.

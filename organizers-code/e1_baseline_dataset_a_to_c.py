@@ -33,9 +33,8 @@ print('First variable: ' + dist0.name + ' with '
       + ' location: ' + str(dist0.loc))
 print('Second variable: ' + str(fit.mul_var_dist.distributions[1]))
 fig = plt.figure(figsize=(6, 5), dpi=150)
-plot_dependence_functions(fit=fit, fig=fig, unconditonal_variable_label=label_hs,
-                          conditoinal_variable_label=label_tz)
-
+plot_dependence_functions(fit=fit, fig=fig, unconditonal_variable_label=label_hs)
+fig.suptitle('Dataset ' + DATASET_CHAR)
 
 # Compute IFORM-contours with return periods of 1 and 20 years.
 return_period_1 = 1
