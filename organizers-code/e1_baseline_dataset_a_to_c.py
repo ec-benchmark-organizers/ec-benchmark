@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 from viroconcom.fitting import Fit
 from viroconcom.contours import IFormContour
-from plot import plot_contour, PlottedSample
+from plot import plot_contour, PlottedSample, plot_dependence_functions
 from contour_statistics import points_outside
 from read_write import read_dataset, determine_file_name_e1, write_contour, read_contour
 
@@ -24,20 +24,24 @@ dist_description_tz = {'name': 'Lognormal_SigmaMu',
                       }
 
 # Fit the model to the data.
-my_fit = Fit((sample_hs, sample_tz), (
+fit = Fit((sample_hs, sample_tz), (
     dist_description_hs, dist_description_tz))
-dist0 = my_fit.mul_var_dist.distributions[0]
+dist0 = fit.mul_var_dist.distributions[0]
 print('First variable: ' + dist0.name + ' with '
       + ' scale: ' + str(dist0.scale) + ', '
       + ' shape: ' + str(dist0.shape) + ', '
       + ' location: ' + str(dist0.loc))
-print('Second variable: ' + str(my_fit.mul_var_dist.distributions[1]))
+print('Second variable: ' + str(fit.mul_var_dist.distributions[1]))
+fig = plt.figure(figsize=(6, 5), dpi=150)
+plot_dependence_functions(fit=fit, fig=fig, unconditonal_variable_label=label_hs,
+                          conditoinal_variable_label=label_tz)
+
 
 # Compute IFORM-contours with return periods of 1 and 20 years.
 return_period_1 = 1
-iform_contour_1 = IFormContour(my_fit.mul_var_dist, return_period_1, 1, 100)
+iform_contour_1 = IFormContour(fit.mul_var_dist, return_period_1, 1, 100)
 return_period_20 = 20
-iform_contour_20 = IFormContour(my_fit.mul_var_dist, return_period_20, 1, 100)
+iform_contour_20 = IFormContour(fit.mul_var_dist, return_period_20, 1, 100)
 
 # Save the contours as csv files in the required format.
 folder_name = 'contour_coordinates/'
@@ -96,5 +100,4 @@ plot_contour(x=contour_tz_20,
              line_style='b-',
              plotted_sample=plotted_sample)
 plt.title('Dataset ' + DATASET_CHAR)
-
 plt.show()

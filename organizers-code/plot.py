@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from viroconcom.distributions import LognormalDistribution
 
 def plot_sample(plotted_sample):
     """
@@ -55,6 +56,71 @@ def plot_sample(plotted_sample):
     if any(d == True for d in ps.do_plot_extreme):
         ps.ax.scatter(x_extremes, y_extremes,  s=40, c='g', marker='*',
                    label='observed extreme')
+
+
+def plot_dependence_functions(
+        fit, fig, unconditonal_variable_label=None,
+        conditoinal_variable_label=None, style_discrete_values='r.',
+        style_dependence_function='b-'):
+    """
+
+    Parameters
+    ----------
+    fit : Fit
+    fig : Figure
+    unconditonal_variable_label : str
+    conditoinal_variable_label : str
+    style_discrete_values : str
+        Style of the discrete values for the parameters that were derived from
+        individual distribution fitting.
+    style_dependence_function : str
+        Style of the fitted dependence function.
+    """
+    ax = fig.add_subplot(211)
+    scale_at = fit.multiple_fit_inspection_data[1].scale_at
+    x1 = np.linspace(0, max(scale_at)*1.1, 100)
+    dp_function = '$' + str('%.2f' % fit.mul_var_dist.distributions[1].scale.a) + \
+                  '+' + str('%.2f' % fit.mul_var_dist.distributions[1].scale.b) + \
+                  '\cdot h_s^{' + str('%.2f' % fit.mul_var_dist.distributions[1].scale.c) + '}$'
+
+
+    if fit.mul_var_dist.distributions[1].name == 'Lognormal':
+        plt.plot(scale_at, np.log(fit.multiple_fit_inspection_data[1].scale_value),
+                 style_discrete_values, label='from individual distribution fitting')
+        plt.plot(x1, np.log(fit.mul_var_dist.distributions[1].scale(x1)),
+                 style_dependence_function, label=dp_function)
+        ylabel = '$μ$'
+    if fit.mul_var_dist.distributions[1].name == 'Weibull':
+        plt.plot(scale_at, fit.multiple_fit_inspection_data[1].scale_value,
+                 style_discrete_values, label='from individual distribution fitting')
+        plt.plot(x1, fit.mul_var_dist.distributions[1].scale(x1),
+                 style_dependence_function, label=dp_function)
+        ylabel = '$α_v$'
+    #plt.xlabel(unconditonal_variable_label)
+    plt.legend(frameon=False)
+    plt.ylabel(ylabel)
+
+    ax = fig.add_subplot(212)
+    shape_at = fit.multiple_fit_inspection_data[1].shape_at
+    x1 = np.linspace(0, max(shape_at)*1.1, 100)
+    plt.plot(shape_at, fit.multiple_fit_inspection_data[1].shape_value,
+             style_discrete_values)
+    plt.plot(x1, fit.mul_var_dist.distributions[1].shape(x1),
+             style_dependence_function)
+    plt.xlabel(unconditonal_variable_label)
+    if fit.mul_var_dist.distributions[1].name == 'Lognormal':
+        ylabel = '$σ$'
+        dp_function = '$' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.a) + \
+                      '+' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.b) + \
+                      '\exp (' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.c) + \
+                      'h_s)$'
+    if fit.mul_var_dist.distributions[1].name == 'Weibull':
+        ylabel = '$β_v$'
+        dp_function = '$' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.a) + \
+                      '+' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.b) + \
+                      '\cdot h_s^{' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.c) + '}$'
+    plt.legend(['from individual distribution fitting', dp_function], frameon=False)
+    plt.ylabel(ylabel)
 
 
 def plot_contour(x, y, ax, contour_label=None, x_label=None, y_label=None,
