@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from viroconcom.distributions import LognormalDistribution
 
 def plot_sample(plotted_sample):
     """
