@@ -13,13 +13,13 @@ The original datasets are owned by NDBC (datasets A, B & C) and WDCC (dataset D,
 To enter the benchmark, please submit the following files to **not-yet-set@email.domain**:
 * Exercise 1 (environmental modeling and contour construction):
   * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise1_Example.pdf) is a filled example)
-  * 12 CSV files, each containing the coordinates of one contour (example: [doe_john_dataset_a_20.txt
-](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/doe_john_dataset_a_20.txt))
-  * 12 figures, each showing one contour (example: [doe_john_dataset_a_20.png](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/doe_john_dataset_a_20.png))
+  * 12 CSV files, each containing the coordinates of one contour (example: [doe_john_dataset_a_1.txt
+](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/contour_coordinates/doe_john_dataset_a_1.txt))
+  * 12 figures, each showing one contour (example: [doe_john_dataset_a_1_20.png](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/figures/doe_john_dataset_a_1_20.png))
   * Please compress these 25 files into a ZIP file and name it 'lastname_firstname_exercise1.zip' (example: **not yet**).
 * Exercise 2 (uncertainty characterization):
   * A title page (use [this form](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2.pdf); [here](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/EC_Benchmark_Exercise2_Example.pdf) is a filled example)
-  * 9 CSV files that together describe 3 contours. Each contour is described with 3 CSV files: one csv file should contain the most-likely contour, one csv file the bottom confidence interval and one csv file the upper confidence interval.
+  * 9 CSV files that together describe the three cases. Each case is described with three CSV files: one csv file should contain the median contour, one csv file the 2.5th percentile contour and one csv file the 97.5th percentile contour (example: [median](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/contour_coordinates/doe_john_years_1_median.txt), [2.5th percentile](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/contour_coordinates/doe_john_years_1_bottom.txt), [97.5th percentile](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/organizers-code/contour_coordinates/doe_john_years_1_upper.txt))
   * 3 figures, each showing one contour (example: **not yet**)
   * Please compress these 13 files into a ZIP file and name it 'lastname_firstname_exercise2.zip' (example: **not yet**).
 * You can either participate only in Exercise 1, only in Excercise 2 or in both.
