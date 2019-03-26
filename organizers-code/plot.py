@@ -312,3 +312,65 @@ def plot_confidence_interval(x_median, y_median, x_bottom, y_bottom, x_upper,
                  ax=ax)
     plt.xlim((0, 32))
     plt.ylim((0, 12))
+
+
+def plot_wave_breaking_limit(ax, bottom_tz=0, upper_tz=20, steps=100):
+    """
+    Plots the wave breaking limit on a given axes.
+
+    Assumes that x = zero-up-crossing period and y = sig. wave height.
+
+    Parameters
+    ----------
+    ax : Axes
+    bottom_tz : float
+        Bottom limit for the curve.
+    upper_tz : float
+        Upper limit for the curve.
+    steps : int
+        Number of points that are plotted on the curve.
+    """
+    tz_lim = np.linspace(bottom_tz, upper_tz, steps)
+    hs_lim = hs_from_limiting_sig_wave_steepness(tz_lim)
+    ax.plot(tz_lim, hs_lim, linestyle='-.', color=[0.5, 0.5, 0.5])
+
+
+def hs_from_limiting_sig_wave_steepness(tz):
+    """
+    Calculates highest Hs value for a given Tz based on wave steepness.
+
+    The calculaion uses the 'limiting significant wave steepness' described in
+    DNV GL's DNV-GL-RP-C205:2017 (section 3.5.3.5. and 3.5.4)
+
+    Parameters
+    ----------
+    tz : ndarray of doubles
+        Zero-up-crossing period in seconds.
+
+    Returns
+    -------
+    hs : ndarray of doubles
+        Significant wave height in meters.
+    """
+    TZLOW_STEEPNESS_VALUE = 0.1 # is 1/10 in DNVG-GL-RP-C205:2017, 3.5.4
+    TZHIGH_STEEPNESS_VALUE = 0.0666666  # is 1/15 in DNVG-GL-RP-C205:2017, 3.5.4
+
+    G = 9.81
+
+    ss = np.empty(tz.size)
+    ss[:] = np.nan
+
+
+    for i in range(tz.size):
+        if tz[i] <= 6:
+            ss[i] = 0.1
+        elif tz[i] < 12:
+            ss[i] = \
+                TZLOW_STEEPNESS_VALUE\
+                + (TZHIGH_STEEPNESS_VALUE - TZLOW_STEEPNESS_VALUE) / 6.0 * (tz[i] - 6)
+        else:
+            ss[i] = TZHIGH_STEEPNESS_VALUE
+
+    hs = ss * tz**2 * G / (2 * np.pi)
+
+    return hs
