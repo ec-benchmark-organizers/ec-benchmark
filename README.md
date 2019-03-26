@@ -1,4 +1,4 @@
-# A Benchmarking Exercise on Estimating Extreme Environmental Conditions for Engineering Design
+# A Benchmarking Exercise on Estimating Extreme Environmental Conditions: Methodology & Baseline Results
 This is the official respository for the excercise annouced at OMAE 2019 (**link to paper**).
 ## Datasets
 The 6 datasets are located in the folder [datasets](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/datasets).
