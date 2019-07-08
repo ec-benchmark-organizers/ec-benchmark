@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 from viroconcom.fitting import Fit
 from viroconcom.contours import IFormContour
-from plot import plot_contour, PlottedSample, plot_dependence_functions
+from plot import plot_contour, PlottedSample, plot_marginal_fit, plot_dependence_functions
 from contour_statistics import points_outside
 from read_write import read_dataset, determine_file_name_e1, write_contour, read_contour
 
@@ -32,6 +32,11 @@ print('First variable: ' + dist0.name + ' with '
       + ' shape: ' + str(dist0.shape) + ', '
       + ' location: ' + str(dist0.loc))
 print('Second variable: ' + str(fit.mul_var_dist.distributions[1]))
+
+fig = plt.figure(figsize=(10, 5), dpi=150)
+plot_marginal_fit(sample_hs, dist0, fig=fig, label='Significant wave height (m)')
+fig.suptitle('Dataset ' + DATASET_CHAR)
+
 fig = plt.figure(figsize=(6, 5), dpi=150)
 plot_dependence_functions(fit=fit, fig=fig, unconditonal_variable_label=label_hs)
 fig.suptitle('Dataset ' + DATASET_CHAR)
