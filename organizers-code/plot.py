@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import stats
+import math
+from viroconcom import distributions
 
 
 def plot_sample(plotted_sample):
@@ -57,6 +60,37 @@ def plot_sample(plotted_sample):
                    label='observed extreme')
 
 
+def plot_marginal_fit(sample, distribution, fig, label=None, color_sample='b',
+                      color_fit='r'):
+    if isinstance(distribution, distributions.WeibullDistribution):
+        rv = stats.weibull_min(distribution.shape(0),
+                         distribution.loc(0),
+                         distribution.scale(0))
+    else:
+        raise NotImplementedError
+
+    # Plot histogram.
+    ax1 = fig.add_subplot(121)
+    plt.hist(sample, normed=True, color=color_sample)
+    xtick_max = math.ceil(max(sample))
+    plt.xticks(range(0, xtick_max))
+    lnspc = np.linspace(0, xtick_max, 500)
+    density_values = rv.pdf(lnspc)
+    plt.plot(lnspc, density_values, label="Norm", color=color_fit)
+    plt.xlabel(label)
+    plt.ylabel('Probability density (-)')
+
+    #Plot Q-Q plot.
+    ax2 = fig.add_subplot(122)
+    stats.probplot(sample, dist=rv, plot=ax2)
+    ax2.get_lines()[0].set_markerfacecolor(color_sample)
+    ax2.get_lines()[0].set_markeredgecolor(color_sample)
+    ax2.get_lines()[1].set_color(color_fit)
+    ax2.title.set_text('')
+    plt.xlabel('Theoretical quantiles, ' + str(label).lower())
+    plt.ylabel('Ordered values, ' + str(label).lower())
+
+
 def plot_dependence_functions(
         fit, fig, unconditonal_variable_label=None,
         style_discrete_values='r.', style_dependence_function='b-'):
@@ -69,7 +103,7 @@ def plot_dependence_functions(
     unconditonal_variable_label : str
     style_discrete_values : str
         Style of the discrete values for the parameters that were derived from
-        individual distribution fitting.
+        marginal distribution fitting.
     style_dependence_function : str
         Style of the fitted dependence function.
     """
@@ -83,13 +117,13 @@ def plot_dependence_functions(
 
     if fit.mul_var_dist.distributions[1].name == 'Lognormal':
         plt.plot(scale_at, np.log(fit.multiple_fit_inspection_data[1].scale_value),
-                 style_discrete_values, label='from individual distribution fitting')
+                 style_discrete_values, label='from marginal distribution fitting')
         plt.plot(x1, np.log(fit.mul_var_dist.distributions[1].scale(x1)),
                  style_dependence_function, label=dp_function)
         ylabel = '$μ$'
     if fit.mul_var_dist.distributions[1].name == 'Weibull':
         plt.plot(scale_at, fit.multiple_fit_inspection_data[1].scale_value,
-                 style_discrete_values, label='from individual distribution fitting')
+                 style_discrete_values, label='from marginal distribution fitting')
         plt.plot(x1, fit.mul_var_dist.distributions[1].scale(x1),
                  style_dependence_function, label=dp_function)
         ylabel = '$α_v$'
@@ -116,7 +150,7 @@ def plot_dependence_functions(
         dp_function = '$' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.a) + \
                       '+' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.b) + \
                       '\cdot h_s^{' + str('%.2f' % fit.mul_var_dist.distributions[1].shape.c) + '}$'
-    plt.legend(['from individual distribution fitting', dp_function], frameon=False)
+    plt.legend(['from marginal distribution fitting', dp_function], frameon=False)
     plt.ylabel(ylabel)
 
 
@@ -187,6 +221,7 @@ def plot_contour(x, y, ax, contour_label=None, x_label=None, y_label=None,
     ax.spines['top'].set_visible(False)
     ax.yaxis.set_ticks_position('left')
     ax.xaxis.set_ticks_position('bottom')
+
 
 class PlottedSample():
     """
