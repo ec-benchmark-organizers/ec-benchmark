@@ -40,7 +40,6 @@ fig = plt.figure(figsize=(10, 5), dpi=150)
 plot_marginal_fit(sample_hs, dist0, fig=fig, label='Significant wave height (m)')
 fig.suptitle('Dataset ' + DATASET_CHAR)
 
-
 fig = plt.figure(figsize=(6, 5), dpi=150)
 plot_dependence_functions(fit=fit, fig=fig, unconditonal_variable_label=label_hs)
 fig.suptitle('Dataset ' + DATASET_CHAR)

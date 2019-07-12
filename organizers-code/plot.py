@@ -59,7 +59,9 @@ def plot_sample(plotted_sample):
         ps.ax.scatter(x_extremes, y_extremes,  s=40, c='g', marker='*',
                    label='observed extreme')
 
-def plot_marginal_fit(sample, distribution, fig, label=None, color_sample='b', color_fit='r'):
+
+def plot_marginal_fit(sample, distribution, fig, label=None, color_sample='b',
+                      color_fit='r'):
     if isinstance(distribution, distributions.WeibullDistribution):
         rv = stats.weibull_min(distribution.shape(0),
                          distribution.loc(0),
@@ -219,6 +221,7 @@ def plot_contour(x, y, ax, contour_label=None, x_label=None, y_label=None,
     ax.spines['top'].set_visible(False)
     ax.yaxis.set_ticks_position('left')
     ax.xaxis.set_ticks_position('bottom')
+
 
 class PlottedSample():
     """
