@@ -11,7 +11,7 @@ Not at OMAE? You can send a proposal which will be included in this document and
 on all proposals until 24 hours before the meeting via email (ecbenchmark@gmail.com).  
 
 Maintainer of this document: Andreas F. Haselsteiner ("Andy"), a.haselsteiner@uni-bremen.de  
-Document lives at: https://addlink.com
+Document lives at: https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/joint-paper/joint-paper-outline.md
 
 # Proposed structure and content
 
@@ -157,7 +157,7 @@ joint distribution using some method (IFORM, direct sampling, highest density re
 Contours for the same joint distribution which are constructed using different methods 
 can differ significantly. It is therefore useful to directly compare the different statistical 
 models for each dataset. One way to compare the statistical models is using exceedance plots 
-for the marginal variables, which compare the observed data and fitted model (see figure below). 
+for the marginal variables, which compare the observed data and fitted model (see Figure A1 below). 
 As well as the marginal variables, these plots can also be produced for the marginal quantities 
 under a rotation of the axes. That is, the quantities Z_θ=X cos⁡θ+Y sin⁡θ, for various angles θ. 
 The marginal variables X and Y correspond to Z(0) and Z(90°), respectively. It is proposed 
@@ -179,8 +179,8 @@ that is independent of the tail of the distribution. Participants could calculat
 quantiles either by integrating the fitted statistical models or by Monte Carlo simulation.  
 
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Example exceedance plot for Hs.")
-*Example exceedance plot for Hs.*  
+![alt text](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/joint-paper/gfx/proposal-a-figure.jpg "Example exceedance plot for Hs.")  
+*Figure A1: Example exceedance plot for Hs.*  
 
 Proposed by: Edward Mackay, e.mackay@exeter.ac.uk
 
