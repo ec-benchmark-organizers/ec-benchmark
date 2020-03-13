@@ -27,15 +27,15 @@ Brief introduction on environmental contours and on this benchmarking exercise.
 |3          |Kernel density model     |Kernel density model     |Highest density            |
 
 ### 2.1 Contour method 1
-Description of used methods on half a page (250 words and up to 1 table or figure).  
+Description of used methods on half a page (200-400 words and up to 1 table or figure).  
 Contribution by: Jane Doe & John Doe
 
 ### 2.2 Contour method 2
-Description of used methods on half a page (250 words and up to 1 table or figure).  
+Description of used methods on half a page (200-400 words and up to 1 table or figure).  
 Contribution by: Jane Doe & John Doe
 
 ### 2.3 Contour method 3
-Description of used methods on half a page (250 words and up to 1 table or figure).  
+Description of used methods on half a page (200-400 words and up to 1 table or figure).  
 Contribution by: Jane Doe & John Doe
 
 ## 3. Results 
