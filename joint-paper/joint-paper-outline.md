@@ -20,11 +20,11 @@ Brief introduction on environmental contours and on this benchmarking exercise.
 
 ## 2 Participants
 
-|Participant|Model for sea state data |Model for wind wave data |Contour construction method|
-|-----------|-------------------------|-------------------------|---------------------------|
-|1          |Global hierarchical model|Global hierarchical model|Direct sampling            |
-|2          |Conditional extreme model|Global hierarchical model|IFORM                      |
-|3          |Kernel density model     |Kernel density model     |Highest density            |
+|Participant|Model for sea state data |Model for wind wave data |Contour construction method|Code  |
+|-----------|-------------------------|-------------------------|---------------------------|------|
+|1          |Global hierarchical model|Global hierarchical model|Direct sampling            |https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/participants-code/participant_1 |
+|2          |Conditional extreme model|Global hierarchical model|IFORM                      |https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/participants-code/participant_2 |
+|3          |Kernel density model     |Kernel density model     |Highest density            |- |
 
 ### 2.1 Contour method 1
 Description of used methods on half a page (200-400 words and up to 1 table or figure).  
