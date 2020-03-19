@@ -129,7 +129,16 @@ Panel N2: Participant N with contours based on 5 year of data.
 Panel N3: Participant N with contours based on 25 year of data.  
 
 ## 4. Discussion
+
 ## 5. Conclusions
+
+## A. Appendix
+
+### A.1 Details about the submission of participant 1
+Optionally, in an appendix further details for each 
+contribution can be given that would exceed the word limit in seection 2.
+
+### A.2 Details about the submision of participant 2
 
 # Timeline and kind of publication
 Meeting at OMAE 2020: Decisions on the structure and content of the paper  
