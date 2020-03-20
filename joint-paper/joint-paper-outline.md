@@ -3,7 +3,8 @@
 This document serves as a proposal for the structure and content of the joint paper that is 
 planned to contain the results of the benchmarking exercise on estimating extreme environmental 
 conditions. This document shall support us in making decisions on the joint paper during the 
-planned meeting at OMAE 2020.
+planned meeting at OMAE 2020. If OMAE 2020 is cancelled or postponed we are considering having 
+a video conference instead.
 
 Meeting time: TBA (ca. 3 hours some time between June 28 – July 3, 2020)  
 Meeting location: OMAE 2020, Florida, USA, Room: TBA  
@@ -53,7 +54,7 @@ Assuming that environmental state are independent, for any contour the number of
 expected datapoints anywhere outside the contour can be calculated as *N × αT* 
 where *N* is the number of datapoints a sample holds and *αT* is the probability 
 that an observations falls anywhere outside the contour. 
-For IFORM, direct sampling, ISORM and highest density contours which are constructed 
+For IFORM, direct sampling, ISORM and highest density contours that are constructed 
 using the same joint distribution and the same *αC*-value, the probability *αT* is different 
 (where *αC* corresponds to the definition of probability of exceedance that is specific 
 to the contour method).
@@ -141,18 +142,22 @@ contribution can be given that would exceed the word limit in seection 2.
 ### A.2 Details about the submision of participant 2
 
 # Timeline and kind of publication
-Meeting at OMAE 2020: Decisions on the structure and content of the paper  
+Meeting at OMAE 2020 (or video conference): Decisions on the structure and content of the paper  
 July 31st: Deadline for first complete draft  
 August 15th: Deadline for submitting comments on the first draft  
-August 30st: Deadlien for revised draft  
+August 30st: Deadline for revised draft  
 September 15th: Deadline for comments on revised draft  
 September 31st: Submission of the manuscript  
   
 Kind of publication: Research article in a journal  
-Target journal: To be discussed. @Lance: Special issue in the Journal of Offshore Mechanics and Artic Engineering?  
+Target journal: We are currently asking editors of different journals whether they would be 
+interested in the paper.  We are also asking editors if they are interested in having 
+a special issue where particpants could submit individual papers that describe their 
+bechmark contribution (potentially, participants could also expand their OMAE 2020 papers) 
 
 # Proposals for further analysis
-At the OMAE 2020 meeting we will decide on the following proposals. 
+At the OMAE 2020 meeting we will decide on the following proposals (if OMAE 2020 is 
+cancelled or postponed we are considering having a video conference instead).  
   
 Feel free to send me your proposals and I will add them here (a.haselsteiner@uni-bremen.de).  
   
