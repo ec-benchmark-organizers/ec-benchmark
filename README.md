@@ -2,7 +2,7 @@
 This is the official respository for the excercise annouced at OMAE 2019 ([paper](mailto:?subject=Send%20benchmarking%20exercise%20paper&body=Hi%20Andreas,%0D%0A%0D%0Acould%20you%20send%20me%20a%20copy%20of%20the%20paper%20that%20describes%20the%20benchmarking%20exercise?%0D%0A%0D%0ABest%20regards,), [presentation](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/publications/2019-06-17_OMAE2019_BenchmarkingExercise.pdf)).
 
 ## Updates
-**March 24, 2020:** The deadline for submitting results is extended to April 31, 2020.
+**March 24, 2020:** The deadline for submitting results is extended to April 30, 2020.
 
 ## Datasets
 The 6 datasets are located in the folder [datasets](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/datasets).
