@@ -6,7 +6,7 @@ conditions. This document shall support us in making decisions on the joint pape
 planned online meeting, which is scheduled to take place June 28 and July 3.
 
 About the meeting:
-* Meeting time: TBA (ca. 3 hours some time between June 28 – July 3, 2020)
+* Meeting time: TBA (ca. 2 hours some time between June 28 – July 3, 2020)
 * Meeting location: Video conference using Zoom
 * Cannot join the meeting? You can send a proposal, which will be included in this document and you can vote
 on all proposals until 24 hours before the meeting via email (ecbenchmark@gmail.com).
