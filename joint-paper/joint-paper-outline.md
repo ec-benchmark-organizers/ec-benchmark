@@ -6,10 +6,18 @@ conditions. This document shall support us in making decisions on the joint pape
 planned online meeting, which is scheduled to take place June 28 and July 3.
 
 About the meeting:
-* Meeting time: TBA (ca. 2 hours some time between June 28 – July 3, 2020)
+* Meeting time: TBA (ca. 2 hours some time between June 28 – July 3, 2020; Please
+fill out the doodle: https://doodle.com/poll/zvk24u5vc7fite8c)
 * Meeting location: Video conference using Zoom
 * Cannot join the meeting? You can send a proposal, which will be included in this document and you can vote
 on all proposals until 24 hours before the meeting via email (ecbenchmark@gmail.com).
+* Proposed agenda:
+    1) 0:00 - 0:15: Brief introduction of all participants
+    2) 0:15 - 0:45: Overview about the results (table listing the contributions, plots that overlay all contours)
+    3) 0:45 - 1:00: Overview about the proposed structure for the joint paper
+    4) 1:00 - 1:30: Decisions on the proposed structure, decisions on proposals for further analysis
+    5) 1:30 - 1:35: Decisions on the next steps and the timeline
+    6) 1:35 - 2:00: Further points / Time buffer
 
 About this document:
 * Maintainer of this document: Andreas F. Haselsteiner ("Andy"), a.haselsteiner@uni-bremen.de
@@ -149,7 +157,7 @@ Panel 33: Contribution 3 with contours based on 25 year of data.
 
 ### A.1 Details about the submission of participant 1
 Optionally, in an appendix further details for each 
-contribution can be given that would exceed the word limit in seection 2.
+contribution can be given that would exceed the word limit in Section 2.
 
 ### A.2 Details about the submision of participant 2
 
