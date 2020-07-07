@@ -3,10 +3,10 @@
 This document serves as a proposal for the structure and content of the joint paper that is 
 planned to contain the results of the benchmarking exercise on estimating extreme environmental 
 conditions. This document shall support us in making decisions on the joint paper during the 
-planned online meeting, which is scheduled to take place June 28 and July 3.
+planned online meeting, which is scheduled to take place between August 3 and August 7.
 
 About the meeting:
-* Meeting time: TBA (ca. 2 hours some time between June 28 – July 3, 2020; Please
+* Meeting time: TBA (ca. 2 hours some time between August 3 and August 7, 2020; Please
 fill out the doodle: https://doodle.com/poll/zvk24u5vc7fite8c)
 * Meeting location: Video conference using Zoom
 * Cannot join the meeting? You can send a proposal, which will be included in this document and you can vote
@@ -30,14 +30,14 @@ Brief introduction on environmental contours and on this benchmarking exercise.
 
 ## 2 Contributions
 
-We received 8 contributions for Exercise 1 and 3 contributions for Exercise 2.
+We received 9 contributions for Exercise 1 and 3 contributions for Exercise 2.
 
 |Contribution|Authors<sup>1</sup>                         |Model for sea state data |Model for wind wave data |Contour construction method|Exercise 1|Exercise 2| Code |
 |------------|--------------------------------------------|-------------------------|-------------------------|---------------------------|----------|----------|------|
 |1           |Maria  Ash, John Doe                        |Global hierarchical model|Global hierarchical model|Direct sampling            | X        |          | https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/participants-code/participant_1 |
 |2           |James Doe                                   |Conditional extreme model|Global hierarchical model|IFORM                      | X        | X        | https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/participants-code/participant_2 |
 |...         |...                                         |...                      |...                      |...                        | X        | X        | ... |
-|8           |Aron Zack, Sarah Johnson                    |Kernel density model     |Kernel density model     |Highest density            | X        |          | -   |
+|9           |Aron Placeholder, Sarah Johnson             |Kernel density model     |Kernel density model     |Highest density            | X        |          | -   |
 
 <sup>1</sup> Sorted by first author's last name
 
@@ -56,7 +56,7 @@ Contribution by: Jane Doe & John Doe
 ## 3. Results 
 ### 3.1 Sea state contours
 **Figure with 2x3 panels that shows the contours**  
-Panel 11: Dataset A with all 1-yr contours.  
+Panel 11: Dataset A (provided and retained) with all 1-yr contours.  
 Panel 12: Dataset B with all 1-yr contours.  
 Panel 13: Dataset C with all 1-yr contours.  
 Panel 21: Dataset A with all 20-yr contours.  
@@ -85,7 +85,7 @@ contours *αC = αT*.
 |1           | 24±7 (A: 30, B: 10, C: 40)          |20  (Highest density)      |
 |2           | 84±12 (A: 70, B: 100, C: 85)        |196 (IFORM)                |
 |...         |...                                  |...                        |
-|8           | 150±40 (A: 70, B: 210, C: 60)       |ca. 196 (Direct sampling)  |
+|9           | 150±40 (A: 70, B: 210, C: 60)       |ca. 196 (Direct sampling)  |
 
 &nbsp;
 
@@ -94,12 +94,12 @@ contours *αC = αT*.
 |1           | 2.2±0.5 (A: 0, B: 3, C: 3)           |1  (Highest density)       |
 |2           | 10.1±5.3 (A: 3, B: 10, C: 13)        |11.5 (IFORM)               |
 |...         |...                                   |...                        |
-|8           | 4.1±1.0 (A: 2, B: 5, C: 5)           |ca. 11.5 (Direct sampling) |
+|9           | 4.1±1.0 (A: 2, B: 5, C: 5)           |ca. 11.5 (Direct sampling) |
 
 
 ### 3.2 Wind-wave contours
 **Figure with 2x3 panels that shows the contours**  
-Panel 11: Dataset D with all 1-yr contours.  
+Panel 11: Dataset D (provided and retained) with all 1-yr contours.  
 Panel 12: Dataset E with all 1-yr contours.  
 Panel 13: Dataset F with all 1-yr contours.  
 Panel 21: Dataset D with all 50-yr contours.  
@@ -112,7 +112,7 @@ Panel 23: Dataset F with all 50-yr contours.
 |1           | 24±7 (A: 30, B: 10, C: 40)          |50  (Highest density)      |
 |2           | 184±12 (A: 170, B: 200, C: 185)     |492 (IFORM)                |
 |...         |...                                  |...                        |
-|8           | 150±40 (A: 70, B: 210, C: 60)       |ca. 492 (Direct sampling)  |
+|9           | 150±40 (A: 70, B: 210, C: 60)       |ca. 492 (Direct sampling)  |
 
 &nbsp;
 
@@ -121,13 +121,13 @@ Panel 23: Dataset F with all 50-yr contours.
 |1           | 2.2±0.5 (A: 0, B: 3, C: 3)           |1  (Highest density)       |
 |2           | 10.1±5.3 (A: 3, B: 10, C: 13)        |12.0 (IFORM)               |
 |...         |...                                   |...                        |
-|3           | 4.1±1.0 (A: 2, B: 5, C: 5)           |ca. 12.0 (Direct sampling) |
+|9           | 4.1±1.0 (A: 2, B: 5, C: 5)           |ca. 12.0 (Direct sampling) |
 
 ### 3.3 Uncertainty of the wind-wave contours
 
 We received 3 contributions for Exercise 2.
 
-**Figure with 3x3 panels that shows contour overlays**  
+**Figure with 4x3 panels that shows contour overlays**  
 Panel 11: Contribution 1 with contours based on 1 year of data.  
 Panel 12: Contribution 1 with contours based on 5 year of data.  
 Panel 13: Contribution 1 with contours based on 25 year of data.  
@@ -137,8 +137,11 @@ Panel 23: Contribution 2 with contours based on 25 year of data.
 Panel 31: Contribution 3 with contours based on 1 year of data.  
 Panel 32: Contribution 3 with contours based on 5 year of data.  
 Panel 33: Contribution 3 with contours based on 25 year of data.  
+Panel 41: Contribution 4 with contours based on 1 year of data.  
+Panel 42: Contribution 4 with contours based on 5 year of data.  
+Panel 43: Contribution 4 with contours based on 25 year of data.  
 
-**Figure with 3x3 panels that shows contour's confidence intervals**  
+**Figure with 4x3 panels that shows contour's confidence intervals**  
 Panel 11: Contribution 1 with contours based on 1 year of data.  
 Panel 12: Contribution 1 with contours based on 5 year of data.  
 Panel 13: Contribution 1 with contours based on 25 year of data.  
@@ -148,6 +151,9 @@ Panel 23: Contribution 2 with contours based on 25 year of data.
 Panel 31: Contribution 3 with contours based on 1 year of data.  
 Panel 32: Contribution 3 with contours based on 5 year of data.  
 Panel 33: Contribution 3 with contours based on 25 year of data.  
+Panel 41: Contribution 4 with contours based on 1 year of data.  
+Panel 42: Contribution 4 with contours based on 5 year of data.  
+Panel 43: Contribution 4 with contours based on 25 year of data.  
 
 ## 4. Discussion
 
@@ -164,22 +170,24 @@ contribution can be given that would exceed the word limit in Section 2.
 # Timeline and kind of publication
 
 Dates:
-* June 28 - July 3 online meeting: Decisions on the structure and content of the paper
-* July 31st: Deadline for first complete draft
-* August 15th: Deadline for submitting comments on the first draft
-* August 30st: Deadline for revised draft
-* September 15th: Deadline for comments on revised draft
-* September 31st: Submission of the manuscript
+* August 3/4/5/6/7 online meeting: Decisions on the structure and content of the paper
+* August 31st: Deadline for first complete draft
+* September 15th: Deadline for submitting comments on the first draft
+* September 30st: Deadline for revised draft
+* October 15th: Deadline for comments on revised draft
+* October 31st: Submission of the manuscript
 
 Publication:
 * Kind of publication: Research article in a journal
-* Target journal: We are currently asking editors of different journals whether they would be
-interested in the paper.  We are also asking editors if they are interested in having 
-a special issue where particpants could submit individual papers that describe their 
-bechmark contribution (potentially, participants could also expand their OMAE 2020 papers) 
+* Target journal: We have proposed a special issue to the editors of Ocean Engineering. 
+The special issue could contain our joint paper as one article and could be a good place for participants
+who want to submit individual papers that describe their bechmark contribution in detail
+(potentially, participants could also expand their OMAE 2020 papers). In case Ocean Engineering is not 
+interested, we could consider a similar journal.
+
 
 # Proposals for further analysis
-In the June/July online meeting we will decide on the following proposals.
+In the August online meeting we will decide on the following proposals.
   
 Feel free to send me your proposals and I will add them here (a.haselsteiner@uni-bremen.de).  
   
