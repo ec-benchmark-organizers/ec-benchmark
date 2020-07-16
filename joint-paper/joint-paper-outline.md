@@ -183,8 +183,7 @@ Publication:
 * Target journal: We have proposed a special issue to the editors of Ocean Engineering. 
 The special issue could contain our joint paper as one article and could be a good place for participants
 who want to submit individual papers that describe their bechmark contribution in detail
-(potentially, participants could also expand their OMAE 2020 papers). In case Ocean Engineering is not 
-interested, we could consider a similar journal.
+(potentially, participants could also expand their OMAE 2020 papers).
 
 
 # Proposals for further analysis
