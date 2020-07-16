@@ -3,21 +3,22 @@
 This document serves as a proposal for the structure and content of the joint paper that is 
 planned to contain the results of the benchmarking exercise on estimating extreme environmental 
 conditions. This document shall support us in making decisions on the joint paper during the 
-planned online meeting, which is scheduled to take place between August 3 and August 7.
+planned online meeting.
 
 About the meeting:
-* Meeting time: TBA (ca. 2 hours some time between August 3 and August 7, 2020; Please
+* Meeting time: TBA (ca. 2 hours some time between August 10 and August 14, 2020; Please
 fill out the doodle: https://doodle.com/poll/zvk24u5vc7fite8c)
 * Meeting location: Video conference using Zoom
-* Cannot join the meeting? You can send a proposal, which will be included in this document and you can vote
-on all proposals until 24 hours before the meeting via email (ecbenchmark@gmail.com).
+* Meeting goal: Get to know each other, get an overview about the results, decisions on the planned joint paper
 * Proposed agenda:
     1) 0:00 - 0:15: Brief introduction of all participants
     2) 0:15 - 0:45: Overview about the results (table listing the contributions, plots that overlay all contours)
     3) 0:45 - 1:00: Overview about the proposed structure for the joint paper
     4) 1:00 - 1:30: Decisions on the proposed structure, decisions on proposals for further analysis
     5) 1:30 - 1:35: Decisions on the next steps and the timeline
-    6) 1:35 - 2:00: Further points / Time buffer
+    6) 1:35 - 2:00: Discussion and further points
+* Cannot join the meeting? You can send a proposal, which will be included in this document and you can vote
+on all proposals until 48 hours before the meeting via email (ecbenchmark@gmail.com).
 
 About this document:
 * Maintainer of this document: Andreas F. Haselsteiner ("Andy"), a.haselsteiner@uni-bremen.de
@@ -170,7 +171,7 @@ contribution can be given that would exceed the word limit in Section 2.
 # Timeline and kind of publication
 
 Dates:
-* August 3/4/5/6/7 online meeting: Decisions on the structure and content of the paper
+* August 10/11/12/13/14 online meeting: Decisions on the structure and content of the paper
 * August 31st: Deadline for first complete draft
 * September 15th: Deadline for submitting comments on the first draft
 * September 30st: Deadline for revised draft
