@@ -6,8 +6,7 @@ conditions. This document shall support us in making decisions on the joint pape
 planned online meeting.
 
 About the meeting:
-* Meeting time: TBA (ca. 2 hours some time between August 10 and August 14, 2020; Please
-fill out the doodle: https://doodle.com/poll/zvk24u5vc7fite8c)
+* Meeting time: August 10, 16:00 - 18:00 CEST
 * Meeting location: Video conference using Zoom
 * Meeting goal: Get to know each other, get an overview about the results, decisions on the planned joint paper
 * Proposed agenda:
@@ -171,7 +170,7 @@ contribution can be given that would exceed the word limit in Section 2.
 # Timeline and kind of publication
 
 Dates:
-* August 10/11/12/13/14 online meeting: Decisions on the structure and content of the paper
+* August 10: Online meeting, decisions on the structure and content of the paper
 * August 31st: Deadline for first complete draft
 * September 15th: Deadline for submitting comments on the first draft
 * September 30st: Deadline for revised draft
@@ -187,7 +186,7 @@ who want to submit individual papers that describe their bechmark contribution i
 
 
 # Proposals for further analysis
-In the August online meeting we will decide on the following proposals.
+In the online meeting on August 10 we will decide on the following proposals.
   
 Feel free to send me your proposals and I will add them here (a.haselsteiner@uni-bremen.de).  
   
