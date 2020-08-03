@@ -11,7 +11,7 @@ About the meeting:
 * Meeting goal: Get to know each other, get an overview about the results, decisions on the planned joint paper
 * Proposed agenda:
     1) 0:00 - 0:15: Brief introduction of all participants
-    2) 0:15 - 0:45: Overview about the results (table listing the contributions, plots that overlay all contours)
+    2) 0:15 - 0:45: Overview about the results
     3) 0:45 - 1:00: Overview about the proposed structure for the joint paper
     4) 1:00 - 1:30: Decisions on the proposed structure, decisions on proposals for further analysis
     5) 1:30 - 1:35: Decisions on the next steps and the timeline
