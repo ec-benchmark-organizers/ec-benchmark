@@ -19,7 +19,7 @@ legend_for_participant = ['Participant 2',
                           ]
 participant_nrs = [2, 3, 4, 9]
 
-for i in (1,2):
+for i in range(4):
     participant_nr = participant_nrs[i]
     folder_name = 'results/exercise-2/participant-' + str(participant_nr)
     temp = folder_name + '/' + lastname_firstname[i] + '_years_' + str(SAMPLE_LENGTH)
@@ -46,5 +46,8 @@ for i in (1,2):
         x_label=label_v,
         y_label=label_hs,
         contour_labels=contour_labels, sample_plot_data=sample_plot_data)
-    plt.title(legend_for_participant[i] + ', samples cover '+ str(SAMPLE_LENGTH) + ' year')
+    title_str = legend_for_participant[i] + ', samples cover '+ str(SAMPLE_LENGTH) + ' year'
+    if SAMPLE_LENGTH > 1:
+        title_str = title_str + 's'
+    plt.title(title_str)
     plt.show()
