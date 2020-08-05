@@ -5,7 +5,7 @@ from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_contour
 
 dataset_char = 'C'
-return_period = 1
+return_period = 20
 
 file_name = 'datasets/' + dataset_char + '.txt'
 sample_hs, sample_tz, label_hs, label_tz = read_ecbenchmark_dataset(file_name)
@@ -37,8 +37,8 @@ for i in range(n_contours_to_analyze):
     if participant_nr > 9:
         participant_nr = 9
     folder_name = 'results/exercise-1/participant-' + str(participant_nr)
-    file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_a_' + \
-                str(return_period) + '.txt'
+    file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_' + \
+                dataset_char + '_' + str(return_period) + '.txt'
     (hs, tz) = read_contour(file_name)
     if i in (7, 8, 9, 10):
         (tz, hs) = read_contour(file_name)
