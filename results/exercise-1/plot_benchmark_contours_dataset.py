@@ -5,16 +5,20 @@ from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_contour
 import os
 import string
+import matplotlib
+matplotlib.use('Agg') # dont show plots on screen
 
 
 def plotAll(dataset_char, return_period, ylim=None, savefile=False):
-    file_name = os.path.join('..','..','datasets', dataset_char + '.txt')
-    
-    
+    file_name_sample = os.path.join('..','..','datasets', dataset_char + '.txt')
+    file_name_retained = os.path.join('..','..','datasets-retained', dataset_char + 'r.txt')
+
     if dataset_char in list(string.ascii_uppercase)[0:3]:
-        sample_hs, sample_tz, label_hs, label_tz = read_ecbenchmark_dataset(file_name)
+        sample_hs, sample_tz, label_hs, label_tz = read_ecbenchmark_dataset(file_name_sample)
+        ret_hs, ret_tz, *_ = read_ecbenchmark_dataset(file_name_retained)
     elif dataset_char in list(string.ascii_uppercase)[3:6]:
-        sample_tz, sample_hs, label_tz, label_hs = read_ecbenchmark_dataset(file_name)
+        sample_tz, sample_hs, label_tz, label_hs = read_ecbenchmark_dataset(file_name_sample)
+        ret_tz, ret_hs, *_ = read_ecbenchmark_dataset(file_name_retained)
     
     lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
                           'haselsteiner_andreas', 'BV', 'mackay_ed',
@@ -75,10 +79,13 @@ def plotAll(dataset_char, return_period, ylim=None, savefile=False):
     fig, ax = plt.subplots(1, 1, figsize=(6, 5))
 
     
-    pds = plt.scatter(sample_tz, sample_hs, c='black', alpha=0.05, zorder=-20)
-    pls = []
+    pds = plt.scatter(sample_tz, sample_hs, 
+                      facecolors='none', edgecolors='y', marker='o', alpha=0.25, zorder=-20, label='Sample data')
+    pdr = plt.scatter(ret_tz, ret_hs, 
+                      facecolors='none', edgecolors='r', marker='s', alpha=0.25, zorder=-21, label='Retained data')
+    pL = []
     for i in range(n_contours_to_analyze):
-        pls.append(plot_contour(contour_tz_1[i], contour_hs_1[i],
+        pL.append(plot_contour(contour_tz_1[i], contour_hs_1[i],
                       ax=ax, 
                       x_label=label_tz.capitalize(), 
                       y_label=label_hs.capitalize(),
@@ -104,8 +111,8 @@ for dataset_char in list(string.ascii_uppercase)[0:3]:
     for return_period in [1, 20]:
         plotAll(dataset_char, return_period, ylim=14, savefile=True)
 
-for dataset_char in list(string.ascii_uppercase)[3:6]:
-    for return_period in [1, 50]:
-        _ = plotAll(dataset_char, return_period, ylim=20, savefile=True)
+# for dataset_char in list(string.ascii_uppercase)[3:6]:
+#     for return_period in [1, 50]:
+#         _ = plotAll(dataset_char, return_period, ylim=20, savefile=True)
 
 # plt.show()
