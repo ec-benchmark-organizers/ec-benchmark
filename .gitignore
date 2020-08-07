@@ -3,3 +3,5 @@
 .idea/
 .DS_Store
 __pycache__
+results/exercise-1/participant*
+results/exercise-2/participant*
