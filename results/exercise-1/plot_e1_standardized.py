@@ -33,10 +33,14 @@ for i in range(11):
 
     dataset_count = 0
     for dataset_char in dataset_chars:
-        file_name = 'datasets/' + dataset_char + '.txt'
+        file_name_provided = 'datasets/' + dataset_char + '.txt'
+        file_name_retained = 'datasets-retained/' + dataset_char + 'r.txt'
 
         if dataset_char in ('A', 'B', 'C'):
-            sample_hs, sample_tz, label_hs, label_tz = read_ecbenchmark_dataset(file_name)
+            hs_p, tz_p, label_hs, label_tz = read_ecbenchmark_dataset(file_name_provided)
+            hs_r, tz_r, label_hs, label_tz = read_ecbenchmark_dataset(file_name_retained)
+            sample_hs = np.concatenate([hs_p, hs_r])
+            sample_tz = np.concatenate([tz_p, tz_r])
 
             contours_hs = []
             contours_tz = []
@@ -63,7 +67,8 @@ for i in range(11):
                 if j == 0:
                     fig_row = dataset_count // 3
                     fig_col = dataset_count % 3
-                    axs[fig_row, fig_col].set_title('Dataset ' + dataset_char)
+                    axs[fig_row, fig_col].set_title('Dataset ' + dataset_char +
+                                                    ', provided and retained')
                     plot_contour(contours_tz[j], contours_hs[j],
                                  ax=axs[fig_row, fig_col],
                                  contour_label=str(return_period) + ' year',
@@ -95,7 +100,10 @@ for i in range(11):
                                  sample_plot_data=sample_plot_data)
             dataset_count = dataset_count + 1
         else:
-            sample_v, sample_hs, label_v, label_hs = read_ecbenchmark_dataset(file_name)
+            v_p, hs_p, label_v, label_hs = read_ecbenchmark_dataset(file_name_provided)
+            v_r, hs_r, label_v, label_hs = read_ecbenchmark_dataset(file_name_retained)
+            sample_v = np.concatenate([v_p, v_r])
+            sample_hs = np.concatenate([hs_p, hs_r])
 
             contours_v = []
             contours_hs = []
@@ -123,7 +131,8 @@ for i in range(11):
                 if j == 0:
                     fig_row = dataset_count // 3
                     fig_col = dataset_count % 3
-                    axs[fig_row, fig_col].set_title('Dataset ' + dataset_char)
+                    axs[fig_row, fig_col].set_title('Dataset ' + dataset_char +
+                                                    ', provided and retained')
                     plot_contour(contours_v[j], contours_hs[j],
                                  ax=axs[fig_row, fig_col],
                                  contour_label=str(return_period) + ' year',
@@ -157,3 +166,4 @@ for i in range(11):
     fig.tight_layout(pad=3.0)
     plt.suptitle(legend_for_participant[contribution_id - 1])
     plt.show()
+    fig.savefig('e1_contribution_' + str(contribution_id), dpi=150)
