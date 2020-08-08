@@ -5,6 +5,11 @@ from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_contour, SamplePlotData
 from viroconcom.contour_analysis import points_outside
 
+# Set these constant to choose if the provided, the retained or both datasets
+# should be plotted together with the contours.
+DO_PLOT_PROVIDED = True
+DO_PLOT_RETAINED = True
+
 dataset_chars = ['A', 'B', 'C', 'D', 'E', 'F']
 lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
                       'haselsteiner_andreas', 'BV', 'mackay_ed',
@@ -39,8 +44,19 @@ for i in range(11):
         if dataset_char in ('A', 'B', 'C'):
             hs_p, tz_p, label_hs, label_tz = read_ecbenchmark_dataset(file_name_provided)
             hs_r, tz_r, label_hs, label_tz = read_ecbenchmark_dataset(file_name_retained)
-            sample_hs = np.concatenate([hs_p, hs_r])
-            sample_tz = np.concatenate([tz_p, tz_r])
+
+            if DO_PLOT_PROVIDED and (not DO_PLOT_RETAINED):
+                sample_hs = hs_p
+                sample_tz = tz_p
+                label_suffix = 'provided'
+            if (not DO_PLOT_PROVIDED) and DO_PLOT_RETAINED:
+                sample_hs = hs_r
+                sample_tz = tz_r
+                label_suffix = 'retained'
+            if DO_PLOT_PROVIDED and DO_PLOT_RETAINED:
+                sample_hs = np.concatenate([hs_p, hs_r])
+                sample_tz = np.concatenate([tz_p, tz_r])
+                label_suffix = 'provided and retained'
 
             contours_hs = []
             contours_tz = []
@@ -68,7 +84,7 @@ for i in range(11):
                     fig_row = dataset_count // 3
                     fig_col = dataset_count % 3
                     axs[fig_row, fig_col].set_title('Dataset ' + dataset_char +
-                                                    ', provided and retained')
+                                                    ', ' + label_suffix)
                     plot_contour(contours_tz[j], contours_hs[j],
                                  ax=axs[fig_row, fig_col],
                                  contour_label=str(return_period) + ' year',
@@ -102,8 +118,19 @@ for i in range(11):
         else:
             v_p, hs_p, label_v, label_hs = read_ecbenchmark_dataset(file_name_provided)
             v_r, hs_r, label_v, label_hs = read_ecbenchmark_dataset(file_name_retained)
-            sample_v = np.concatenate([v_p, v_r])
-            sample_hs = np.concatenate([hs_p, hs_r])
+
+            if DO_PLOT_PROVIDED and (not DO_PLOT_RETAINED):
+                sample_v = v_p
+                sample_hs = hs_p
+                label_suffix = 'provided'
+            if (not DO_PLOT_PROVIDED) and DO_PLOT_RETAINED:
+                sample_v = v_r
+                sample_hs = hs_r
+                label_suffix = 'retained'
+            if DO_PLOT_PROVIDED and DO_PLOT_RETAINED:
+                sample_v = np.concatenate([v_p, v_r])
+                sample_hs = np.concatenate([hs_p, hs_r])
+                label_suffix = 'provided and retained'
 
             contours_v = []
             contours_hs = []
@@ -132,7 +159,7 @@ for i in range(11):
                     fig_row = dataset_count // 3
                     fig_col = dataset_count % 3
                     axs[fig_row, fig_col].set_title('Dataset ' + dataset_char +
-                                                    ', provided and retained')
+                                                    ', ' + label_suffix)
                     plot_contour(contours_v[j], contours_hs[j],
                                  ax=axs[fig_row, fig_col],
                                  contour_label=str(return_period) + ' year',
@@ -166,4 +193,5 @@ for i in range(11):
     fig.tight_layout(pad=3.0)
     plt.suptitle(legend_for_participant[contribution_id - 1])
     plt.show()
-    fig.savefig('e1_contribution_' + str(contribution_id), dpi=150)
+    fig_name_suffix = label_suffix.replace(" ", "_")
+    fig.savefig('e1_contribution_' + str(contribution_id) + '_' + fig_name_suffix, dpi=150)
