@@ -23,6 +23,7 @@ legend_for_participant = ['Participant 1',
                           'Participant 9, DS smoothed',
                           'Participant 9, IFORM'
                           ]
+n_contours_to_analyze = 11
 
 for dataset_char in dataset_chars:
     for return_period in return_periods:
@@ -30,9 +31,8 @@ for dataset_char in dataset_chars:
         file_name = 'datasets/' + dataset_char + '.txt'
         sample_hs, sample_tz, label_hs, label_tz = read_ecbenchmark_dataset(file_name)
 
-        n_contours_to_analyze = 11
-        contour_hs_1 = []
-        contour_tz_1 = []
+        contours_hs = []
+        contours_tz = []
         max_hs_on_contour = np.empty(n_contours_to_analyze)
         for i in range(n_contours_to_analyze):
             participant_nr = i + 1
@@ -44,8 +44,8 @@ for dataset_char in dataset_chars:
             (hs, tz) = read_contour(file_name)
             if i in (7, 8, 9, 10):
                 (tz, hs) = read_contour(file_name)
-            contour_hs_1.append(hs)
-            contour_tz_1.append(tz)
+            contours_hs.append(hs)
+            contours_tz.append(tz)
             max_hs_on_contour[i] = max(hs[~np.isnan(tz)])
 
         # Plot the data and the contour.
@@ -53,7 +53,7 @@ for dataset_char in dataset_chars:
         plt.scatter(sample_tz, sample_hs, c='black', alpha=0.5)
         for i in range(n_contours_to_analyze):
             ylim = 1.05 * max([max(max_hs_on_contour), max(sample_hs)])
-            plot_contour(contour_tz_1[i], contour_hs_1[i],
+            plot_contour(contours_tz[i], contours_hs[i],
                          ax=ax, x_label=label_tz.capitalize(), y_label=label_hs.capitalize(),
                          line_style=style_for_participant[i],
                          contour_label=legend_for_participant[i],
