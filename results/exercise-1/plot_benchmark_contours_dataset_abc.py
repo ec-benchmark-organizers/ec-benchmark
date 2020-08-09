@@ -10,18 +10,18 @@ lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
                       'haselsteiner_andreas', 'BV', 'mackay_ed',
                       'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
                       'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-style_for_participant = ['-b', '-r', '-g', '-k', '--b', '--r', '--g', '--k', '-c', '--c', '.-c']
-legend_for_participant = ['Participant 1',
-                          'Participant 2',
-                          'Participant 3',
-                          'Participant 4',
-                          'Participant 5',
-                          'Participant 6',
-                          'Participant 7',
-                          'Participant 8',
-                          'Participant 9, DS',
-                          'Participant 9, DS smoothed',
-                          'Participant 9, IFORM'
+styles_for_contribution = ['-b', '-r', '-g', '-k', '--b', '--r', '--g', '--k', '-c', '--c', '.-c']
+legends_for_contribution = ['Contribution 1',
+                          'Contribution 2',
+                          'Contribution 3',
+                          'Contribution 4',
+                          'Contribution 5',
+                          'Contribution 6',
+                          'Contribution 7',
+                          'Contribution 8',
+                          'Contribution 9, DS',
+                          'Contribution 9, DS smoothed',
+                          'Contribution 9, IFORM'
                           ]
 n_contours_to_analyze = 11
 
@@ -35,10 +35,10 @@ for dataset_char in dataset_chars:
         contours_tz = []
         max_hs_on_contour = np.empty(n_contours_to_analyze)
         for i in range(n_contours_to_analyze):
-            participant_nr = i + 1
-            if participant_nr > 9:
-                participant_nr = 9
-            folder_name = 'results/exercise-1/participant-' + str(participant_nr)
+            contribution_nr = i + 1
+            if contribution_nr > 9:
+                contribution_nr = 9
+            folder_name = 'results/exercise-1/contribution-' + str(contribution_nr)
             file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
             (hs, tz) = read_contour(file_name)
@@ -55,8 +55,8 @@ for dataset_char in dataset_chars:
             ylim = 1.05 * max([max(max_hs_on_contour), max(sample_hs)])
             plot_contour(contours_tz[i], contours_hs[i],
                          ax=ax, x_label=label_tz.capitalize(), y_label=label_hs.capitalize(),
-                         line_style=style_for_participant[i],
-                         contour_label=legend_for_participant[i],
+                         line_style=styles_for_contribution[i],
+                         contour_label=legends_for_contribution[i],
                          upper_ylim=ylim)
             plt.legend(prop={'size': 6})
             plt.title('Dataset ' + dataset_char + ', ' + str(return_period) + '-year contour')

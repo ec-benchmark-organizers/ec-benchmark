@@ -15,23 +15,23 @@ lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
                       'haselsteiner_andreas', 'BV', 'mackay_ed',
                       'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
                       'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-legend_for_participant = ['Participant 1',
-                          'Participant 2',
-                          'Participant 3',
-                          'Participant 4',
-                          'Participant 5',
-                          'Participant 6',
-                          'Participant 7',
-                          'Participant 8',
-                          'Participant 9, DS',
-                          'Participant 9, DS smoothed',
-                          'Participant 9, IFORM'
+legends_for_contribution = ['Contribution 1',
+                          'Contribution 2',
+                          'Contribution 3',
+                          'Contribution 4',
+                          'Contribution 5',
+                          'Contribution 6',
+                          'Contribution 7',
+                          'Contribution 8',
+                          'Contribution 9, DS',
+                          'Contribution 9, DS smoothed',
+                          'Contribution 9, IFORM'
                           ]
 
 for i in range(11):
     contribution_id = i + 1
 
-    print('Starting analysis for ' + legend_for_participant[contribution_id - 1] +
+    print('Starting analysis for ' + legends_for_contribution[contribution_id - 1] +
           ' (' + lastname_firstname[contribution_id -1] + ')')
 
     fig, axs = plt.subplots(2, 3, figsize=(16, 10))
@@ -69,7 +69,7 @@ for i in range(11):
                     participant_nr = 9
                 else:
                     participant_nr = contribution_id
-                folder_name = 'results/exercise-1/participant-' + str(participant_nr)
+                folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
                 file_name = folder_name + '/' + \
                             lastname_firstname[contribution_id - 1] + '_dataset_' + \
                             dataset_char + '_' + str(return_period) + '.txt'
@@ -79,23 +79,25 @@ for i in range(11):
                 contours_hs.append(hs)
                 contours_tz.append(tz)
 
+                hs_outside, tz_outside, hs_inside, tz_inside = \
+                    points_outside(contours_hs[j],
+                                   contours_tz[j],
+                                   np.asarray(sample_hs),
+                                   np.asarray(sample_tz))
                 # Plot the data and the contour.
                 if j == 0:
                     fig_row = dataset_count // 3
                     fig_col = dataset_count % 3
                     axs[fig_row, fig_col].set_title('Dataset ' + dataset_char +
                                                     ', ' + label_suffix)
+                    print('Dataset ' + dataset_char + ', points outside the 1-yr Hs-Tz contour: ' +
+                          str(len(hs_outside)))
                     plot_contour(contours_tz[j], contours_hs[j],
                                  ax=axs[fig_row, fig_col],
                                  contour_label=str(return_period) + ' year',
                                  line_style='b--')
                 else:
-                    hs_outside, tz_outside, hs_inside, tz_inside = \
-                        points_outside(contours_hs[1],
-                                       contours_tz[1],
-                                       np.asarray(sample_hs),
-                                       np.asarray(sample_tz))
-                    print('Dataset ' + dataset_char + ', points outside the contour: ' +
+                    print('Dataset ' + dataset_char + ', points outside the 20-yr Hs-Tz contour: ' +
                           str(len(hs_outside)))
                     sample_plot_data = SamplePlotData(x=np.asarray(sample_tz),
                                                     y=np.asarray(sample_hs),
@@ -143,7 +145,7 @@ for i in range(11):
                     participant_nr = 9
                 else:
                     participant_nr = contribution_id
-                folder_name = 'results/exercise-1/participant-' + str(participant_nr)
+                folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
                 file_name = folder_name + '/' + \
                             lastname_firstname[contribution_id - 1] + '_dataset_' + \
                             dataset_char + '_' + str(return_period) + '.txt'
@@ -154,23 +156,27 @@ for i in range(11):
                 contours_v.append(v)
                 contours_hs.append(hs)
 
+                v_outside, hs_outside, v_inside, hs_inside = \
+                    points_outside(contours_v[j],
+                                   contours_hs[j],
+                                   np.asarray(sample_v),
+                                   np.asarray(sample_hs))
+
                 # Plot the data and the contour.
                 if j == 0:
                     fig_row = dataset_count // 3
                     fig_col = dataset_count % 3
                     axs[fig_row, fig_col].set_title('Dataset ' + dataset_char +
                                                     ', ' + label_suffix)
+                    print('Dataset ' + dataset_char + ', points outside the 1-yr V-Hs contour: ' +
+                          str(len(hs_outside)))
                     plot_contour(contours_v[j], contours_hs[j],
                                  ax=axs[fig_row, fig_col],
                                  contour_label=str(return_period) + ' year',
                                  line_style='b--')
                 else:
-                    v_outside, hs_outside, v_inside, hs_inside = \
-                        points_outside(contours_v[1],
-                                       contours_hs[1],
-                                       np.asarray(sample_v),
-                                       np.asarray(sample_hs))
-                    print('Dataset ' + dataset_char + ', points outside the contour: ' +
+
+                    print('Dataset ' + dataset_char + ', points outside the 50-yr V-Hs contour: ' +
                           str(len(hs_outside)))
                     sample_plot_data = SamplePlotData(x=np.asarray(sample_v),
                                                     y=np.asarray(sample_hs),
@@ -191,7 +197,7 @@ for i in range(11):
                                  sample_plot_data=sample_plot_data)
             dataset_count = dataset_count + 1
     fig.tight_layout(pad=3.0)
-    plt.suptitle(legend_for_participant[contribution_id - 1])
-    plt.show()
+    plt.suptitle(legends_for_contribution[contribution_id - 1])
+    #plt.show()
     fig_name_suffix = label_suffix.replace(" ", "_")
     fig.savefig('e1_contribution_' + str(contribution_id) + '_' + fig_name_suffix, dpi=150)
