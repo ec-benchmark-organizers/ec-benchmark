@@ -97,7 +97,7 @@ axs[0, 0].scatter(np.ones(np.shape(c_max_hs)) + 2, c_max_hs, c=values, s=marker_
                   cmap=cm.jet_r, edgecolors='k', alpha=0.7)
 axs[0, 0].set_xticks([1, 2, 3])
 axs[0, 0].set_xticklabels(['A', 'B', 'C'])
-axs[0, 0].set_ylabel('Max. Hs (m)')
+axs[0, 0].set_ylabel('Max. Hs along 20-yr contour (m)')
 fig.legend(handles=scatterHs.legend_elements()[0], labels=legends_for_contribution,
            prop={'size': 6}, loc='lower center', ncol=6)
 
@@ -115,7 +115,7 @@ axs[0, 1].scatter(np.ones(np.shape(c_min_tz)) + 2.2, c_max_tz, c=values, s=marke
                   cmap=cm.jet_r, edgecolors='k', alpha=0.7)
 axs[0, 1].set_xticks([1.1, 2.1, 3.1])
 axs[0, 1].set_xticklabels(['A', 'B', 'C'])
-axs[0, 1].set_ylabel('Min. and max Tp (m)')
+axs[0, 1].set_ylabel('Min. and max Tp  along 20-yr contour (s)')
 
 scatterV = axs[1, 0].scatter(np.ones(np.shape(d_max_v)), d_max_v, c=values, s=marker_size,
                               cmap=cm.jet_r, edgecolors='k', alpha=0.7)
@@ -125,7 +125,7 @@ axs[1, 0].scatter(np.ones(np.shape(f_max_v)) + 2, f_max_v, c=values, s=marker_si
                   cmap=cm.jet_r, edgecolors='k', alpha=0.7)
 axs[1, 0].set_xticks([1, 2, 3])
 axs[1, 0].set_xticklabels(['D', 'E', 'F'])
-axs[1, 0].set_ylabel('Max. V (m/s)')
+axs[1, 0].set_ylabel('Max. V  along 50-yr contour (m/s)')
 
 
 scatterHs = axs[1, 1].scatter(np.ones(np.shape(d_max_hs)), d_max_hs, c=values, s=marker_size,
@@ -136,7 +136,7 @@ axs[1, 1].scatter(np.ones(np.shape(f_max_hs)) + 2, f_max_hs, c=values, s=marker_
                   cmap=cm.jet_r, edgecolors='k', alpha=0.7)
 axs[1, 1].set_xticks([1, 2, 3])
 axs[1, 1].set_xticklabels(['D', 'E', 'F'])
-axs[1, 1].set_ylabel('Max. Hs (m)')
+axs[1, 1].set_ylabel('Max. Hs  along 50-yr contour  (m)')
 
 plt.show()
 fig.savefig('e1_max_values', dpi=150)
