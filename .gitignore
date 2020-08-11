@@ -3,7 +3,5 @@
 .idea/
 .DS_Store
 __pycache__
-results/exercise-1/contribution*
-results/exercise-2/contribution*
 ~*
 *.m
