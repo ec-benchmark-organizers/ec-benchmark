@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
 from viroconcom.read_write import read_ecbenchmark_dataset
 
@@ -52,5 +51,5 @@ for dataset_char in dataset_chars:
     i = i + 1
 
 plt.show()
-figp.savefig('datasets_provided', dpi=150)
-figr.savefig('datasets_retained', dpi=150)
+figp.savefig('datasets/datasets_provided', dpi=150)
+figr.savefig('datasets-retained/datasets_retained', dpi=150)

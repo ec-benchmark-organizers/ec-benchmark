@@ -7,7 +7,7 @@ from viroconcom.contour_analysis import points_outside
 
 # Set these constant to choose if the provided, the retained or both datasets
 # should be plotted together with the contours.
-DO_PLOT_PROVIDED = True
+DO_PLOT_PROVIDED = False
 DO_PLOT_RETAINED = True
 
 dataset_chars = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -198,6 +198,7 @@ for i in range(11):
             dataset_count = dataset_count + 1
     fig.tight_layout(pad=3.0)
     plt.suptitle(legends_for_contribution[contribution_id - 1])
-    #plt.show()
+    plt.show()
     fig_name_suffix = label_suffix.replace(" ", "_")
-    fig.savefig('e1_contribution_' + str(contribution_id) + '_' + fig_name_suffix, dpi=150)
+    fig.savefig('results/e1_contribution_' + str(contribution_id) + '_' +
+                fig_name_suffix, dpi=150)

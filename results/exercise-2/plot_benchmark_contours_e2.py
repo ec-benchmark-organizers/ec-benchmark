@@ -50,6 +50,6 @@ for sample_length in sample_lengths:
         if sample_length > 1:
             title_str = title_str + 's'
         plt.title(title_str)
-        #plt.show()
-        fig.savefig('e2_samplelength_' + str(sample_length) + '_contribution_' +
-                    str(contribution_nr), dpi=150)
+        plt.show()
+        fig.savefig('results/e2_samplelength_' + str(sample_length) +
+                    '_contribution_' + str(contribution_nr), dpi=150)

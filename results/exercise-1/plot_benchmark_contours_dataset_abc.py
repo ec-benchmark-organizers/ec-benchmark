@@ -61,5 +61,5 @@ for dataset_char in dataset_chars:
             plt.legend(prop={'size': 6})
             plt.title('Dataset ' + dataset_char + ', ' + str(return_period) + '-year contour')
         plt.show()
-        fig.savefig('e1_overlay_dataset_' + dataset_char + '_returnperiod_' +
-                    str(return_period), dpi=150)
+        fig.savefig('results/e1_overlay_dataset_' + dataset_char +
+                    '_returnperiod_' + str(return_period), dpi=150)

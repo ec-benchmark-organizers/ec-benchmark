@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 
-from viroconcom.read_write import  read_contour
+from viroconcom.read_write import read_contour
 
 dataset_chars = ['A', 'B', 'C', 'D', 'E', 'F']
 lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
@@ -139,4 +139,4 @@ axs[1, 1].set_xticklabels(['D', 'E', 'F'])
 axs[1, 1].set_ylabel('Max. Hs  along 50-yr contour  (m)')
 
 plt.show()
-fig.savefig('e1_max_values', dpi=150)
+fig.savefig('results/e1_max_values', dpi=150)
