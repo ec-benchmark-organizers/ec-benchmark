@@ -17,9 +17,14 @@ legend_for_participant = ['Contribution 2',
                           ]
 contribution_nrs = [2, 3, 4, 9]
 sample_lengths = [1, 5, 25]
+contour_labels = ['50th percentile contour', '2.5th percentile contour',
+                  '97.5th percentile contour']
+ylims = [18, 18, 18]
 
-for sample_length in sample_lengths:
-    for i in range(4):
+for (sample_length,ylim) in zip(sample_lengths,ylims):
+    fig, ax = plt.subplots(2, 2, sharex=True, sharey=True, figsize=(10, 8))
+    for (i, ax1) in enumerate(ax.flatten()):
+    # for i in range(4):
         contribution_nr = contribution_nrs[i]
         folder_name = 'results/exercise-2/contribution-' + str(contribution_nr)
         temp = folder_name + '/' + lastname_firstname[i] + '_years_' + str(sample_length)
@@ -31,25 +36,27 @@ for sample_length in sample_lengths:
         v_upper, hs_upper = read_contour(file_name_upper)
 
         # Plot the sample, the median contour and the confidence interval.
-        fig = plt.figure(figsize=(5, 5), dpi=150)
-        ax = fig.add_subplot(111)
+        # fig = plt.figure(figsize=(5, 5), dpi=150)
+        # ax = fig.add_subplot(111)
         sample_plot_data = SamplePlotData(x=np.asarray(sample_v),
                                         y=np.asarray(sample_hs),
-                                        ax=ax,
+                                        ax=ax1,
                                         label='Dataset D')
-        contour_labels = ['50th percentile contour', '2.5th percentile contour',
-                          '97.5th percentile contour']
+
         plot_confidence_interval(
             x_median=v_median, y_median=hs_median,
             x_bottom=v_lower, y_bottom=hs_lower,
-            x_upper=v_upper, y_upper=hs_upper, ax=ax,
-            x_label=label_v.capitalize(),
-            y_label=label_hs.capitalize(),
+            x_upper=v_upper, y_upper=hs_upper, ax=ax1,
             contour_labels=contour_labels, sample_plot_data=sample_plot_data)
-        title_str = legend_for_participant[i] + ', samples cover '+ str(sample_length) + ' year'
-        if sample_length > 1:
-            title_str = title_str + 's'
-        plt.title(title_str)
-        plt.show()
-        fig.savefig('results/e2_samplelength_' + str(sample_length) +
-                    '_contribution_' + str(contribution_nr), dpi=150)
+        title_str = legend_for_participant[i]
+        # if sample_length > 1:
+        #     title_str = title_str + 's'
+        ax1.set_title(title_str)
+        ax1.set_xlabel(label_v.capitalize())
+        ax1.set_ylabel(label_hs.capitalize())
+        ax1.set_ylim(top=ylim)
+        ax1.set_xlim(left=0, right=32)
+        
+    fig.tight_layout()
+    fig.savefig('results/e2_samplelength_' + str(sample_length) + '.pdf', bbox_inches='tight')
+    # plt.show()
