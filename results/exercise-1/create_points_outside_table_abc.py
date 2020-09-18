@@ -1,9 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
 from tabulate import tabulate
-
-
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.contour_analysis import points_outside
 
@@ -112,7 +109,17 @@ for i in range(11):
 
         dataset_count = dataset_count + 1
 
-    new_row = [str(contribution_id),
+
+    if contribution_id == 9:
+        contr_abbrevation = '9 DS'
+    elif contribution_id == 10:
+        contr_abbrevation = '9 DS s.'
+    elif contribution_id == 11:
+        contr_abbrevation = '9 IFORM'
+    else:
+        contr_abbrevation = str(contribution_id)
+
+    new_row = [contr_abbrevation,
                 #mean_and_individuals_string(outside_1yr),
                 "{:.1f}".format(np.mean(outside_1yr)),
                 expected_outside_1yr[contribution_id - 1],
