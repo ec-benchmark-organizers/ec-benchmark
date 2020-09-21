@@ -16,8 +16,8 @@ all_rows = [['Contribution',
              'Num. points outside 50-yr contour',
              'Expected num. points outside 50-yr',
              'Num. points outside 20-yr where v>1 m/s and hs>1 m']]
-expected_outside_1yr =  ['20', 'ca. 492', '?', '50', 'ca. 492', '492', '492', '492', 'ca. 492', 'ca. 492', '492']
-expected_outside_20yr = ['1', 'ca. 12', '?', '1', 'ca. 12', '12', '12', '12', 'ca. 12', 'ca. 12', '12']
+expected_outside_1yr =  ['50', 'ca. 492', '?', '50', 'ca. 492', '492', '492', '492', 'ca. 492', 'ca. 492', '492']
+expected_outside_50yr = ['1', 'ca. 12', '?', '1', 'ca. 12', '12', '12', '12', 'ca. 12', 'ca. 12', '12']
 
 
 # Set these constant to choose if the provided, the retained or both datasets
@@ -134,7 +134,7 @@ for i in range(11):
                 #mean_and_individuals_string(outside_withthreshold_1yr),
                 "{:.1f}".format(np.mean(outside_withthreshold_1yr)),
                 mean_and_individuals_string(outside_50yr),
-                expected_outside_20yr[contribution_id - 1],
+                expected_outside_50yr[contribution_id - 1],
                 mean_and_individuals_string(outside_withthreshold_50yr)]
     all_rows = np.vstack([all_rows, new_row])
 
