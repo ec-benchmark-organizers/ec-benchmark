@@ -10,7 +10,7 @@ lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
                       'haselsteiner_andreas', 'BV', 'mackay_ed',
                       'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
                       'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-styles_for_contribution = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '--', '.-']
+ls_for_contribution = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '--', '-.']
 colors_for_contribution = mycorder.mpl_colors
 for idx in range(3):
         colors_for_contribution.append(colors_for_contribution[8])
@@ -42,7 +42,7 @@ for (return_period, ax0) in zip(return_periods, ax):
             contribution_nr = i + 1
             if contribution_nr > 9:
                 contribution_nr = 9
-            folder_name = 'results/exercise-1/participant-' + str(contribution_nr)
+            folder_name = 'results/exercise-1/contribution-' + str(contribution_nr)
             file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
             if contribution_nr in (1, 2, 3, 5, 6, 8):
@@ -54,25 +54,14 @@ for (return_period, ax0) in zip(return_periods, ax):
             max_hs_on_contours[i] = max(hs[~np.isnan(hs)])
 
         # Plot the data and the contour.
-        # fig, ax = plt.subplots(1, 1, figsize=(10, 8))
         ax1.scatter(sample_v, sample_hs, c='black', alpha=0.5, zorder=-2)
         for i in range(n_contours_to_analyze):
             ylim = 1.05 * max([max(max_hs_on_contours), max(sample_hs)])
-            # plot_contour(contours_v[i], contours_hs[i],
-            #              ax=ax, x_label=label_v.capitalize(), y_label=label_hs.capitalize(),
-            #              line_style=styles_for_contribution[i],
-            #              contour_label=legends_for_contribution[i],
-            #              upper_ylim=ylim)
             plot_contour(contours_v[i], contours_hs[i],
                          ax=ax1,
-                         line_style=styles_for_contribution[i],
                          color=colors_for_contribution[i],
+                         linestyle=ls_for_contribution[i],
                          upper_ylim=ylim)
-        #     plt.legend(prop={'size': 6})
-        #     plt.title('Dataset ' + dataset_char + ', ' + str(return_period) + '-year contour')
-        # plt.show()
-        # fig.savefig('e1_overlay_dataset_' + dataset_char + '_returnperiod_' +
-        #             str(return_period), dpi=150)
 
         ax1.set_rasterization_zorder(-1)
         ax1.set_xlabel(label_v.capitalize())

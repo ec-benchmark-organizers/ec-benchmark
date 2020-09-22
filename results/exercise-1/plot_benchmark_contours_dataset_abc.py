@@ -10,7 +10,7 @@ lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
                       'haselsteiner_andreas', 'BV', 'mackay_ed',
                       'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
                       'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-styles_for_contribution = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '--', '.-']
+ls_for_contribution = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '--', '-.']
 colors_for_contribution = mycorder.mpl_colors
 for idx in range(3):
         colors_for_contribution.append(colors_for_contribution[8])
@@ -43,7 +43,7 @@ for (return_period, ax0) in zip(return_periods, ax):
             contribution_nr = i + 1
             if contribution_nr > 9:
                 contribution_nr = 9
-            folder_name = 'results/exercise-1/participant-' + str(contribution_nr)
+            folder_name = 'results/exercise-1/contribution-' + str(contribution_nr)
             file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
             (hs, tz) = read_contour(file_name)
@@ -60,8 +60,8 @@ for (return_period, ax0) in zip(return_periods, ax):
             ylim = 1.05 * max([max(max_hs_on_contour), max(sample_hs)])
             plot_contour(contours_tz[i], contours_hs[i],
                          ax=ax1,
-                         line_style=styles_for_contribution[i],
                          color=colors_for_contribution[i],
+                         linestyle=ls_for_contribution[i],
                          upper_ylim=ylim)
         
         ax1.set_rasterization_zorder(-1)
@@ -76,4 +76,3 @@ lgd = fig.legend(legends_for_contribution,
 fig.tight_layout(rect=(0,0.05,1,1))
 plt.savefig('results/e1_overlay_abc.pdf', bbox_inches='tight', bbox_extra_artists=[lgd])
 plt.show()
-
