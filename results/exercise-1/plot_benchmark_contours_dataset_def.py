@@ -75,5 +75,3 @@ lgd = fig.legend(legends_for_contribution,
 fig.tight_layout(rect=(0,0.05,1,1))
 plt.savefig('results/e1_overlay_def.pdf', bbox_inches='tight', bbox_extra_artists=[lgd])
 plt.show()
-
-
