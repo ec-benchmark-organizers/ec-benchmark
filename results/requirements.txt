@@ -1,3 +1,4 @@
 viroconcom==1.4.2
 tabulate==0.8.7
 palettable==3.3.0
+matplotlib==3.3.1

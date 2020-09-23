@@ -142,5 +142,5 @@ axs[1, 1].set_ylabel('Max. Hs  along 50-yr contour  (m)')
 fig.legend(handles=scatterHs.legend_elements()[0], labels=legends_for_contribution,
            prop={'size': 6}, loc='lower center', ncol=6, scatterpoints=1)
 
-# plt.show()
+plt.show()
 fig.savefig('results/e1_max_values.pdf')
