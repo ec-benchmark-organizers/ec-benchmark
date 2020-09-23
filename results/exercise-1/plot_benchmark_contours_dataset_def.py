@@ -29,11 +29,15 @@ legends_for_contribution = ['Contribution 1',
 n_contours_to_analyze = 11
 
 fig, ax = plt.subplots(len(return_periods), len(dataset_chars), sharex='row', sharey='row', figsize=(10, 8))
+max_hs_of_sample = 0
 for (return_period, ax0) in zip(return_periods, ax):
     for (dataset_char, ax1) in zip(dataset_chars, ax0):
         # Load the environmental data.
-        file_name = 'datasets/' + dataset_char + '.txt'
-        sample_v, sample_hs, label_v, label_hs = read_ecbenchmark_dataset(file_name)
+        file_name_provided = 'datasets/' + dataset_char + '.txt'
+        file_name_retained = 'datasets-retained/' + dataset_char + 'r.txt'
+        v_p, hs_p, label_v, label_hs = read_ecbenchmark_dataset(file_name_provided)
+        v_r, hs_r, label_v, label_hs = read_ecbenchmark_dataset(file_name_retained)
+        max_hs_of_sample = max([max_hs_of_sample, max(hs_p), max(hs_r)])
 
         contours_v = []
         contours_hs = []
@@ -54,9 +58,10 @@ for (return_period, ax0) in zip(return_periods, ax):
             max_hs_on_contours[i] = max(hs[~np.isnan(hs)])
 
         # Plot the data and the contour.
-        ax1.scatter(sample_v, sample_hs, c='black', alpha=0.5, zorder=-2)
+        ax1.scatter(v_p, hs_p, c='black', alpha=0.5, zorder=-2)
+        ax1.scatter(v_r, hs_r, marker='v', c='black', alpha=0.5, zorder=-2)
         for i in range(n_contours_to_analyze):
-            ylim = 1.05 * max([max(max_hs_on_contours), max(sample_hs)])
+            ylim = 1.05 * max([max(max_hs_on_contours), max_hs_of_sample])
             plot_contour(contours_v[i], contours_hs[i],
                          ax=ax1,
                          color=colors_for_contribution[i],
