@@ -59,7 +59,8 @@ for (return_period, ax0) in zip(return_periods, ax):
 
         # Plot the data and the contour.
         ax1.scatter(v_p, hs_p, c='black', alpha=0.5, zorder=-2)
-        ax1.scatter(v_r, hs_r, marker='v', c='black', alpha=0.5, zorder=-2)
+        ax1.scatter(v_r, hs_r, marker='v', facecolor='None',
+                    edgecolor='black', alpha=0.5, zorder=-2)
         for i in range(n_contours_to_analyze):
             ylim = 1.05 * max([max(max_hs_on_contours), max_hs_of_sample])
             plot_contour(contours_v[i], contours_hs[i],
