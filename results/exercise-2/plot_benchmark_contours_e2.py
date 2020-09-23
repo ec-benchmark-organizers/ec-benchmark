@@ -4,6 +4,8 @@ import numpy as np
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_confidence_interval, SamplePlotData
 
+fs = 18
+
 file_name = 'datasets/D.txt'
 sample_v, sample_hs, label_v, label_hs = read_ecbenchmark_dataset(file_name)
 
@@ -48,15 +50,33 @@ for (sample_length,ylim) in zip(sample_lengths,ylims):
             x_bottom=v_lower, y_bottom=hs_lower,
             x_upper=v_upper, y_upper=hs_upper, ax=ax1,
             contour_labels=contour_labels, sample_plot_data=sample_plot_data)
+        
+        ax1.legend(fontsize=14, frameon=False)
+        lgd = ax1.get_legend()
+        if i is not 0:
+            lgd.remove()
+            
         title_str = legend_for_participant[i]
         # if sample_length > 1:
         #     title_str = title_str + 's'
-        ax1.set_title(title_str)
-        ax1.set_xlabel(label_v.capitalize())
-        ax1.set_ylabel(label_hs.capitalize())
+        ax1.set_title(title_str, fontsize=fs, weight='bold')
+        
+        ax1.tick_params(axis='both', which='major', labelsize=fs)
+        
+        ax1.xaxis.set_major_locator(plt.MaxNLocator(5))
+        ax1.yaxis.set_major_locator(plt.MaxNLocator(5))
+        
         ax1.set_ylim(top=ylim)
         ax1.set_xlim(left=0, right=32)
         
+    for ax1 in ax.flat:
+        ax1.label_outer()
+    
+    ax[0,0].set_ylabel(label_hs.capitalize(), fontsize=fs)
+    ax[1,0].set_ylabel(label_hs.capitalize(), fontsize=fs)
+    ax[1,0].set_xlabel(label_v.capitalize(), fontsize=fs)
+    ax[1,1].set_xlabel(label_v.capitalize(), fontsize=fs)
+
     fig.tight_layout()
     fig.savefig('results/e2_samplelength_' + str(sample_length) + '.pdf', bbox_inches='tight')
     # plt.show()
