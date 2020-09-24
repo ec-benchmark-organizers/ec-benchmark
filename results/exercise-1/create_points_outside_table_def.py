@@ -16,8 +16,8 @@ all_rows = [['Contribution',
              'Num. points outside 50-yr contour',
              'Expected num. points outside 50-yr',
              'Num. points outside 20-yr where v>1 m/s and hs>1 m']]
-expected_outside_1yr =  ['50', 'ca. 492', '?', '50', 'ca. 492', '492', '492', '492', 'ca. 492', 'ca. 492', '492']
-expected_outside_50yr = ['1', 'ca. 12', '?', '1', 'ca. 12', '12', '12', '12', 'ca. 12', 'ca. 12', '12']
+expected_outside_1yr =  ['50', 'ca. 492', '50', '50', 'ca. 492', '492', '492', '492', 'ca. 492', 'ca. 492', '492']
+expected_outside_50yr = ['1', 'ca. 12', '1', '1', 'ca. 12', '12', '12', '12', 'ca. 12', 'ca. 12', '12']
 
 
 # Set these constant to choose if the provided, the retained or both datasets
