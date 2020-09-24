@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 from palettable.colorbrewer.qualitative import Paired_11 as mycorder
-from viroconcom.read_write import read_contour
+from viroconcom.read_write import read_contour, read_ecbenchmark_dataset
 
 dataset_chars = ['A', 'B', 'C', 'D', 'E', 'F']
 lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
@@ -85,6 +85,29 @@ for i in range(11):
                 f_max_v.append(max(v))
                 f_max_hs.append(max(hs))
 
+# Load the environmental data and compute their minima and maxima.
+empirical_max_hs_abc = np.empty([3, 1])
+empirical_min_tz_abc = np.empty([3, 1])
+empirical_max_tz_abc = np.empty([3, 1])
+for i, dataset_char in np.ndenumerate(['A', 'B', 'C']):
+    file_name_provided = 'datasets/' + dataset_char + '.txt'
+    file_name_retained = 'datasets-retained/' + dataset_char + 'r.txt'
+    hs_p, tz_p, lhs, ltz = read_ecbenchmark_dataset(
+        file_name_provided)
+    hs_r, tz_r, lhs, ltz = read_ecbenchmark_dataset(
+        file_name_retained)
+    empirical_max_hs_abc[i] = max([max(hs_p), max(hs_r)])
+    empirical_min_tz_abc[i] = max([min(tz_p), min(tz_r)])
+    empirical_max_tz_abc[i] = max([max(tz_p), max(tz_r)])
+empirical_max_v_def = np.empty([3, 1])
+empirical_max_hs_def = np.empty([3, 1])
+for i, dataset_char in np.ndenumerate(['D', 'E', 'F']):
+    file_name_provided = 'datasets/' + dataset_char + '.txt'
+    file_name_retained = 'datasets-retained/' + dataset_char + 'r.txt'
+    v_p, hs_p, lv, lhs = read_ecbenchmark_dataset(file_name_provided)
+    v_r, hs_r, lv, lhs = read_ecbenchmark_dataset(file_name_retained)
+    empirical_max_v_def[i] = max([max(v_p), max(v_r)])
+    empirical_max_hs_def[i] = max([max(hs_p), max(hs_r)])
 
 # Plot the figure for datasets A, B, C.
 fig_abc, axs = plt.subplots(1, 2, figsize=(10*0.75, 5*0.75))
@@ -97,6 +120,12 @@ axs[0].scatter(np.ones(np.shape(b_max_hs)) + 1, b_max_hs, c=values, s=marker_siz
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
 axs[0].scatter(np.ones(np.shape(c_max_hs)) + 2, c_max_hs, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+for i in range(3):
+    axs[0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
+axs[0].spines['right'].set_visible(False)
+axs[0].spines['top'].set_visible(False)
+axs[0].yaxis.set_ticks_position('left')
+axs[0].xaxis.set_ticks_position('bottom')
 axs[0].set_xticks([1, 2, 3])
 axs[0].set_xticklabels(['A', 'B', 'C'])
 axs[0].set_ylabel('Max. Hs along 20-yr contour (m)')
@@ -114,6 +143,14 @@ axs[1].scatter(np.ones(np.shape(b_min_tz)) + 1.2, b_max_tz, c=values, s=marker_s
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
 axs[1].scatter(np.ones(np.shape(c_min_tz)) + 2.2, c_max_tz, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+for i in range(3):
+    axs[1].plot([i + 0.9, i + 1.1], [empirical_min_tz_abc[i], empirical_min_tz_abc[i]], '-k')
+    axs[1].plot([i + 1.1, i + 1.3], [empirical_max_tz_abc[i], empirical_max_tz_abc[i]], '-k')
+    # Remove axis on the right and on the top (Matlab 'box off').
+axs[1].spines['right'].set_visible(False)
+axs[1].spines['top'].set_visible(False)
+axs[1].yaxis.set_ticks_position('left')
+axs[1].xaxis.set_ticks_position('bottom')
 axs[1].set_xticks([1.1, 2.1, 3.1])
 axs[1].set_xticklabels(['A', 'B', 'C'])
 axs[1].set_ylabel('Min. and max Tz  along 20-yr contour (s)')
@@ -130,6 +167,12 @@ axs[0].scatter(np.ones(np.shape(e_max_v)) + 1, e_max_v, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
 axs[0].scatter(np.ones(np.shape(f_max_v)) + 2, f_max_v, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+for i in range(3):
+    axs[0].plot([i + 0.8, i + 1.2], [empirical_max_v_def[i], empirical_max_v_def[i]], '-k')
+axs[0].spines['right'].set_visible(False)
+axs[0].spines['top'].set_visible(False)
+axs[0].yaxis.set_ticks_position('left')
+axs[0].xaxis.set_ticks_position('bottom')
 axs[0].set_xticks([1, 2, 3])
 axs[0].set_xticklabels(['D', 'E', 'F'])
 axs[0].set_ylabel('Max. V  along 50-yr contour (m/s)')
@@ -141,6 +184,12 @@ axs[1].scatter(np.ones(np.shape(e_max_hs)) + 1, e_max_hs, c=values, s=marker_siz
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
 axs[1].scatter(np.ones(np.shape(f_max_hs)) + 2, f_max_hs, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+for i in range(3):
+    axs[1].plot([i + 0.8, i + 1.2], [empirical_max_hs_def[i], empirical_max_hs_def[i]], '-k')
+axs[1].spines['right'].set_visible(False)
+axs[1].spines['top'].set_visible(False)
+axs[1].yaxis.set_ticks_position('left')
+axs[1].xaxis.set_ticks_position('bottom')
 axs[1].set_xticks([1, 2, 3])
 axs[1].set_xticklabels(['D', 'E', 'F'])
 axs[1].set_ylabel('Max. Hs  along 50-yr contour  (m)')
