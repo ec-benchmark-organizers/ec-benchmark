@@ -120,7 +120,9 @@ axs[0].scatter(np.ones(np.shape(b_max_hs)) + 1, b_max_hs, c=values, s=marker_siz
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
 axs[0].scatter(np.ones(np.shape(c_max_hs)) + 2, c_max_hs, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-for i in range(3):
+i = 0
+emp = axs[0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
+for i in (1, 2):
     axs[0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
 axs[0].spines['right'].set_visible(False)
 axs[0].spines['top'].set_visible(False)
@@ -155,7 +157,9 @@ axs[1].set_xticks([1.1, 2.1, 3.1])
 axs[1].set_xticklabels(['A', 'B', 'C'])
 axs[1].set_ylabel('Min. and max Tz  along 20-yr contour (s)')
 
-fig_abc.legend(handles=scatterHs.legend_elements()[0], labels=legends_for_contribution,
+handles = np.append(scatterHs.legend_elements()[0], emp).tolist()
+labels = np.append(legends_for_contribution, 'Max/Min in full dataset').tolist()
+fig_abc.legend(handles=handles, labels=labels,
            prop={'size': 6}, loc='lower center', ncol=6, scatterpoints=1)
 fig_abc.tight_layout(rect=(0, 0.05, 1, 1))
 
@@ -167,7 +171,9 @@ axs[0].scatter(np.ones(np.shape(e_max_v)) + 1, e_max_v, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
 axs[0].scatter(np.ones(np.shape(f_max_v)) + 2, f_max_v, c=values, s=marker_size,
                   cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-for i in range(3):
+i = 0
+emp = axs[0].plot([i + 0.8, i + 1.2], [empirical_max_v_def[i], empirical_max_v_def[i]], '-k')
+for i in (1, 2):
     axs[0].plot([i + 0.8, i + 1.2], [empirical_max_v_def[i], empirical_max_v_def[i]], '-k')
 axs[0].spines['right'].set_visible(False)
 axs[0].spines['top'].set_visible(False)
@@ -193,8 +199,9 @@ axs[1].xaxis.set_ticks_position('bottom')
 axs[1].set_xticks([1, 2, 3])
 axs[1].set_xticklabels(['D', 'E', 'F'])
 axs[1].set_ylabel('Max. Hs  along 50-yr contour  (m)')
-
-fig_def.legend(handles=scatterHs.legend_elements()[0], labels=legends_for_contribution,
+handles = np.append(scatterHs.legend_elements()[0], emp).tolist()
+labels = np.append(legends_for_contribution, 'Maximum in full dataset').tolist()
+fig_def.legend(handles=handles, labels=labels,
            prop={'size': 6}, loc='lower center', ncol=6, scatterpoints=1)
 fig_def.tight_layout(rect=(0, 0.05, 1, 1))
 
