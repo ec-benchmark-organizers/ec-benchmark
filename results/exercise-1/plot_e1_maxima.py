@@ -160,6 +160,7 @@ axs[0, 0].yaxis.set_ticks_position('left')
 axs[0, 0].xaxis.set_ticks_position('bottom')
 axs[0, 0].set_xticks([1, 2, 3])
 axs[0, 0].set_xticklabels(['A', 'B', 'C'])
+axs[0, 0].set_ylim(4, 15)
 axs[0, 0].set_ylabel('Max. Hs along 1-yr contour (m)')
 
 axs[0, 1].scatter(np.ones(np.shape(a_min_tz_c1)), a_min_tz_c1, c=values, s=marker_size,
@@ -177,13 +178,17 @@ axs[0, 1].scatter(np.ones(np.shape(c_min_tz_c1)) + 2.2, c_max_tz_c1, c=values, s
 #for i in range(3):
     #axs[0, 1].plot([i + 0.9, i + 1.1], [empirical_min_tz_abc[i], empirical_min_tz_abc[i]], '-k')
     #axs[0, 1].plot([i + 1.1, i + 1.3], [empirical_max_tz_abc[i], empirical_max_tz_abc[i]], '-k')
-    # Remove axis on the right and on the top (Matlab 'box off').
+
+# Remove axis on the right and on the top (Matlab 'box off').
 axs[0, 1].spines['right'].set_visible(False)
 axs[0, 1].spines['top'].set_visible(False)
 axs[0, 1].yaxis.set_ticks_position('left')
 axs[0, 1].xaxis.set_ticks_position('bottom')
+
 axs[0, 1].set_xticks([1.1, 2.1, 3.1])
 axs[0, 1].set_xticklabels(['A', 'B', 'C'])
+axs[0, 1].set_ylim(0, 20)
+axs[0, 1].set_yticks([0, 5, 10, 15, 20])
 axs[0, 1].set_ylabel('Min. and max Tz  along 1-yr contour (s)')
 
 # Plot the 20-yr contour maxima.
@@ -203,6 +208,7 @@ axs[1, 0].yaxis.set_ticks_position('left')
 axs[1, 0].xaxis.set_ticks_position('bottom')
 axs[1, 0].set_xticks([1, 2, 3])
 axs[1, 0].set_xticklabels(['A', 'B', 'C'])
+axs[1, 0].set_ylim(4, 15)
 axs[1, 0].set_ylabel('Max. Hs along 20-yr contour (m)')
 
 
@@ -221,13 +227,17 @@ axs[1, 1].scatter(np.ones(np.shape(c_min_tz_c20)) + 2.2, c_max_tz_c20, c=values,
 for i in range(3):
     axs[1, 1].plot([i + 0.9, i + 1.1], [empirical_min_tz_abc[i], empirical_min_tz_abc[i]], '-k')
     axs[1, 1].plot([i + 1.1, i + 1.3], [empirical_max_tz_abc[i], empirical_max_tz_abc[i]], '-k')
-    # Remove axis on the right and on the top (Matlab 'box off').
+
+# Remove axis on the right and on the top (Matlab 'box off').
 axs[1, 1].spines['right'].set_visible(False)
 axs[1, 1].spines['top'].set_visible(False)
 axs[1, 1].yaxis.set_ticks_position('left')
 axs[1, 1].xaxis.set_ticks_position('bottom')
+
 axs[1, 1].set_xticks([1.1, 2.1, 3.1])
 axs[1, 1].set_xticklabels(['A', 'B', 'C'])
+axs[1, 1].set_ylim(0, 20)
+axs[1, 1].set_yticks([0, 5, 10, 15, 20])
 axs[1, 1].set_ylabel('Min. and max Tz  along 20-yr contour (s)')
 
 handles = np.append(scatterHs.legend_elements()[0], emp).tolist()
