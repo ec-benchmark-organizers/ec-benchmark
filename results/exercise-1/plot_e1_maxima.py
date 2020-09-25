@@ -21,16 +21,24 @@ legends_for_contribution = ['Contribution 1',
                           'Contribution 9, DS smoothed',
                           'Contribution 9, IFORM'
                           ]
-
-a_max_hs =  []
-a_min_tz = []
-a_max_tz = []
-b_max_hs =  []
-b_min_tz = []
-b_max_tz = []
-c_max_hs =  []
-c_min_tz = []
-c_max_tz = []
+a_max_hs_c1 =  []
+a_min_tz_c1 = []
+a_max_tz_c1 = []
+b_max_hs_c1 =  []
+b_min_tz_c1 = []
+b_max_tz_c1 = []
+c_max_hs_c1 =  []
+c_min_tz_c1 = []
+c_max_tz_c1 = []
+a_max_hs_c20 =  []
+a_min_tz_c20 = []
+a_max_tz_c20 = []
+b_max_hs_c20 =  []
+b_min_tz_c20 = []
+b_max_tz_c20 = []
+c_max_hs_c20 =  []
+c_min_tz_c20 = []
+c_max_tz_c20 = []
 d_max_v = []
 d_max_hs = []
 e_max_v = []
@@ -45,8 +53,10 @@ for i in range(11):
         participant_nr = contribution_id
     for dataset_char in dataset_chars:
         if dataset_char in ('A', 'B', 'C'):
-            return_period = 20
             folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
+
+            # Read the 1-year contours
+            return_period = 1
             file_name = folder_name + '/' + \
                         lastname_firstname[contribution_id - 1] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
@@ -54,17 +64,38 @@ for i in range(11):
             if participant_nr in (8, 9):
                 (tz, hs) = read_contour(file_name)
             if dataset_char == 'A':
-                a_max_hs.append(max(hs))
-                a_min_tz.append(min(tz))
-                a_max_tz.append(max(tz))
+                a_max_hs_c1.append(max(hs))
+                a_min_tz_c1.append(min(tz))
+                a_max_tz_c1.append(max(tz))
             elif dataset_char == 'B':
-                b_max_hs.append(max(hs))
-                b_min_tz.append(min(tz))
-                b_max_tz.append(max(tz))
+                b_max_hs_c1.append(max(hs))
+                b_min_tz_c1.append(min(tz))
+                b_max_tz_c1.append(max(tz))
             elif dataset_char == 'C':
-                c_max_hs.append(max(hs))
-                c_min_tz.append(min(tz))
-                c_max_tz.append(max(tz))
+                c_max_hs_c1.append(max(hs))
+                c_min_tz_c1.append(min(tz))
+                c_max_tz_c1.append(max(tz))
+
+            # Now read the 20-year contours.
+            return_period = 20
+            file_name = folder_name + '/' + \
+                        lastname_firstname[contribution_id - 1] + '_dataset_' + \
+                        dataset_char + '_' + str(return_period) + '.txt'
+            (hs, tz) = read_contour(file_name)
+            if participant_nr in (8, 9):
+                (tz, hs) = read_contour(file_name)
+            if dataset_char == 'A':
+                a_max_hs_c20.append(max(hs))
+                a_min_tz_c20.append(min(tz))
+                a_max_tz_c20.append(max(tz))
+            elif dataset_char == 'B':
+                b_max_hs_c20.append(max(hs))
+                b_min_tz_c20.append(min(tz))
+                b_max_tz_c20.append(max(tz))
+            elif dataset_char == 'C':
+                c_max_hs_c20.append(max(hs))
+                c_min_tz_c20.append(min(tz))
+                c_max_tz_c20.append(max(tz))
         else:
             return_period = 50
             folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
@@ -110,52 +141,94 @@ for i, dataset_char in np.ndenumerate(['D', 'E', 'F']):
     empirical_max_hs_def[i] = max([max(hs_p), max(hs_r)])
 
 # Plot the figure for datasets A, B, C.
-fig_abc, axs = plt.subplots(1, 2, figsize=(10*0.75, 5*0.75))
-values = range(len(a_max_hs)) + np.ones(len(a_max_hs))
+fig_abc, axs = plt.subplots(2, 2, figsize=(10*0.75, 9*0.75))
+values = range(len(a_max_hs_c20)) + np.ones(len(a_max_hs_c20))
 marker_size = 60
 
-scatterHs = axs[0].scatter(np.ones(np.shape(a_max_hs)), a_max_hs, c=values, s=marker_size,
-                              cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[0].scatter(np.ones(np.shape(b_max_hs)) + 1, b_max_hs, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[0].scatter(np.ones(np.shape(c_max_hs)) + 2, c_max_hs, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-i = 0
-emp = axs[0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
-for i in (1, 2):
-    axs[0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
-axs[0].spines['right'].set_visible(False)
-axs[0].spines['top'].set_visible(False)
-axs[0].yaxis.set_ticks_position('left')
-axs[0].xaxis.set_ticks_position('bottom')
-axs[0].set_xticks([1, 2, 3])
-axs[0].set_xticklabels(['A', 'B', 'C'])
-axs[0].set_ylabel('Max. Hs along 20-yr contour (m)')
+# Plot the 1-yr contour maxima.
+axs[0, 0].scatter(np.ones(np.shape(a_max_hs_c1)), a_max_hs_c1, c=values, s=marker_size,
+                           cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 0].scatter(np.ones(np.shape(b_max_hs_c1)) + 1, b_max_hs_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 0].scatter(np.ones(np.shape(c_max_hs_c1)) + 2, c_max_hs_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+#for i in (0, 1, 2):
+    #axs[0, 0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
+axs[0, 0].spines['right'].set_visible(False)
+axs[0, 0].spines['top'].set_visible(False)
+axs[0, 0].yaxis.set_ticks_position('left')
+axs[0, 0].xaxis.set_ticks_position('bottom')
+axs[0, 0].set_xticks([1, 2, 3])
+axs[0, 0].set_xticklabels(['A', 'B', 'C'])
+axs[0, 0].set_ylabel('Max. Hs along 1-yr contour (m)')
 
-
-scatterTp = axs[1].scatter(np.ones(np.shape(a_min_tz)), a_min_tz, c=values, s=marker_size,
-                              cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[1].scatter(np.ones(np.shape(b_min_tz)) + 1, b_min_tz, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[1].scatter(np.ones(np.shape(c_min_tz)) + 2, c_min_tz, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[1].scatter(np.ones(np.shape(a_min_tz)) + 0.2, a_max_tz, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[1].scatter(np.ones(np.shape(b_min_tz)) + 1.2, b_max_tz, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-axs[1].scatter(np.ones(np.shape(c_min_tz)) + 2.2, c_max_tz, c=values, s=marker_size,
-                  cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
-for i in range(3):
-    axs[1].plot([i + 0.9, i + 1.1], [empirical_min_tz_abc[i], empirical_min_tz_abc[i]], '-k')
-    axs[1].plot([i + 1.1, i + 1.3], [empirical_max_tz_abc[i], empirical_max_tz_abc[i]], '-k')
+axs[0, 1].scatter(np.ones(np.shape(a_min_tz_c1)), a_min_tz_c1, c=values, s=marker_size,
+                           cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 1].scatter(np.ones(np.shape(b_min_tz_c1)) + 1, b_min_tz_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 1].scatter(np.ones(np.shape(c_min_tz_c1)) + 2, c_min_tz_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 1].scatter(np.ones(np.shape(a_min_tz_c1)) + 0.2, a_max_tz_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 1].scatter(np.ones(np.shape(b_min_tz_c1)) + 1.2, b_max_tz_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[0, 1].scatter(np.ones(np.shape(c_min_tz_c1)) + 2.2, c_max_tz_c1, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+#for i in range(3):
+    #axs[0, 1].plot([i + 0.9, i + 1.1], [empirical_min_tz_abc[i], empirical_min_tz_abc[i]], '-k')
+    #axs[0, 1].plot([i + 1.1, i + 1.3], [empirical_max_tz_abc[i], empirical_max_tz_abc[i]], '-k')
     # Remove axis on the right and on the top (Matlab 'box off').
-axs[1].spines['right'].set_visible(False)
-axs[1].spines['top'].set_visible(False)
-axs[1].yaxis.set_ticks_position('left')
-axs[1].xaxis.set_ticks_position('bottom')
-axs[1].set_xticks([1.1, 2.1, 3.1])
-axs[1].set_xticklabels(['A', 'B', 'C'])
-axs[1].set_ylabel('Min. and max Tz  along 20-yr contour (s)')
+axs[0, 1].spines['right'].set_visible(False)
+axs[0, 1].spines['top'].set_visible(False)
+axs[0, 1].yaxis.set_ticks_position('left')
+axs[0, 1].xaxis.set_ticks_position('bottom')
+axs[0, 1].set_xticks([1.1, 2.1, 3.1])
+axs[0, 1].set_xticklabels(['A', 'B', 'C'])
+axs[0, 1].set_ylabel('Min. and max Tz  along 1-yr contour (s)')
+
+# Plot the 20-yr contour maxima.
+scatterHs = axs[1, 0].scatter(np.ones(np.shape(a_max_hs_c20)), a_max_hs_c20, c=values, s=marker_size,
+                           cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 0].scatter(np.ones(np.shape(b_max_hs_c20)) + 1, b_max_hs_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 0].scatter(np.ones(np.shape(c_max_hs_c20)) + 2, c_max_hs_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+i = 0
+emp = axs[1, 0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
+for i in (1, 2):
+    axs[1, 0].plot([i + 0.8, i + 1.2], [empirical_max_hs_abc[i], empirical_max_hs_abc[i]], '-k')
+axs[1, 0].spines['right'].set_visible(False)
+axs[1, 0].spines['top'].set_visible(False)
+axs[1, 0].yaxis.set_ticks_position('left')
+axs[1, 0].xaxis.set_ticks_position('bottom')
+axs[1, 0].set_xticks([1, 2, 3])
+axs[1, 0].set_xticklabels(['A', 'B', 'C'])
+axs[1, 0].set_ylabel('Max. Hs along 20-yr contour (m)')
+
+
+scatterTp = axs[1, 1].scatter(np.ones(np.shape(a_min_tz_c20)), a_min_tz_c20, c=values, s=marker_size,
+                           cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 1].scatter(np.ones(np.shape(b_min_tz_c20)) + 1, b_min_tz_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 1].scatter(np.ones(np.shape(c_min_tz_c20)) + 2, c_min_tz_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 1].scatter(np.ones(np.shape(a_min_tz_c20)) + 0.2, a_max_tz_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 1].scatter(np.ones(np.shape(b_min_tz_c20)) + 1.2, b_max_tz_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+axs[1, 1].scatter(np.ones(np.shape(c_min_tz_c20)) + 2.2, c_max_tz_c20, c=values, s=marker_size,
+               cmap=mycorder.mpl_colormap, edgecolors='k', alpha=0.7, linewidths=0.5)
+for i in range(3):
+    axs[1, 1].plot([i + 0.9, i + 1.1], [empirical_min_tz_abc[i], empirical_min_tz_abc[i]], '-k')
+    axs[1, 1].plot([i + 1.1, i + 1.3], [empirical_max_tz_abc[i], empirical_max_tz_abc[i]], '-k')
+    # Remove axis on the right and on the top (Matlab 'box off').
+axs[1, 1].spines['right'].set_visible(False)
+axs[1, 1].spines['top'].set_visible(False)
+axs[1, 1].yaxis.set_ticks_position('left')
+axs[1, 1].xaxis.set_ticks_position('bottom')
+axs[1, 1].set_xticks([1.1, 2.1, 3.1])
+axs[1, 1].set_xticklabels(['A', 'B', 'C'])
+axs[1, 1].set_ylabel('Min. and max Tz  along 20-yr contour (s)')
 
 handles = np.append(scatterHs.legend_elements()[0], emp).tolist()
 labels = np.append(legends_for_contribution, 'Max/Min in full dataset').tolist()
