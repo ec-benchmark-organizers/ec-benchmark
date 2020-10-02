@@ -72,7 +72,7 @@ for (return_period, ax0) in zip(return_periods, ax):
         ax1.set_rasterization_zorder(-1)
         ax1.set_xlabel(label_v.capitalize())
         ax1.set_ylabel(label_hs.capitalize())
-        ax1.set_title('Dataset ' + dataset_char + ', ' + str(return_period) + '-year contour')
+        ax1.set_title('Dataset ' + dataset_char + ', ' + str(return_period) + '-yr contour')
         
 lgd = fig.legend(legends_for_contribution, 
            loc='lower center', 
