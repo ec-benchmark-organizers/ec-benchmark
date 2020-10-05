@@ -4,30 +4,15 @@ from palettable.colorbrewer.qualitative import Paired_9 as mycorder
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_contour
 
+from settings import lastname_firstname, legends_for_contribution, ls_for_contribution
+
 dataset_chars = ['A', 'B', 'C']
 return_periods = [1, 20]
-lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
-                      'haselsteiner_andreas', 'BV', 'mackay_ed',
-                      'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
-                      'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-ls_for_contribution = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '--', '-.']
+n_contours_to_analyze = len(legends_for_contribution)
+
 colors_for_contribution = mycorder.mpl_colors
 for idx in range(3):
         colors_for_contribution.append(colors_for_contribution[8])
-legends_for_contribution = ['Contribution 1',
-                          'Contribution 2',
-                          'Contribution 3',
-                          'Contribution 4',
-                          'Contribution 5',
-                          'Contribution 6',
-                          'Contribution 7',
-                          'Contribution 8',
-                          'Contribution 9, DS',
-                          'Contribution 9, DS smoothed',
-                          'Contribution 9, IFORM'
-                          ]
-n_contours_to_analyze = 11
-
 
 fig, ax = plt.subplots(len(return_periods), len(dataset_chars), sharex='row', sharey='row', figsize=(10, 8))
 max_hs_of_sample = 0
@@ -79,5 +64,5 @@ lgd = fig.legend(legends_for_contribution,
            ncol=6, 
            prop={'size': 8})
 fig.tight_layout(rect=(0,0.05,1,1))
-plt.savefig('results/e1_overlay_abc.pdf', bbox_inches='tight', bbox_extra_artists=[lgd])
+plt.savefig('results/exercise-1/e1_overlay_abc.pdf', bbox_inches='tight', bbox_extra_artists=[lgd])
 plt.show()
