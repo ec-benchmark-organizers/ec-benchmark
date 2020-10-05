@@ -4,6 +4,8 @@ from tabulate import tabulate
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.contour_analysis import points_outside
 
+from settings import lastname_firstname, legends_for_contribution, ls_for_contribution
+
 def mean_and_individuals_string(nr_outside):
     rstring = "{:.1f}".format(np.mean(nr_outside)) + ' (' + str(int(nr_outside[0])) + ', ' + \
               str(int(nr_outside[1])) + ', ' + str(int(nr_outside[2])) + ')'
@@ -16,8 +18,8 @@ all_rows = [['Contribution',
              'Num. points outside 50-yr contour',
              'Expected num. points outside 50-yr',
              'Num. points outside 20-yr where v>1 m/s and hs>1 m']]
-expected_outside_1yr =  ['50', 'ca. 492', '50', '50', 'ca. 492', '492', '492', '492', 'ca. 492', 'ca. 492', '492']
-expected_outside_50yr = ['1', 'ca. 12', '1', '1', 'ca. 12', '12', '12', '12', 'ca. 12', 'ca. 12', '12']
+expected_outside_1yr =  ['50', 'ca. 492', '50', '50', 'ca. 492', '492', '492', '492', 'ca. 492', 'ca. 492', '492', '?']
+expected_outside_50yr = ['1', 'ca. 12', '1', '1', 'ca. 12', '12', '12', '12', 'ca. 12', 'ca. 12', '12', '?']
 
 
 # Set these constant to choose if the provided, the retained or both datasets
@@ -26,24 +28,9 @@ DO_USE_PROVIDED = True
 DO_USE_RETAINED = True
 
 dataset_chars = ['D', 'E', 'F']
-lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
-                      'haselsteiner_andreas', 'BV', 'mackay_ed',
-                      'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
-                      'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-legends_for_contribution = ['Contribution 1',
-                          'Contribution 2',
-                          'Contribution 3',
-                          'Contribution 4',
-                          'Contribution 5',
-                          'Contribution 6',
-                          'Contribution 7',
-                          'Contribution 8',
-                          'Contribution 9, DS',
-                          'Contribution 9, DS smoothed',
-                          'Contribution 9, IFORM'
-                          ]
+n_contours_to_analyze = len(legends_for_contribution)
 
-for i in range(11):
+for i in range(n_contours_to_analyze):
     contribution_id = i + 1
 
     print('Starting analysis for ' + legends_for_contribution[contribution_id - 1] +
@@ -81,15 +68,17 @@ for i in range(11):
                 return_period = 1
             else:
                 return_period = 50
-            if contribution_id > 9:
+            participant_nr = contribution_id
+            if 11 >= contribution_id >= 9:
                 participant_nr = 9
-            else:
-                participant_nr = contribution_id
+            elif contribution_id > 11:
+                # Because contribution 9 holds 3 sets of contours.
+                participant_nr = contribution_id - 2
             folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
             file_name = folder_name + '/' + \
                         lastname_firstname[contribution_id - 1] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
-            if participant_nr in (1, 2, 3, 5, 6, 8):
+            if participant_nr in (1, 2, 3, 5, 6, 8, 10):
                 (hs, v) = read_contour(file_name)
             else:
                 (v, hs) = read_contour(file_name)
@@ -124,6 +113,8 @@ for i in range(11):
         contr_abbrevation = '9 DS s.'
     elif contribution_id == 11:
         contr_abbrevation = '9 IFORM'
+    elif contribution_id == 12:
+        contr_abbrevation = legends_for_contribution[11]
     else:
         contr_abbrevation = str(contribution_id)
 
