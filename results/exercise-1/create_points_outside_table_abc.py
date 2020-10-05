@@ -4,6 +4,8 @@ from tabulate import tabulate
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.contour_analysis import points_outside
 
+from settings import lastname_firstname, legends_for_contribution, ls_for_contribution
+
 def mean_and_individuals_string(nr_outside):
     rstring = "{:.1f}".format(np.mean(nr_outside)) + ' (' + str(int(nr_outside[0])) + ', ' + \
               str(int(nr_outside[1])) + ', ' + str(int(nr_outside[2])) + ')'
@@ -20,24 +22,9 @@ DO_USE_PROVIDED = True
 DO_USE_RETAINED = True
 
 dataset_chars = ['A', 'B', 'C']
-lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
-                      'haselsteiner_andreas', 'BV', 'mackay_ed',
-                      'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
-                      'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-legends_for_contribution = ['Contribution 1',
-                          'Contribution 2',
-                          'Contribution 3',
-                          'Contribution 4',
-                          'Contribution 5',
-                          'Contribution 6',
-                          'Contribution 7',
-                          'Contribution 8',
-                          'Contribution 9, DS',
-                          'Contribution 9, DS smoothed',
-                          'Contribution 9, IFORM'
-                          ]
+n_contours_to_analyze = len(legends_for_contribution)
 
-for i in range(11):
+for i in range(n_contours_to_analyze):
     contribution_id = i + 1
 
     print('Starting analysis for ' + legends_for_contribution[contribution_id - 1] +
@@ -75,10 +62,12 @@ for i in range(11):
                 return_period = 1
             else:
                 return_period = 20
-            if contribution_id > 9:
+            participant_nr = contribution_id
+            if 11 >= contribution_id >= 9:
                 participant_nr = 9
-            else:
-                participant_nr = contribution_id
+            elif contribution_id > 11:
+                # Because contribution 9 holds 3 sets of contours.
+                participant_nr = contribution_id - 2
             folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
             file_name = folder_name + '/' + \
                         lastname_firstname[contribution_id - 1] + '_dataset_' + \
