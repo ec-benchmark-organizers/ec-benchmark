@@ -1,37 +1,25 @@
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
-from palettable.colorbrewer.qualitative import Paired_11 as mycorder
+from palettable.colorbrewer.qualitative import Paired_9 as mycorder
 from viroconcom.read_write import read_contour, read_ecbenchmark_dataset
 
+from settings import lastname_firstname, legends_for_contribution, ls_for_contribution
+
 dataset_chars = ['A', 'B', 'C', 'D', 'E', 'F']
-lastname_firstname = ['Wei_Bernt', 'GC_CGS', 'hannesdottir_asta',
-                      'haselsteiner_andreas', 'BV', 'mackay_ed',
-                      'qiao_chi', 'rode_anna', 'vanem_DirectSampling',
-                      'vanem_DirectSamplingsmoothed', 'vanem_IFORM']
-legends_for_contribution = [
-    'Contr. 1',
-    'Contr. 2',
-    'Contr. 3',
-    'Contr. 4',
-    'Contr. 5',
-    'Contr. 6',
-    'Contr. 7',
-    'Contr. 8',
-    'Contr. 9, DS',
-    'Contr. 9, DS s.',
-    'Contr. 9, IFORM']
+n_contributions = len(legends_for_contribution)
 
 colors_for_contribution = np.array(mycorder.mpl_colors)
-for idx in range(3):
+for idx in range(2):
     np.append(colors_for_contribution, colors_for_contribution[8])
+colors_for_contribution.append('blue')
+
 # Marginal exceedance = 'o', total exceedance = 'v'
 marker_class0 = 'o'
 marker_class1 = 'v'
 marker_class = np.array([marker_class0, marker_class1])
-classes = np.array([1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+classes = np.array([1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0])
 
-n_contributions = 11
 a_max_hs_c1 = np.empty(n_contributions)
 a_min_tz_c1 = np.empty(n_contributions)
 a_max_tz_c1 = np.empty(n_contributions)
@@ -63,12 +51,14 @@ e_max_v_c50 = np.empty(n_contributions)
 e_max_hs_c50 = np.empty(n_contributions)
 f_max_v_c50 = np.empty(n_contributions)
 f_max_hs_c50 = np.empty(n_contributions)
-for i in range(11):
+for i in range(n_contributions):
     contribution_id = i + 1
-    if contribution_id > 9:
+    participant_nr = contribution_id
+    if 11 >= contribution_id >= 9:
         participant_nr = 9
-    else:
-        participant_nr = contribution_id
+    elif contribution_id > 11:
+        # Because contribution 9 holds 3 sets of contours.
+        participant_nr = contribution_id - 2
     for dataset_char in dataset_chars:
         if dataset_char in ('A', 'B', 'C'):
             folder_name = 'results/exercise-1/contribution-' + str(participant_nr)
@@ -431,5 +421,5 @@ fig_def.legend(handles=handles, labels=labels,
 fig_def.tight_layout(rect=(0, 0.05, 1, 1))
 
 plt.show()
-fig_abc.savefig('results/e1_max_values_abc.pdf')
-fig_def.savefig('results/e1_max_values_def.pdf')
+fig_abc.savefig('results/exercise-1/e1_max_values_abc.pdf')
+fig_def.savefig('results/exercise-1/e1_max_values_def.pdf')
