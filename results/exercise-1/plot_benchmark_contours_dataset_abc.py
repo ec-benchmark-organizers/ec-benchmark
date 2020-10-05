@@ -11,8 +11,9 @@ return_periods = [1, 20]
 n_contours_to_analyze = len(legends_for_contribution)
 
 colors_for_contribution = mycorder.mpl_colors
-for idx in range(3):
+for idx in range(2):
         colors_for_contribution.append(colors_for_contribution[8])
+colors_for_contribution.append('blue')
 
 fig, ax = plt.subplots(len(return_periods), len(dataset_chars), sharex='row', sharey='row', figsize=(10, 8))
 max_hs_of_sample = 0
@@ -30,8 +31,11 @@ for (return_period, ax0) in zip(return_periods, ax):
         max_hs_on_contour = np.empty(n_contours_to_analyze)
         for i in range(n_contours_to_analyze):
             contribution_nr = i + 1
-            if contribution_nr > 9:
+            if 11 >= contribution_nr >= 9:
                 contribution_nr = 9
+            elif contribution_nr > 11:
+                # Because contribution 9 holds 3 sets of contours.
+                contribution_nr = contribution_nr - 2
             folder_name = 'results/exercise-1/contribution-' + str(contribution_nr)
             file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
