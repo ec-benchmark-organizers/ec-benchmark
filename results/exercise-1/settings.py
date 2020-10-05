@@ -25,7 +25,7 @@ legends_for_contribution = [
     'Contribution 8',
     'Contribution 9, DS',
     'Contribution 9, DS smoothed',
-    'Contribution 9, IFORM'
+    'Contribution 9, IFORM',
     #'John\'s new method'
     # Add a legend for your contribution here.
 ]

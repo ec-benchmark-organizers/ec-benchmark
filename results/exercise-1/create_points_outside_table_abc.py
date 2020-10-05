@@ -13,8 +13,8 @@ def mean_and_individuals_string(nr_outside):
 
 all_rows = [['Contribution', 'Num. points outside 1-yr contour', 'Expected num. points outside 1-yr', 'Num. points outside 1-yr where hs>1 m',
          'Num. points outside 20-yr contour', 'Expected num. points outside 20-yr', 'Num. points outside 20-yr where hs>1 m']]
-expected_outside_1yr =  ['20', 'ca. 197', '20', '20', 'ca. 197', '197', '197', '197', 'ca. 197', 'ca. 197', '197']
-expected_outside_20yr = ['1', 'ca. 11.5', '1', '1', 'ca. 11.5', '11.5', '11.5', '11.5', 'ca. 11.5', 'ca. 11.5', '11.5']
+expected_outside_1yr =  ['20', 'ca. 197', '20', '20', 'ca. 197', '197', '197', '197', 'ca. 197', 'ca. 197', '197', '?']
+expected_outside_20yr = ['1', 'ca. 11.5', '1', '1', 'ca. 11.5', '11.5', '11.5', '11.5', 'ca. 11.5', 'ca. 11.5', '11.5', '?']
 
 # Set these constant to choose if the provided, the retained or both datasets
 # should be plotted together with the contours.
@@ -105,6 +105,8 @@ for i in range(n_contours_to_analyze):
         contr_abbrevation = '9 DS s.'
     elif contribution_id == 11:
         contr_abbrevation = '9 IFORM'
+    elif contribution_id == 12:
+        contr_abbrevation = legends_for_contribution[11]
     else:
         contr_abbrevation = str(contribution_id)
 
