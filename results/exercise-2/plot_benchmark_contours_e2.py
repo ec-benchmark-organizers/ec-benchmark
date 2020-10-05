@@ -92,6 +92,6 @@ lgd = fig.legend(axs[0,0].get_legend_handles_labels()[0],
            fontsize = fs, 
            bbox_to_anchor=(0.5,0))
 
-fig.savefig('results/e2.pdf',
+fig.savefig('results/exercise-2/e2.pdf',
             pad_inches=0.35,
             bbox_extra_artists=[lgd])
