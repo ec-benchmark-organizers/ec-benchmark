@@ -4,7 +4,7 @@ You can use the provided scripts to apply the same analysis that was used in
 the EC benchmark to some new environmental contours.
 
 To do that you must
- - clone / fork this repository
+ - clone / fork this repository,
  - provide contour coordinates in the format that was specified for the EC benchmark,
  - save these coordinates in the folder 'contribution-10' (the doe_john files
  are examples that you can overwrite) and
