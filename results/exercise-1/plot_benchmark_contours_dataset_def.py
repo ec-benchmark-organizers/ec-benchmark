@@ -40,7 +40,7 @@ for (return_period, ax0) in zip(return_periods, ax):
             folder_name = 'results/exercise-1/contribution-' + str(contribution_nr)
             file_name = folder_name + '/' + lastname_firstname[i] + '_dataset_' + \
                         dataset_char + '_' + str(return_period) + '.txt'
-            if contribution_nr in (1, 2, 3, 5, 6, 8):
+            if contribution_nr in (1, 2, 3, 5, 6, 8, 10):
                 (hs, v) = read_contour(file_name)
             else:
                 (v, hs) = read_contour(file_name)
