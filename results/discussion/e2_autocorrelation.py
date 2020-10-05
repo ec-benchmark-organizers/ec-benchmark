@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from viroconcom.read_write import read_ecbenchmark_dataset
 from viroconcom.fitting import Fit
 from viroconcom.contours import HighestDensityContour, \
-    IFormContour, sort_points_to_form_continous_line
+    sort_points_to_form_continous_line
 from viroconcom.plot import plot_contour, SamplePlotData
 
 # Define the number of years of data that one bootstrap sample should contain.
@@ -23,6 +23,35 @@ hs0 = np.mean(dataset_d_hs)
 nr_of_datapoints_to_draw = int(NR_OF_YEARS_TO_DRAW * 365.25 * 24)
 np.random.seed(9001)
 
+# Define the structure of the probabilistic model that will be fitted to the
+# dataset.
+dist_description_v = {'name': 'Weibull_Exp',
+                      'dependency': (None, None, None, None),
+                      'width_of_intervals': 2}
+dist_description_hs = {'name': 'Weibull_Exp',
+                       'fixed_parameters': (None, None, None, 5),
+                       # shape, location, scale, shape2
+                       'dependency': (0, None, 0, None),
+                       # shape, location, scale, shape2
+                       'functions': ('logistics4', None, 'alpha3', None),
+                       # shape, location, scale, shape2
+                       'min_datapoints_for_fit': 50,
+                       'do_use_weights_for_dependence_function': True}
+# Fit the model to the dataset.
+fit = Fit((dataset_d_v, dataset_d_hs), (dist_description_v, dist_description_hs))
+dist0 = fit.mul_var_dist.distributions[0]
+dist1 = fit.mul_var_dist.distributions[1]
+
+# Compute 50-yr contour.
+return_period = 50
+ts = 1  # Sea state duration in hours.
+limits = [(0, 45), (0, 25)]  # Limits of the computational domain.
+deltas = [0.05, 0.05]  # Dimensions of the grid cells.
+hdc = HighestDensityContour(fit.mul_var_dist, return_period, ts,
+                                      limits, deltas)
+contour_with_all_data = sort_points_to_form_continous_line(
+    hdc.coordinates[0], hdc.coordinates[1], do_search_for_optimal_start=True)
+
 for i in range(NR_OF_BOOTSTRAP_SAMPLES):
     print('Contour {}/{}'.format(i, NR_OF_BOOTSTRAP_SAMPLES))
 
@@ -31,39 +60,18 @@ for i in range(NR_OF_BOOTSTRAP_SAMPLES):
     v_i = np.take(dataset_d_v, sample_indices)
     hs_i = np.take(dataset_d_hs, sample_indices)
 
-    # Define the structure of the probabilistic model that will be fitted to the
-    # dataset.
-    dist_description_v = {'name': 'Weibull_Exp',
-                          'dependency': (None, None, None, None),
-                          'width_of_intervals': 2}
-    dist_description_hs = {'name': 'Weibull_Exp',
-                           'fixed_parameters': (None, None, None, 5),
-                           # shape, location, scale, shape2
-                           'dependency': (0, None, 0, None),
-                           # shape, location, scale, shape2
-                           'functions': ('logistics4', None, 'alpha3', None),
-                           # shape, location, scale, shape2
-                           'min_datapoints_for_fit': 50,
-                           'do_use_weights_for_dependence_function': True}
-
     # Fit the model to the dataset.
     fit = Fit((v_i, hs_i), (dist_description_v, dist_description_hs))
     dist0 = fit.mul_var_dist.distributions[0]
     dist1 = fit.mul_var_dist.distributions[1]
 
     # Compute 50-yr contour.
-    return_period = 50
-    ts = 1  # Sea state duration in hours.
-    limits = [(0, 45), (0, 25)]  # Limits of the computational domain.
-    deltas = [0.05, 0.05]  # Dimensions of the grid cells.
     hdc_contour_i = HighestDensityContour(fit.mul_var_dist, return_period, ts,
                                           limits, deltas)
     c = sort_points_to_form_continous_line(hdc_contour_i.coordinates[0],
                                            hdc_contour_i.coordinates[1],
                                            do_search_for_optimal_start=True)
     hdc_contour_i.c = c
-    #hdc_contour_i = IFormContour(fit.mul_var_dist, return_period, ts)
-    #hdc_contour_i.c = hdc_contour_i.coordinates
 
     if i == 0:
         contours = [hdc_contour_i]
@@ -92,6 +100,8 @@ for i, contour in enumerate(contours):
                      style='b-',
                      alpha=0.4,
                      ax=ax[0])
+plot_contour(x=contour_with_all_data[0], y=contour_with_all_data[1],
+             color='r', linewidth=2, linestyle='--', ax=ax[0])
 ax[0].set_xlim((0, 40))
 ax[0].set_ylim((0, 25))
 
@@ -117,8 +127,6 @@ for i in range(25):
                                            hdc_contour_i.coordinates[1],
                                            do_search_for_optimal_start=True)
     hdc_contour_i.c = c
-    #hdc_contour_i = IFormContour(fit.mul_var_dist, return_period, ts)
-    #hdc_contour_i.c = hdc_contour_i.coordinates
 
     if i == 0:
         contours = [hdc_contour_i]
@@ -142,8 +150,10 @@ for i, contour in enumerate(contours):
                      style='b-',
                      alpha=0.4,
                      ax=ax[1])
+plot_contour(x=contour_with_all_data[0], y=contour_with_all_data[1],
+             color='r', linewidth=2, linestyle='--', ax=ax[1])
 ax[1].set_xlim((0, 40))
 ax[1].set_ylim((0, 25))
-
+fig.tight_layout()
 plt.show()
 fig.savefig('results/discussion/e2_autocorrelation.pdf')
