@@ -5,11 +5,11 @@ the EC benchmark to some new environmental contours.
 
 To do that you must
  - provide contour coordinates in the format that was specified for the EC benchmark,
- - save these coordinates in the folder 'contribution-1' and
+ - save these coordinates in the folder 'contribution-10' and
  - adapt the file settings.py .
 
 In settings.py
- - Add the filename prefix to the variable 'lastname_firstname' and
+ - add the filename prefix to the variable 'lastname_firstname' and
  - add a legend for your environmental contours to the variable 'legends_for_contribution'.
 
  Then you can run the scripts that were used in the EC benchmark:
