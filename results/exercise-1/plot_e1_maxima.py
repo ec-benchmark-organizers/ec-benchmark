@@ -210,7 +210,7 @@ axs[0, 0].xaxis.set_ticks_position('bottom')
 axs[0, 0].set_xticks([1, 2, 3])
 axs[0, 0].set_xticklabels(['A', 'B', 'C'])
 axs[0, 0].set_ylim(4, 15)
-axs[0, 0].set_ylabel('Max. Hs along 1-yr contour (m)')
+axs[0, 0].set_ylabel('Max. $H_s$ along 1-yr contour (m)')
 
 for i in (0, 1):
     axs[0, 1].scatter(np.ones(np.shape(a_min_tz_c1[classes==i])), a_min_tz_c1[classes==i],
@@ -244,7 +244,7 @@ axs[0, 1].set_xticks([1.1, 2.1, 3.1])
 axs[0, 1].set_xticklabels(['A', 'B', 'C'])
 axs[0, 1].set_ylim(0, 20)
 axs[0, 1].set_yticks([0, 5, 10, 15, 20])
-axs[0, 1].set_ylabel('Min. and max Tz  along 1-yr contour (s)')
+axs[0, 1].set_ylabel('Min. and max $T_z$  along 1-yr contour (s)')
 
 # Plot the 20-yr contour maxima.
 for i in (0, 1):
@@ -271,7 +271,7 @@ axs[1, 0].xaxis.set_ticks_position('bottom')
 axs[1, 0].set_xticks([1, 2, 3])
 axs[1, 0].set_xticklabels(['A', 'B', 'C'])
 axs[1, 0].set_ylim(4, 15)
-axs[1, 0].set_ylabel('Max. Hs along 20-yr contour (m)')
+axs[1, 0].set_ylabel('Max. $H_s$ along 20-yr contour (m)')
 
 for i in (0, 1):
     axs[1, 1].scatter(np.ones(np.shape(a_min_tz_c20[classes == i])), a_min_tz_c20[classes == i],
@@ -306,7 +306,7 @@ axs[1, 1].set_xticks([1.1, 2.1, 3.1])
 axs[1, 1].set_xticklabels(['A', 'B', 'C'])
 axs[1, 1].set_ylim(0, 20)
 axs[1, 1].set_yticks([0, 5, 10, 15, 20])
-axs[1, 1].set_ylabel('Min. and max Tz  along 20-yr contour (s)')
+axs[1, 1].set_ylabel('Min. and max $T_z$  along 20-yr contour (s)')
 
 handles = []
 for i in range(n_contributions):
@@ -348,7 +348,7 @@ axs[0, 0].xaxis.set_ticks_position('bottom')
 axs[0, 0].set_xticks([1, 2, 3])
 axs[0, 0].set_xticklabels(['D', 'E', 'F'])
 axs[0, 0].set_ylim(21, 34)
-axs[0, 0].set_ylabel('Max. V  along 1-yr contour (m/s)')
+axs[0, 0].set_ylabel('Max. $U_{10}$  along 1-yr contour (m/s)')
 
 for i in (0, 1):
     axs[0, 1].scatter(np.ones(np.shape(d_max_hs_c1[classes==i])), d_max_hs_c1[classes==i],
@@ -369,7 +369,7 @@ axs[0, 1].xaxis.set_ticks_position('bottom')
 axs[0, 1].set_xticks([1, 2, 3])
 axs[0, 1].set_xticklabels(['D', 'E', 'F'])
 axs[0, 1].set_ylim(6, 20)
-axs[0, 1].set_ylabel('Max. Hs  along 1-yr contour  (m)')
+axs[0, 1].set_ylabel('Max. $H_s$  along 1-yr contour  (m)')
 
 # Now plot the 50-yr maxima.
 for i in (0, 1):
@@ -392,7 +392,7 @@ axs[1, 0].xaxis.set_ticks_position('bottom')
 axs[1, 0].set_xticks([1, 2, 3])
 axs[1, 0].set_xticklabels(['D', 'E', 'F'])
 axs[1, 0].set_ylim(21, 34)
-axs[1, 0].set_ylabel('Max. V  along 50-yr contour (m/s)')
+axs[1, 0].set_ylabel('Max. $U_{10}$  along 50-yr contour (m/s)')
 
 for i in (0, 1):
     axs[1, 1].scatter(np.ones(np.shape(d_max_hs_c50[classes==i])), d_max_hs_c50[classes==i],
@@ -413,7 +413,7 @@ axs[1, 1].xaxis.set_ticks_position('bottom')
 axs[1, 1].set_xticks([1, 2, 3])
 axs[1, 1].set_xticklabels(['D', 'E', 'F'])
 axs[1, 1].set_ylim(6, 20)
-axs[1, 1].set_ylabel('Max. Hs  along 50-yr contour  (m)')
+axs[1, 1].set_ylabel('Max. $H_s$  along 50-yr contour  (m)')
 
 labels = legends_for_contribution.copy()
 labels.append('Empirical marginal 1-yr return value')
