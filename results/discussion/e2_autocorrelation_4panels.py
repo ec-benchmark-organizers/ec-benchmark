@@ -53,7 +53,7 @@ contour_with_all_data = sort_points_to_form_continous_line(
     hdc.coordinates[0], hdc.coordinates[1], do_search_for_optimal_start=True)
 
 # Create the figure for plotting the contours.
-fig, axs = plt.subplots(len(NR_OF_YEARS_TO_DRAW), 2, sharex='row', sharey='row',
+fig, axs = plt.subplots(len(NR_OF_YEARS_TO_DRAW), 2, sharex=True, sharey=True,
                         figsize=(8, 6.5))
 
 for j in range(len(NR_OF_YEARS_TO_DRAW)):
@@ -92,11 +92,14 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
                                            y=np.asarray(dataset_d_hs),
                                            ax=axs)
             contour_label = str(return_period) + '-yr contour'
+            if j == 0:
+                ylabel = 'Using {}-yr of data'.format(NR_OF_YEARS_TO_DRAW[j])
+            else:
+                ylabel = 'Using {}-yrs of data'.format(NR_OF_YEARS_TO_DRAW[j])
             plot_contour(x=contour.c[0],
                          y=contour.c[1],
                          ax=axs[j, 0],
-                         x_label=label_v.capitalize(),
-                         y_label=label_hs.capitalize(),
+                         y_label=ylabel,
                          style='b-',
                          alpha=0.4,
                          sample_plot_data=plotted_sample)
@@ -108,8 +111,6 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
                          ax=axs[j, 0])
     plot_contour(x=contour_with_all_data[0], y=contour_with_all_data[1],
                  color='r', linewidth=2, linestyle='--', ax=axs[j, 0])
-    axs[j, 0].set_xlim((0, 40))
-    axs[j, 0].set_ylim((0, 25))
 
     for i in range(NR_OF_BOOTSTRAP_SAMPLES[j]):
         print('j = {}/{}, contour {}/{}'.format(j, len(NR_OF_YEARS_TO_DRAW) - 1,
@@ -146,8 +147,6 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
             plot_contour(x=contour.c[0],
                          y=contour.c[1],
                          ax=axs[j, 1],
-                         x_label=label_v.capitalize(),
-                         y_label=label_hs.capitalize(),
                          style='b-',
                          alpha=0.4,
                          sample_plot_data=plotted_sample)
@@ -159,9 +158,26 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
                          ax=axs[j, 1])
     plot_contour(x=contour_with_all_data[0], y=contour_with_all_data[1],
                  color='r', linewidth=2, linestyle='--', ax=axs[j, 1])
-    axs[j, 1].set_xlim((0, 40))
-    axs[j, 1].set_ylim((0, 25))
 
-fig.tight_layout()
+for ax in axs.flat:
+    ax.label_outer()
+    ax.set_xlim((0, 40))
+    ax.set_ylim((0, 25))
+
+fs_normal = 10
+fs_big = 12
+axs[0, 0].set_title('Randomly drawn samples', fontsize=fs_normal)
+axs[0, 1].set_title('Consecutive time series', fontsize=fs_normal)
+fig.text(0.5, 0.075, label_v.capitalize(),
+         ha='center',
+         fontsize=fs_big,
+         weight='bold')
+fig.text(0.04, 0.5, label_hs.capitalize(),
+         va='center',
+         rotation='vertical',
+         fontsize=fs_big,
+         weight='bold')
+fig.tight_layout(rect=(0.075, 0.1, 1, 1))
+
 plt.show()
 fig.savefig('results/discussion/e2_autocorrelation_4panels.pdf')
