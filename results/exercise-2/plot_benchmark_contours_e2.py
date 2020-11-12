@@ -59,27 +59,24 @@ for (ax, slength) in zip(axs[0], slengths):
         tstr = 'Using {}-yr of data'.format(slength)
     else:
         tstr = 'Using {}-yrs of data'.format(slength)
-    ax.set_title(tstr)
+    ax.set_title(tstr, fontsize=10)
 
 
 for (ax, num) in zip(axs[:,0], nums):
     ax.set_ylabel('Contrib. {}'.format(num))
 
 for ax in axs.flat:
-    # ax.tick_params(axis='both', which='major', labelsize=fs)   
-    # ax.xaxis.set_major_locator(plt.MaxNLocator(5))
-    # ax.yaxis.set_major_locator(plt.MaxNLocator(5))
     ax.label_outer()
     ax.set_ylim(top=ylim)
     ax.set_xlim(left=0, right=32)
 
 fig.tight_layout(rect=(0.075,0.1,1,1))
 
-fig.text(0.5, 0.075, label_hs.capitalize(), 
+fig.text(0.5, 0.075, label_v.capitalize(),
          ha='center', 
          fontsize=fs, 
          weight='bold')
-fig.text(0.04, 0.5, label_v.capitalize(), 
+fig.text(0.04, 0.5, label_hs.capitalize(),
          va='center', 
          rotation='vertical', 
          fontsize=fs, 
