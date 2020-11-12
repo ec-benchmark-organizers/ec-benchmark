@@ -10,9 +10,9 @@ from viroconcom.plot import plot_contour, SamplePlotData
 np.random.seed(9001) # For reproducablity.
 
 # Define the number of years of data that one bootstrap sample should contain.
-# In the exercise 1, 5 and 25 years are used.
-NR_OF_YEARS_TO_DRAW = [1, 5]#[1, 5]
-NR_OF_BOOTSTRAP_SAMPLES = [2, 2]#[25, 5]
+# In the benchmark 1, 5 and 25 years are used.
+NR_OF_YEARS_TO_DRAW = [1, 5]
+NR_OF_BOOTSTRAP_SAMPLES = [25, 5]
 GRID_CELL_SIZE = 0.5 # 0.05
 
 # Read dataset D.
@@ -52,6 +52,10 @@ hdc = HighestDensityContour(fit.mul_var_dist, return_period, ts,
 contour_with_all_data = sort_points_to_form_continous_line(
     hdc.coordinates[0], hdc.coordinates[1], do_search_for_optimal_start=True)
 
+# Create the figure for plotting the contours.
+fig, axs = plt.subplots(len(NR_OF_YEARS_TO_DRAW), 2, sharex='row', sharey='row',
+                        figsize=(8, 6.5))
+
 for j in range(len(NR_OF_YEARS_TO_DRAW)):
     nr_of_datapoints_to_draw = round(NR_OF_YEARS_TO_DRAW[j] * 365.25 * 24)
     for i in range(NR_OF_BOOTSTRAP_SAMPLES[j]):
@@ -82,16 +86,15 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
             contours.append(hdc_contour_i)
 
     # Plot the environmental contours.
-    fig, ax = plt.subplots(j + 1, 2, sharex='row', sharey='row', figsize=(8, 4))
     for i, contour in enumerate(contours):
         if i == 0:
             plotted_sample = SamplePlotData(x=np.asarray(dataset_d_v),
                                            y=np.asarray(dataset_d_hs),
-                                           ax=ax)
+                                           ax=axs)
             contour_label = str(return_period) + '-yr contour'
             plot_contour(x=contour.c[0],
                          y=contour.c[1],
-                         ax=ax[0],
+                         ax=axs[j, 0],
                          x_label=label_v.capitalize(),
                          y_label=label_hs.capitalize(),
                          style='b-',
@@ -102,11 +105,11 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
                          y=contour.c[1],
                          style='b-',
                          alpha=0.4,
-                         ax=ax[0])
+                         ax=axs[j, 0])
     plot_contour(x=contour_with_all_data[0], y=contour_with_all_data[1],
-                 color='r', linewidth=2, linestyle='--', ax=ax[0])
-    ax[0].set_xlim((0, 40))
-    ax[0].set_ylim((0, 25))
+                 color='r', linewidth=2, linestyle='--', ax=axs[j, 0])
+    axs[j, 0].set_xlim((0, 40))
+    axs[j, 0].set_ylim((0, 25))
 
     for i in range(NR_OF_BOOTSTRAP_SAMPLES[j]):
         print('j = {}/{}, contour {}/{}'.format(j, len(NR_OF_YEARS_TO_DRAW) - 1,
@@ -142,7 +145,7 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
             contour_label = str(return_period) + '-yr contour'
             plot_contour(x=contour.c[0],
                          y=contour.c[1],
-                         ax=ax[1],
+                         ax=axs[j, 1],
                          x_label=label_v.capitalize(),
                          y_label=label_hs.capitalize(),
                          style='b-',
@@ -153,11 +156,11 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
                          y=contour.c[1],
                          style='b-',
                          alpha=0.4,
-                         ax=ax[1])
+                         ax=axs[j, 1])
     plot_contour(x=contour_with_all_data[0], y=contour_with_all_data[1],
-                 color='r', linewidth=2, linestyle='--', ax=ax[1])
-    ax[1].set_xlim((0, 40))
-    ax[1].set_ylim((0, 25))
+                 color='r', linewidth=2, linestyle='--', ax=axs[j, 1])
+    axs[j, 1].set_xlim((0, 40))
+    axs[j, 1].set_ylim((0, 25))
 
 fig.tight_layout()
 plt.show()
