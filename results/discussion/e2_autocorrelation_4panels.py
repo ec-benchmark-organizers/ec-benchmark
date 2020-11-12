@@ -13,7 +13,7 @@ np.random.seed(9001) # For reproducablity.
 # In the benchmark 1, 5 and 25 years are used.
 NR_OF_YEARS_TO_DRAW = [1, 5]
 NR_OF_BOOTSTRAP_SAMPLES = [25, 5]
-GRID_CELL_SIZE = 0.5 # 0.05
+GRID_CELL_SIZE = 0.05
 
 # Read dataset D.
 file_path = 'datasets/D.txt'
@@ -179,5 +179,4 @@ fig.text(0.04, 0.5, label_hs.capitalize(),
          weight='bold')
 fig.tight_layout(rect=(0.075, 0.1, 1, 1))
 
-plt.show()
 fig.savefig('results/discussion/e2_autocorrelation_4panels.pdf')
