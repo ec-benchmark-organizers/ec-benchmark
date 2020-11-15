@@ -41,7 +41,7 @@ for idx, (axi,name,style,leg_str,num) in enumerate(zip(axs, names, styles, leg_s
         sample_plot_data = SamplePlotData(x=np.asarray(sample_v),
                                           y=np.asarray(sample_hs),
                                           ax=ax,
-                                          label='Dataset D')
+                                          label='Dataset D (provided)')
         
         plot_confidence_interval(x_median=v_median, y_median=hs_median,
                                  x_bottom=v_lower, y_bottom=hs_lower,
