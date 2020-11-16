@@ -7,11 +7,21 @@ from viroconcom.contours import Contour
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_contour, plot_confidence_interval
 
-from settings import lastname_firstname
-
 dataset_char = 'D'
 return_period =  50
-n_contours_to_analyze = 9
+
+lastname_firstname = [
+    'Wei_Bernt',
+    'GC_CGS',
+    'hannesdottir_asta',
+    'haselsteiner_andreas',
+    'BV',
+    'mackay_ed',
+    'qiao_chi',
+    'rode_anna',
+    'vanem_DirectSampling',
+]
+n_contours_to_analyze = len(lastname_firstname)
 
 class Object(object):
     pass
@@ -218,7 +228,7 @@ cu.hs = sorted_hs[upper_index, :]
 axs[0].scatter(v_p, hs_p, c='black', alpha=0.5, zorder=-2, rasterized=True, label='Dataset D (provided)')
 for i in range(n_contours_to_analyze):
     if i == 0:
-        clabel = '50-yr contour'
+        clabel = 'Submitted 50-yr contours'
     else:
         clabel = None
     plot_contour(contours_v[i], contours_hs[i],
@@ -240,4 +250,4 @@ for ax in axs.flat:
     ax.set_xlim((0, 35))
     ax.set_ylim((0, 18))
 fig.tight_layout()
-fig.savefig('results/exercise-1/e1_confidence_bounds.pdf', bbox_inches='tight')
+fig.savefig('results/discussion/e1_confidence_bounds.pdf', bbox_inches='tight')
