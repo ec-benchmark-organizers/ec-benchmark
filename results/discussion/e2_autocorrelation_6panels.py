@@ -13,7 +13,7 @@ np.random.seed(9001) # For reproducablity.
 # In the benchmark 1, 5 and 25 years are used.
 NR_OF_YEARS_TO_DRAW = [1, 2, 5]
 NR_OF_BOOTSTRAP_SAMPLES = [25, 12, 5]
-GRID_CELL_SIZE = 0.5
+GRID_CELL_SIZE = 0.05
 
 # Read dataset D.
 file_path = 'datasets/D.txt'
@@ -54,13 +54,13 @@ contour_with_all_data = sort_points_to_form_continous_line(
 
 # Create the figure for plotting the contours.
 fig, axs = plt.subplots(len(NR_OF_YEARS_TO_DRAW), 2, sharex=True, sharey=True,
-                        figsize=(8, 6.5))
+                        figsize=(8, 9))
 
 for j in range(len(NR_OF_YEARS_TO_DRAW)):
     nr_of_datapoints_to_draw = round(NR_OF_YEARS_TO_DRAW[j] * 365.25 * 24)
     for i in range(NR_OF_BOOTSTRAP_SAMPLES[j]):
-        print('j = {}/{}, contour {}/{}'.format(j, len(NR_OF_YEARS_TO_DRAW) - 1,
-                                                i + 1, NR_OF_BOOTSTRAP_SAMPLES[j]))
+        print('j = {}/{}, random sample, contour {}/{}'.format(
+            j, len(NR_OF_YEARS_TO_DRAW) - 1, i + 1, NR_OF_BOOTSTRAP_SAMPLES[j]))
 
         # Resample from the hindcast dataset to get the sample D_i.
         sample_indices = np.random.randint(dataset_d_v.size, size=nr_of_datapoints_to_draw)
@@ -113,8 +113,8 @@ for j in range(len(NR_OF_YEARS_TO_DRAW)):
                  color='r', linewidth=2, linestyle='--', ax=axs[j, 0])
 
     for i in range(NR_OF_BOOTSTRAP_SAMPLES[j]):
-        print('j = {}/{}, contour {}/{}'.format(j, len(NR_OF_YEARS_TO_DRAW) - 1,
-                                                i + 1, NR_OF_BOOTSTRAP_SAMPLES[j]))
+        print('j = {}/{}, consecutive series, contour {}/{}'.format(
+            j, len(NR_OF_YEARS_TO_DRAW) - 1, i + 1, NR_OF_BOOTSTRAP_SAMPLES[j]))
         n_consecutive_points = round(NR_OF_YEARS_TO_DRAW[j] * 365.25 * 24)
         v_i = dataset_d_v[i * n_consecutive_points : (i + 1) * n_consecutive_points]
         hs_i = dataset_d_hs[i * n_consecutive_points: (i + 1) * n_consecutive_points]
