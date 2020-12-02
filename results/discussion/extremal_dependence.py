@@ -5,13 +5,14 @@ from viroconcom.distributions import (WeibullDistribution,
     ExponentiatedWeibullDistribution, MultivariateDistribution)
 from viroconcom.read_write import read_ecbenchmark_dataset
 
-# Results: 
-#alpha = 1E-2 # lambda contr. 1&2: 0.481, 0.475, 0.461 | contr. 4 = 0.526, 0.526, 0.524 | empirical (p, r): 0.552, 0.851
-#alpha = 1E-3 # lambda contr. 1&2: 0.433, 0.409, 0.445 | contr. 4 = 0.415, 0.405, 0.406 | empirical (p, r): 0.571, 0.891
-#alpha = 1E-4 # lambda contr. 1&2: 0.371, 0.308, 0.321 | contr. 4 = 0.292, 0.291, 0.302 | empirical (p, r): 0.814, 0.572
-#alpha = 1E-5 # lambda contr. 1&2: X.XXX | contr. 4 = 0.215, 0.211, 0.213 | empirical (p, r): -1.119
+# Results with n=10, and precision_factor=10: 
+#alpha = 1E-2 # lambda contr. 1&2: 0.480 ± 0.007 | contr. 4 = 0.532 ± 0.005 | empirical (p, r): 0.552, 0.851
+#alpha = 1E-3 # lambda contr. 1&2: 0.384 ± 0.025 | contr. 4 = 0.403 ± 0.015 | empirical (p, r): 0.571, 0.891
+#alpha = 1E-4 # lambda contr. 1&2: 0.334 ± 0.021 | contr. 4 = 0.280 ± 0.020 | empirical (p, r): 0.814, 0.572
 
 alphas = np.array([1E-2, 1E-3, 1E-4])
+n_iters = 10 # Number of iterations to estimate the marginal icdf.
+precision = 10 # precision_factor to estiamate the marginal icdf (higher = more precise).
 
 # Create joint distribution model of contribution #1 and #2 (baseline model)
 u_scale = FunctionParam('power3', 0, 7.58, 0.520)
@@ -35,20 +36,30 @@ joint_model_4 = MultivariateDistribution(distributions, dependencies)
 
 joint_models = [joint_model_1, joint_model_4]
 model_names = ['Contribution 1 and 2', 'Contribution 4']
+u_dim = [1, 0] # Indices of wind speed the different hierarchical joint models.
+hs_dim = [0, 1]# Indices of wave height the different hierarchical joint models.
 
 for alpha in alphas:
     print(f'*** Computing with alpha = {alpha:.1e} ***') 
-    for j, joint_model in enumerate(joint_models):
+    for j, jmodel in enumerate(joint_models):
         print(f'* Joint model: {model_names[j]} *')    
-        n_iters = 3
+        lam = np.empty(n_iters)
         for i in range(n_iters):
-            ur = joint_model.marginal_icdf(1 - alpha, dim=0)
-            hr = joint_model.marginal_icdf(1- alpha, dim=1, precision_factor=5)
-            print(f'i = {i+1}/{n_iters}')
+            ur = jmodel.marginal_icdf(1 - alpha, dim=u_dim[j], precision_factor=precision)
+            hr = jmodel.marginal_icdf(1- alpha, dim=hs_dim[j], precision_factor=precision)
+            print(f'i = {i + 1}/{n_iters}')
             print(f'u_r = {ur:.3f}, h_r = {hr:.3f}')
-            jointAB = 1 - 2 * (1- alpha) + joint_model.cdf([ur, hr], lower_integration_limit=(0, 0))
-            lam = jointAB / alpha
-            print(f'model lambda = {lam:.3f}')
+            if u_dim[j] == 0:
+                p_urhr = jmodel.cdf([ur, hr], lower_integration_limit=(0, 0))
+            elif u_dim[j] == 1:
+                p_urhr = jmodel.cdf([hr, ur], lower_integration_limit=(0, 0))
+            else:
+                raise  ValueError
+            jointAB = 1 - 2 * (1- alpha) + p_urhr
+            lam[i] = jointAB / alpha
+            print(f'model lambda[{i + 1:d}] = {lam[i]:.3f}')
+            if i == n_iters - 1:
+                print(f'model lambda = {np.mean(lam):.3f} ± {np.std(lam):.3f}')
 
     file_names = ['datasets/D.txt', 'datasets-retained/Dr.txt']
     file_labels = ['D_provided', 'D_retained']
@@ -56,6 +67,6 @@ for alpha in alphas:
         u10, hs, lhs, ltz = read_ecbenchmark_dataset(fname)
         ur = np.quantile(u10, 1 - alpha)
         hr = np.quantile(hs, 1 - alpha)
-        jointAB = 1 - 2 * (1 - alpha) + joint_model.cdf([ur, hr], lower_integration_limit=(0, 0))
+        jointAB = 1 - 2 * (1 - alpha) + jmodel.cdf([ur, hr], lower_integration_limit=(0, 0))
         lam = jointAB / alpha
-        print(f'{file_labels[i]}, empircal lambda = {lam:.3f}')
+        print(f'{file_labels[i]}, empirical lambda = {lam:.3f}')
