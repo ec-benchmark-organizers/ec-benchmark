@@ -15,9 +15,9 @@ for idx in range(2):
         colors_for_contribution.append(colors_for_contribution[8])
 colors_for_contribution.append('blue')
 
-fig, ax = plt.subplots(len(return_periods), len(dataset_chars), sharex='row', sharey='row', figsize=(10, 8))
+fig, axs = plt.subplots(len(return_periods), len(dataset_chars), sharex='row', sharey='row', figsize=(10, 8))
 max_hs_of_sample = 0
-for (return_period, ax0) in zip(return_periods, ax):
+for (return_period, ax0) in zip(return_periods, axs):
     for (dataset_char, ax1) in zip(dataset_chars, ax0):
         # Load the environmental data.
         file_name_provided = 'datasets/' + dataset_char + '.txt'
@@ -59,10 +59,14 @@ for (return_period, ax0) in zip(return_periods, ax):
                          upper_ylim=ylim)
         
         ax1.set_rasterization_zorder(-1)
-        ax1.set_xlabel(label_tz.capitalize())
-        ax1.set_ylabel(label_hs.capitalize())
         ax1.set_title('Dataset ' + dataset_char + ', ' + str(return_period) + '-yr contour')
-        
+
+for ax in axs[1]:
+    ax.set_xlabel(label_tz.capitalize())
+for ax in axs[:,0]:
+    ax.set_ylabel(label_hs.capitalize())
+
+
 lgd = fig.legend(legends_for_contribution, 
            loc='lower center', 
            ncol=6, 
