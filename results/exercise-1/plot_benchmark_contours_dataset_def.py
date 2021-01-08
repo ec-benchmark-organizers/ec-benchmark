@@ -4,17 +4,11 @@ from palettable.colorbrewer.qualitative import Paired_9 as mycorder
 from viroconcom.read_write import read_ecbenchmark_dataset, read_contour
 from viroconcom.plot import plot_contour
 
-from settings import lastname_firstname, legends_for_contribution, ls_for_contribution
+from settings import lastname_firstname, legends_for_contribution, ls_for_contribution, colors_for_contribution
 
 dataset_chars = ['D', 'E', 'F']
 return_periods = [1, 50]
 n_contours_to_analyze = len(legends_for_contribution)
-
-colors_for_contribution = mycorder.mpl_colors
-for idx in range(2):
-        colors_for_contribution.append(colors_for_contribution[8])
-colors_for_contribution.append('blue')
-
 
 fig, axs = plt.subplots(len(return_periods), len(dataset_chars), sharex='row', sharey='row', figsize=(10, 8))
 max_hs_of_sample = 0

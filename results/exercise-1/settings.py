@@ -1,3 +1,11 @@
+"""
+Settings for plotting the results.
+
+If you want to plot your contour too, you need to make the 
+changes that are described in inline comments below.
+"""
+import numpy as np
+
 lastname_firstname = [
     'Wei_Bernt',
     'GC_CGS',
@@ -13,7 +21,6 @@ lastname_firstname = [
     #'doe_john'
     # Add the filename prefix of your contribution here.
 ]
-ls_for_contribution = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '--', '-.', '-']
 legends_for_contribution = [
     'Contribution 1',
     'Contribution 2',
@@ -29,3 +36,12 @@ legends_for_contribution = [
     #'John\'s new method'
     # Add a legend for your contribution here.
 ]
+
+# Add an additional 1 for total exceedance and a 0 for marginal exceedance here.
+# If your contribution is a total exceedance contour use a dash line to draw it, '--'
+contour_classes = np.array([ 1,    0,   1,    1,    0,   0,   0,   0,   0,   0,   0,     ]) 
+ls_for_contribution =      ['--', '-', '--', '--', '-', '-', '-', '-', '-', '-', '-', '-']
+
+# Import Paired_12 instead of Paired_11 here.
+from palettable.colorbrewer.qualitative import Paired_11 as mycorder
+colors_for_contribution = np.array(mycorder.mpl_colors)

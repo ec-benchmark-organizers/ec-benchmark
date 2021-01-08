@@ -1,26 +1,19 @@
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
-from palettable.colorbrewer.qualitative import Paired_11 as mycorder
-from palettable.colorbrewer.qualitative import Paired_12 as mycorder12
 from viroconcom.read_write import read_contour, read_ecbenchmark_dataset
 
-from settings import lastname_firstname, legends_for_contribution, ls_for_contribution
+from settings import lastname_firstname, legends_for_contribution, ls_for_contribution, contour_classes, colors_for_contribution
 
 legends_for_contribution = [l.replace('Contribution', 'Contr.') for l in legends_for_contribution]
 dataset_chars = ['A', 'B', 'C', 'D', 'E', 'F']
 n_contributions = len(legends_for_contribution)
 
-colors_for_contribution = np.array(mycorder.mpl_colors) # Must be np.array for filtering.
-
 # Marginal exceedance = 'o', total exceedance = 'v'
 marker_class0 = 'o'
 marker_class1 = 'v'
 marker_class = np.array([marker_class0, marker_class1])
-classes = np.array([1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0])
-if n_contributions == 12:
-    classes = np.append(classes, 0)
-    colors_for_contribution = np.array(mycorder12.mpl_colors)
+classes = contour_classes
 
 a_max_hs_c1 = np.empty(n_contributions)
 a_min_tz_c1 = np.empty(n_contributions)

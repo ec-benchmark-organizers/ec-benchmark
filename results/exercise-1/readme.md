@@ -11,8 +11,9 @@ To do that you must
  - adapt the file settings.py .
 
 In settings.py
- - add the filename prefix to the variable 'lastname_firstname' and
- - add a legend for your environmental contours to the variable 'legends_for_contribution'.
+ - add the filename prefix to the variable 'lastname_firstname',
+ - add a legend for your environmental contours to the variable 'legends_for_contribution' and
+ - add a 0 or 1 to 'contour_classes' depending upon which class your contour is.
 
  Then you can run the scripts that were used in the EC benchmark:
   - plot_e1_standardized.py (one plot for each contour method)
