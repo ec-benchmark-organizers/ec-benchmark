@@ -3,6 +3,7 @@ This is the official respository for the excercise annouced at OMAE 2019 ([paper
 
 ## Updates
 **August 11, 2020:** Yesterday, we held an online meeting on the benchmark's results. The presentation is available [here](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/results/2020-08-10_EcBenchmarkMeeting_LowResolution.pdf) . 
+
 **March 24, 2020:** The deadline for submitting results is extended to April 30, 2020.
 
 ## Datasets
