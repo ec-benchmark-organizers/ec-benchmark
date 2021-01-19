@@ -14,7 +14,7 @@ The original datasets are owned by NDBC (datasets A, B & C) and WDCC (dataset D,
 * WDCC: https://cera-www.dkrz.de/WDCC/ui/cerasearch/info?site=termsofuse
 
 ## Compare your contour method with the benchmark
-For Exercise 1, we wrote the open-source analysis code such that also now that the exercise is completed, you can analyze additional contour methods using the same methods.
+For Exercise 1, we wrote the analysis scripts such that now as the exercise is completed, you can analyze additional contour methods using the same methods.
 
 The [readme](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/results/exercise-1) for Exercise 1, provides further instructions.
 
