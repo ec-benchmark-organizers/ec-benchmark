@@ -16,7 +16,7 @@ The original datasets are owned by NDBC (datasets A, B & C) and WDCC (dataset D,
 ## Compare your contour method with the benchmark
 For Exercise 1, we wrote the analysis scripts such that now as the exercise is completed, you can analyze additional contour methods using the same analysis.
 
-The [readme](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/results/exercise-1) for Exercise 1, provides further instructions.
+The [readme](https://github.com/ec-benchmark-organizers/ec-benchmark/tree/master/results/exercise-1) for Exercise 1 provides further instructions.
 
 ## Questions
 We use GitHub issues like a forum. Feel free to [open an issue](https://github.com/ec-benchmark-organizers/ec-benchmark/issues/new) if you have a questions and we will answer it publicly in the same issue. Alternatively, you can contact us per email: <ecbenchmark@gmail.com>
