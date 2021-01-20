@@ -24,4 +24,5 @@ In settings.py
   - create_points_outside_table_abc.py (counts datapoints outside the contours)
   - create_points_outside_table_def.py (counts datapoints outside the contours)
   
-The scripts must be run while you are in the repository's base folder in your shell (e.g. python results/exercise-1/plot_e1_standardized.py)
+The scripts must be run while you are in the repository's base folder (in "ec-benchmark").
+From there run the scripts by typing, for example, 'python results/exercise-1/plot_benchmark_contours_dataset_abc.py'
