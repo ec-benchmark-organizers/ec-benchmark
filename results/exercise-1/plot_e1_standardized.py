@@ -191,5 +191,5 @@ for i in range(n_contours_to_analyze):
     plt.suptitle(legends_for_contribution[contribution_id - 1])
     plt.show()
     fig_name_suffix = label_suffix.replace(" ", "_")
-    fig.savefig('results/exercise-1/e1_contribution_' + str(contribution_id) + '_' +
+    fig.savefig('results/exercise-1/gfx/e1_contribution_' + str(contribution_id) + '_' +
                 fig_name_suffix, dpi=150)

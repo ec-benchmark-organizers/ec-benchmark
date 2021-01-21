@@ -416,5 +416,5 @@ fig_def.legend(handles=handles, labels=labels,
 fig_def.tight_layout(rect=(0, 0.05, 1, 1))
 
 plt.show()
-fig_abc.savefig('results/exercise-1/e1_max_values_abc.pdf')
-fig_def.savefig('results/exercise-1/e1_max_values_def.pdf')
+fig_abc.savefig('results/exercise-1/gfx/e1_max_values_abc.pdf')
+fig_def.savefig('results/exercise-1/gfx/e1_max_values_def.pdf')

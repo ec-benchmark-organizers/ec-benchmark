@@ -69,5 +69,5 @@ lgd = fig.legend(legends_for_contribution,
            ncol=6, 
            prop={'size': 8})
 fig.tight_layout(rect=(0,0.05,1,1))
-plt.savefig('results/exercise-1/e1_overlay_abc.pdf', bbox_inches='tight', bbox_extra_artists=[lgd])
+plt.savefig('results/exercise-1/gfx/e1_overlay_abc.pdf', bbox_inches='tight', bbox_extra_artists=[lgd])
 plt.show()
