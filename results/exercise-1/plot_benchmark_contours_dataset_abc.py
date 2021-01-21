@@ -47,10 +47,12 @@ for (return_period, ax0) in zip(return_periods, axs):
                     edgecolor='black', alpha=0.5, zorder=-2)
         for i in range(n_contours_to_analyze):
             ylim = 1.05 * max([max(max_hs_on_contour), max_hs_of_sample])
+            lw = 1.5 if i < 11 else 3
             plot_contour(contours_tz[i], contours_hs[i],
                          ax=ax1,
                          color=colors_for_contribution[i],
                          linestyle=ls_for_contribution[i],
+                         linewidth=lw,
                          upper_ylim=ylim)
         
         ax1.set_rasterization_zorder(-1)
