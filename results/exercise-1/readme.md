@@ -6,15 +6,15 @@ the EC benchmark to some new environmental contours.
 To do that you must
  - clone or fork this repository,
  - install the python packages listed in [results/requirements.txt](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/results/requirements.txt)
- - provide 1-year, 20-year and 50-year contour coordinates in the format that was specified for the EC benchmark (look at the other results to understand the format),
- - save these coordinates in the folder 'contribution-10' (the doe_john files
- are examples that you can overwrite) and
+ - provide 1-year, 20-year and 50-year contour coordinates in the format that was specified for the EC benchmark for all datasets,
+ - save these coordinates in the folder 'contribution-10' using the file_naming convention {last_name}_{first_name}_dataset_{dataset character}_{return period}.txt (the doe_john files are examples that you can overwrite, they are in the required format and follow the naming convention) and
  - adapt the file settings.py .
 
 In settings.py
- - add the filename prefix to the variable 'lastname_firstname',
- - add a legend for your environmental contours to the variable 'legends_for_contribution' and
- - add a 0 or 1 to 'contour_classes' depending upon which class your contour is.
+ - add the filename prefix to the variable 'lastname_firstname' (line 21),
+ - add a legend for your environmental contours to the variable 'legends_for_contribution' (line 36),
+ - add a 0 or 1 to 'contour_classes' depending upon which class your contour is (line 42) and
+ - use 12 colors for plotting instead of 11 by changing the import (line 46)
 
  Then you can run the scripts that were used in the EC benchmark:
   - plot_e1_standardized.py (one plot for each contour method)
