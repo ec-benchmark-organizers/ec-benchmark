@@ -6,7 +6,7 @@ the EC benchmark to some new environmental contours.
 To do that you must
  - clone or fork this repository,
  - install the python packages listed in [results/requirements.txt](https://github.com/ec-benchmark-organizers/ec-benchmark/blob/master/results/requirements.txt)
- - provide 1-year, 20-year and 50-year contour coordinates in the format that was specified for the EC benchmark for all datasets,
+ - provide 1-year, 20-year and 50-year contour coordinates in the format that was specified for the EC benchmark for all datasets (A - F),
  - save these coordinates in the folder 'contribution-10' using the file_naming convention {last_name}_{first_name}_dataset_{dataset character}_{return period}.txt (the doe_john files are examples that you can overwrite, they are in the required format and follow the naming convention) and
  - adapt the file settings.py .
 
