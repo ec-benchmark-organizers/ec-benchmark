@@ -26,3 +26,7 @@ In settings.py
   
 The scripts must be run while you are in the repository's base folder (in "ec-benchmark").
 From there run the scripts by typing, for example, 'python results/exercise-1/plot_benchmark_contours_dataset_abc.py'
+
+## Video tutorial
+
+[![Video](http://img.youtube.com/vi/TpXXtI6KRF8/0.jpg)](http://www.youtube.com/watch?v=TpXXtI6KRF8 "Video")
