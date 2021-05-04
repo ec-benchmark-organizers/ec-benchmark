@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.api as sm
 from palettable.colorbrewer.qualitative import Paired_6 as mycorder
-
+import scipy.signal as ss
 
 from viroconcom.read_write import read_ecbenchmark_dataset
 
@@ -35,7 +35,6 @@ for i, dataset_char in enumerate(dataset_chars):
         hs_hindcast_list.append(hs_p)
         v_list.append(v_p)
 
-import scipy.signal as ss
 
 def ccf(x, y, lag_max = 100):
 

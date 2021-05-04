@@ -2,4 +2,5 @@ viroconcom==1.4.8
 tabulate==0.8.7
 palettable==3.3.0
 matplotlib==3.3.1
+scipy==15.4
 #basemap (is not available via pip but only via conda --> conda install basemap)
