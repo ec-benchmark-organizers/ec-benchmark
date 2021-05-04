@@ -179,4 +179,4 @@ fig.text(0.04, 0.5, label_hs.capitalize(),
          weight='bold')
 fig.tight_layout(rect=(0.075, 0.1, 1, 1))
 
-fig.savefig('results/discussion/e2_autocorrelation_6panels.pdf')
+fig.savefig('results/discussion/gfx/e2_autocorrelation_6panels.pdf')

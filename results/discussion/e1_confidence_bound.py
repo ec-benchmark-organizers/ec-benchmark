@@ -250,4 +250,4 @@ for ax in axs.flat:
     ax.set_xlim((0, 35))
     ax.set_ylim((0, 18))
 fig.tight_layout()
-fig.savefig('results/discussion/e1_confidence_bounds.pdf', bbox_inches='tight')
+fig.savefig('results/discussion/gfx/e1_confidence_bounds.pdf', bbox_inches='tight')
