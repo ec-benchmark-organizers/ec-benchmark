@@ -37,7 +37,8 @@ for i, dataset_char in enumerate(dataset_chars):
 
 
 def ccf(x, y, lag_max = 100):
-
+    # Calculates the cross correlation of x and y.
+    # Thanks to https://stackoverflow.com/questions/53959879/how-do-i-get-rs-ccf-in-python
     result = ss.correlate(y - np.mean(y), x - np.mean(x), method='direct') / (np.std(y) * np.std(x) * len(y))
     length = (len(result) - 1) // 2
     lo = length - lag_max
@@ -51,12 +52,16 @@ for i in range(3):
     ax[0,1].plot(lag, c_tz[i], color=dataset_colors[i])
     c = ccf(hs_buoy_list[i], tz_list[i], lag_max=n_lags)
     ax[0,2].plot(lag, c[n_lags:], color=dataset_colors[i])
+    print(r'Maximum auto-correlation when \tau = hours ')
+    print(np.argmax(c[n_lags:]))
 for i in range(3):
     ax[1,0].plot(lag, c_hs_hincast[i], label='Dataset ' + dataset_chars[i + 3], color=dataset_colors[i + 3])
     ax[1,1].plot(lag, c_v[i], color=dataset_colors[i + 3])
     c = ccf(v_list[i], hs_hindcast_list[i], lag_max=n_lags)
     ax[1,2].plot(lag, c[n_lags:], color=dataset_colors[i + 3])
-    
+    print(r'Maximum auto-correlation when \tau = hours ')
+    print(np.argmax(c[n_lags:]))
+
 for i in range(2):
     for j in range(3):
         ax[i,j].spines['right'].set_visible(False)
@@ -67,11 +72,11 @@ for i in range(2):
 lgd = fig.legend(loc='lower center',
                  ncol=6,
                  prop={'size': 8})
-ax[0,0].set_ylabel('Autocorrelation of $H_s$')
-ax[0,1].set_ylabel('Autocorrelation of $T_z$')
+ax[0,0].set_ylabel('Auto-correlation of $H_s$')
+ax[0,1].set_ylabel('Auto-correlation of $T_z$')
 ax[0,2].set_ylabel(r'Correlation of $H_s(t)$ and $T_z(t + \tau)$')
-ax[1,0].set_ylabel('Autocorrelation of $H_s$')
-ax[1,1].set_ylabel('Autocorrelation of $U_{10}$')
+ax[1,0].set_ylabel('Auto-correlation of $H_s$')
+ax[1,1].set_ylabel('Auto-correlation of $U_{10}$')
 ax[1,2].set_ylabel(r'Correlation of $U_{10}(t)$ and $H_s(t + \tau)$')
 ax[1,0].set_xlabel('Lag (days)')
 ax[1,1].set_xlabel('Lag (days)')
