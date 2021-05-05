@@ -14,9 +14,9 @@ n_contributions = len(legends_for_contribution) - 2
 marker_class0 = 'o'
 marker_class1 = 'v'
 marker_classes = np.array([marker_class0, marker_class1])
-class0_color = '#bd1c1c'
-class1_color = '#1c5abd'
-color_classes = np.array([class0_color, class1_color]) #red and blue
+class0_color = '#1c5abd' # blue
+class1_color = '#bd1c1c' # red
+color_classes = np.array([class0_color, class1_color]) 
 classes = contour_classes
 
 a_min_hs_c1 = np.empty(n_contributions)
