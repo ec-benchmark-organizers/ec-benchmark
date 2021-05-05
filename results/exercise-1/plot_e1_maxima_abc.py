@@ -268,9 +268,9 @@ for axs in [axs_1, axs_20]:
 
 
 patch_marg = Patch(facecolor=class0_color, edgecolor='w',
-                        label='Marginal exceedance contours')
+                        label='Marginal exceedance contour')
 patch_tot = Patch(facecolor=class1_color, edgecolor='w',
-                        label='Total exceedance contours')
+                        label='Total exceedance contour')
 line_observed_rp1 = Line2D([0], [0], color='k', lw=1, linestyle='--', 
                         label='Empirical marginal 1-yr return value')
 line_observed_rp20 = Line2D([0], [0], color='k', lw=1, linestyle='--', 
