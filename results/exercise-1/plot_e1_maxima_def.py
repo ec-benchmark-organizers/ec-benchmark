@@ -179,9 +179,9 @@ for i in range(3):
     ax_50[0].plot([i - 0.5 * barWidth, i + 8.5 * barWidth], [empirical_max_v_def[i], empirical_max_v_def[i]], '--k')
 
 axs_1[1].set_ylabel('$H_s$ range of 1-yr contour (m)') 
-axs_1[0].set_ylabel('$U_{10}$ range of 1-yr contour (m s$^{-1}$)') 
+axs_1[0].set_ylabel('$U_{10}$ range of 1-yr contour (m/s)') 
 ax_50[1].set_ylabel('$H_s$ range of 50-yr contour (m)') 
-ax_50[0].set_ylabel('$U_{10}$ range of 50-yr contour (m s$^{-1}$)') 
+ax_50[0].set_ylabel('$U_{10}$ range of 50-yr contour (m/s)') 
 
 # Xticks on the middle of the group bars
 for axs in [axs_1, ax_50]:
