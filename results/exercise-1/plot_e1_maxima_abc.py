@@ -216,7 +216,7 @@ def autolabel(ax, rects, label, vertical_pos):
 r = np.empty((n_contributions, 3))
 # Regroup by contribution
 for i in range(n_contributions):
-    hs1_min = [a_min_hs_c20[i], b_min_hs_c20[i], c_min_hs_c20[i]]
+    hs1_min = [a_min_hs_c1[i], b_min_hs_c1[i], c_min_hs_c1[i]]
     hs1_max = [a_max_hs_c1[i], b_max_hs_c1[i], c_max_hs_c1[i]]
     tz1_min = [a_min_tz_c1[i], b_min_tz_c1[i], c_min_tz_c1[i]]
     tz1_max = [a_max_tz_c1[i], b_max_tz_c1[i], c_max_tz_c1[i]]
@@ -265,6 +265,7 @@ for axs in [axs_1, axs_20]:
     for ax in axs:
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
+    axs[1].set_xlabel('Dataset')
 
 
 patch_marg = Patch(facecolor=class0_color, edgecolor='w',
@@ -274,7 +275,7 @@ patch_tot = Patch(facecolor=class1_color, edgecolor='w',
 line_observed_rp1 = Line2D([0], [0], color='k', lw=1, linestyle='--', 
                         label='Empirical marginal 1-yr return value')
 line_observed_rp20 = Line2D([0], [0], color='k', lw=1, linestyle='--', 
-                        label='Observed extreme')
+                        label='Min and max in full dataset')
 axs_1[0].legend(handles=[patch_marg, patch_tot, line_observed_rp1], 
     loc='upper center', ncol=3, fontsize=8, bbox_to_anchor=(0.5, 1.25),)
 axs_20[0].legend(handles=[patch_marg, patch_tot, line_observed_rp20], 
