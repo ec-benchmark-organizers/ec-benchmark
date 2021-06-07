@@ -6,7 +6,7 @@ from viroconcom.distributions import (WeibullDistribution,
     ExponentiatedWeibullDistribution, MultivariateDistribution)
 from viroconcom.read_write import read_ecbenchmark_dataset
 
-MC_FACTOR = 50 # How many more random realizations are drawn than the dataset's length
+MC_FACTOR = 100 # How many more random realizations are drawn than the dataset's length
 
 # Create joint distribution model of contribution #4.
 U10 = ExponentiatedWeibullDistribution(shape=2.42, scale=10.0, shape2=0.761)
@@ -136,8 +136,8 @@ u_for_centiles = np.arange(1, 30, 1)
 u_bin_width = 2
 rv_values = np.array([u_for_centiles, np.empty(len(u_for_centiles))])
 quantiles = np.array([0.1, 0.5, 0.9, 0.99])
-hs_at_p_empirical = np.empty(len(u_for_centiles))
-hs_at_p_model = np.empty(len(u_for_centiles))
+hs_at_p_empirical = np.zeros(len(u_for_centiles))
+hs_at_p_model = np.zeros(len(u_for_centiles))
 from palettable.colorbrewer.diverging import Spectral_4 as mycorder
 centile_colors = np.array(mycorder.mpl_colors)
 
@@ -145,9 +145,10 @@ centile_colors = np.array(mycorder.mpl_colors)
 for i, q in enumerate(quantiles):
     for j, u_bin_center in enumerate(u_for_centiles):
         hs_in_interval = hs[(u > u_bin_center - 0.5 * u_bin_width) & (u < u_bin_center + 0.5 * u_bin_width)]
-        hs_at_p_empirical[j] = np.quantile(hs_in_interval, q)
-
-    axs2[1].plot(u_for_centiles, hs_at_p_empirical, label='{:.0f}, empirical'.format(q * 100), 
+        if len(hs_in_interval) > 100:
+            hs_at_p_empirical[j] = np.quantile(hs_in_interval, q)
+    mask = np.nonzero(hs_at_p_empirical)
+    axs2[1].plot(u_for_centiles[mask], hs_at_p_empirical[mask], label='{:.0f}, empirical'.format(q * 100), 
         linestyle='--', color=centile_colors[i])
 
 # Joint model decile curves
@@ -167,7 +168,7 @@ lgd = axs2[1].legend(loc='upper left',
            title='Percentile')
 
 # Upper tail dependence, lambda, plot 
-alphas = np.divide(1, np.logspace(2, 5, num=200))
+alphas = np.divide(1, np.logspace(2, 5, num=500))
 ps = np.subtract(1,  alphas)
 lamdas_empirical = np.empty(len(ps))
 lamdas_model = np.empty(len(ps))
@@ -198,6 +199,7 @@ lgd = axs2[2].legend(loc='lower left',
            ncol=1, 
            prop={'size': 8},
            frameon=False)
+axs2[2].set_ylim(0, 1)
 
 for ax in axs2:
     ax.spines['right'].set_visible(False)
